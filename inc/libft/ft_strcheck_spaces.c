@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_strcheck_spaces.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/15 16:11:58 by pjelinek         ###   ########.fr       */
+/*   Created: 2025/12/15 17:58:56 by pjelinek          #+#    #+#             */
+/*   Updated: 2025/12/15 18:02:45 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "libft.h"
 
-#include "cub3d.h"
+int	ft_strcheck_spaces(char *str)
+{
+	int	i;
 
-int	parser(t_data *data, char *file);
-
-
-
-int		extract_file(t_data *data, int fd);
-int		extract_texture(t_data *data, const char *line);
-void	cleanup_parser(t_data *data);
-int		extract_rgb(t_data *data, const char *line);
-
-
-
-# endif
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}

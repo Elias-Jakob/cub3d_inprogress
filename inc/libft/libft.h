@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 11:23:20 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/10 08:04:42 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:01:55 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void		ft_skip_whitespaces(const char **p);
 bool		ft_skip_signs(const char **p);
 bool		ll_overflow_check(const char *str);
 bool    	int_overflow_check(const char *str);
-int	ft_strcmp(const char *s1, const char *s2);
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_strcheck_spaces(char *str);
 
 #endif

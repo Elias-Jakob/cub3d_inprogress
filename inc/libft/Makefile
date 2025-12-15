@@ -61,6 +61,7 @@ SRC := \
 	ft_skip_zeros.c \
 	ft_strcmp.c \
 	ft_atoll.c \
+	ft_strcheck_spaces.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \

@@ -1,4 +1,4 @@
-NAME        = cub3d
+NAME        = cub3D
 CC          = cc
 CFLAGS      = -Wall -Werror -Wextra
 DEBUG_FLAGS = -g -DVERBOSE=1
@@ -15,6 +15,12 @@ OBJ_DIR     = obj
 SRCS = \
 	main.c \
 	parser/parser.c \
+	parser/extract_rgb.c \
+	parser/extract_file.c \
+	parser/extract_texture.c \
+	parser/cleanup_parser.c \
+
+
 
 
 # baue aus z.B. "executor/landing_file.c" -> "obj/executor/landing_file.o"
