@@ -1,0 +1,6 @@
+*.o
+*.a
+
+obj/
+obj_bonus/
+objects/
