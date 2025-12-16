@@ -158,8 +158,8 @@
         "editor.lineHighlightBackground": "#011544",
         "editor.lineHighlightBorder": "#6a0269",
 
-        "activityBar.background": "#5b001e",
-        "titleBar.activeBackground": "#00595b",
+        "activityBar.background": "#2a0018",
+        "titleBar.activeBackground": "#2a0018",
         "titleBar.activeForeground": "#FDFBF7"
     },
 
