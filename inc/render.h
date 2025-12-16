@@ -2,18 +2,16 @@
 # define RENDER_H
 
 # include <mlx.h>
-// more for key hooks then
 # include <X11/keysym.h>
 
-typedef struct s_img_data
-{
-	void	*image;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_img_data;
+// init.c
+bool	render_game(t_data *game);
 
-int	create_base_window(void);
+// hooks.c
+int	key_hook(int key_code, t_data *game);
+int	quit_game(t_data *game);
+
+// clean_up.c
+void	clean_up_mlx(t_data *game);
 
 #endif

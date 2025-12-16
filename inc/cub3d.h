@@ -23,8 +23,8 @@
 # define RED 0
 # define GREEN 1
 # define BLUE 2
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 1620
+# define HEIGHT 880
 
 # include <stdio.h>
 # include <limits.h>
@@ -65,13 +65,19 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
-typedef struct s_game
+typedef struct s_ray
 {
-	void	*mlx;
-	void	*mlx_win;
-	char	**map;
-	t_player	*player;
-}	t_game;
+	/* ... */
+}	t_ray;
+
+typedef struct s_img_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img_data;
 
 typedef struct texture
 {	/* PATRICK */
@@ -134,6 +140,13 @@ typedef struct data
 
 
 	/* ELIAS   */
+	void	*mlx;
+	void	*mlx_win;
+	t_img_data	*image;
+	// char	**map;
+	int	map_width;
+	int	map_heigth;
+	t_player	*player;
 }	t_data;
 
 

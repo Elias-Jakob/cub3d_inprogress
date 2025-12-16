@@ -26,9 +26,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	printf("\033[32mOK EXIT\033[0m\n");
+	render_game(&data);
 	cleanup_parser(&data, SUCCESS);
-	if (!parser(&data, av[1]))
-		return (1); //cleanup(&data);
-	create_base_window();
 	return (0);
 }

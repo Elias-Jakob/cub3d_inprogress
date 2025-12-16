@@ -41,7 +41,7 @@ static int	valid_file(char *str)
 		printf("\033[31mError\033[0m\nHidden files forbidden\n");
 		return (ERROR);
 	}
-	if (!ft_memcmp(&str[len - 4], ".cub", 5) == 0)
+	if (!(ft_memcmp(&str[len - 4], ".cub", 5) == 0))
 	{
 		printf("\033[31mError\033[0m\nWrong file extension\n");
 		return(ERROR);

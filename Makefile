@@ -12,7 +12,9 @@ INCLUDES    = -I inc -I $(LIBFT_DIR)
 SRC_DIR     = src
 OBJ_DIR     = obj
 
-RENDER_SRC = reander/test.c
+RENDER_SRC = render/init.c \
+						 render/hooks.c \
+						 render/clean_up.c \
 
 SRCS = \
 	main.c \
