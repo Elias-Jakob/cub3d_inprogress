@@ -27,5 +27,8 @@ int	main(int ac, char **av)
 	}
 	printf("\033[32mOK EXIT\033[0m\n");
 	cleanup_parser(&data, SUCCESS);
+	if (!parser(&data, av[1]))
+		return (1); //cleanup(&data);
+	create_base_window();
 	return (0);
 }

@@ -12,6 +12,8 @@ INCLUDES    = -I inc -I $(LIBFT_DIR)
 SRC_DIR     = src
 OBJ_DIR     = obj
 
+RENDER_SRC = reander/test.c
+
 SRCS = \
 	main.c \
 	parser/parser.c \
@@ -22,8 +24,7 @@ SRCS = \
 	parser/validate_map.c \
 	parser/cleanup_parser.c \
 	parser/extract_texture.c \
-
-
+	$(RENDER_SRC) \
 
 
 # baue aus z.B. "executor/landing_file.c" -> "obj/executor/landing_file.o"
@@ -49,7 +50,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c inc/cub3d.h
 
 # Executable
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L/usr/include -lmlx -lX11 -lXext
 
 # Libft bauen
 $(LIBFT):
