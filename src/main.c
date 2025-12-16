@@ -22,5 +22,6 @@ int	main(int ac, char **av)
 	ft_memset(&data, 0, sizeof(t_data));
 	if (!parser(&data, av[1]))
 		return (1); //cleanup(&data);
+	create_base_window();
 	return (0);
 }

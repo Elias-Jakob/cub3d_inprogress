@@ -23,6 +23,9 @@
 # define ERROR 1
 # define SUCCESS 0
 
+# define WIDTH 1920
+# define HEIGHT 1080
+
 # include <stdio.h>
 # include <limits.h>
 # include <stdbool.h>
@@ -52,7 +55,23 @@
 /* ELIAS EXECUTION STRUCTS   */
 ///////////////////////////////
 
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
 
+typedef struct s_game
+{
+	void	*mlx;
+	void	*mlx_win;
+	char	**map;
+	t_player	*player;
+}	t_game;
 
 typedef struct data
 {
@@ -66,4 +85,5 @@ typedef struct data
 
 
 # include "parser.h"
+# include "render.h"
 #endif
