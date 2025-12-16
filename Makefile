@@ -15,10 +15,13 @@ OBJ_DIR     = obj
 SRCS = \
 	main.c \
 	parser/parser.c \
+	parser/verbose.c \
+	parser/extract_map.c \
 	parser/extract_rgb.c \
 	parser/extract_file.c \
-	parser/extract_texture.c \
+	parser/validate_map.c \
 	parser/cleanup_parser.c \
+	parser/extract_texture.c \
 
 
 

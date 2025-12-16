@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 13:06:18 by netrunner         #+#    #+#             */
-/*   Updated: 2025/12/16 05:37:26 by pjelinek         ###   ########.fr       */
+/*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
+/*   Updated: 2025/12/16 05:53:55 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parser.h"
 
-int	main(int ac, char **av)
+int	validate_map(t_data *data)
 {
-	t_data data;
-
-	if (ac != 2)
-		return (printf("\033[31mError\033[0m\nInvalid number of arguments\n"));
-	ft_memset(&data, 0, sizeof(t_data));
-	if (parser(&data, av[1]))
-	{
-		printf("\033[31mERROR EXIT\033[0m\n");
-		cleanup_parser(&data, ERROR);
-		return (1);
-	}
-	printf("\033[32mOK EXIT\033[0m\n");
-	cleanup_parser(&data, SUCCESS);
-	return (0);
+	(void) data;
+	return (SUCCESS);
 }

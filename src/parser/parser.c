@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 09:38:00 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/15 15:02:39 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/16 05:54:09 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ int	parser(t_data *data, char *file)
 		perror(file);
 		return (ERROR);
 	}
-	if (!extract_file(data, fd))
+	data->map = ft_calloc(2, sizeof(char *));
+	if (!data->map || extract_files(data, fd) || validate_map(data))
 	{
 		close(fd);
 		return (ERROR);
 	}
 	close(fd);
 	if (VERBOSE)
-		printf("exit parser\n");
+		printf("\033[32mOK\033[0m exit parser\n");
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:09:55 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/15 18:10:59 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/16 05:48:55 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,17 @@
 
 int	digit_check(char *split)
 {
-	const char *str;
-
-	str = (const char *) split;
-	while (str)
+	while (split)
 	{
-		if (!ft_isdigit(*str))
+		if (!ft_isdigit(*split))
 			return (ERROR);
-		str++;
+		split++;
 	}
 	return (SUCCESS);
 }
 
-static int	check_rgb_code(char **split)
+static int	check_rgb_code(char **split, int *color)
 {
-	int	ceil[3];
 	int	i;
 
 	i = 0;
@@ -38,15 +34,12 @@ static int	check_rgb_code(char **split)
 			return (ERROR);
 		i++;
 	}
-	ceil[RED] = ft_atoi(split[RED]);
-	ceil[GREEN] = ft_atoi(split[GREEN]);
-	ceil[BLUE] = ft_atoi(split[BLUE]);
-	if (VERBOSE)
-		printf("\tRED: %i GREEN: %i BLUE: %i\n", \
-			ceil[RED], ceil[GREEN], ceil[BLUE]);
-	if (split[3] != NULL || (ceil[RED] < 0 || ceil[RED] > 255)
-		|| (ceil[GREEN] < 0 || ceil[GREEN] > 255)
-		|| (ceil[BLUE] < 0 || ceil[BLUE] > 255))
+	color[RED] = ft_atoi(split[RED]);
+	color[GREEN] = ft_atoi(split[GREEN]);
+	color[BLUE] = ft_atoi(split[BLUE]);
+	if (split[3] != NULL || (color[RED] < 0 || color[RED] > 255)
+		|| (color[GREEN] < 0 || color[GREEN] > 255)
+		|| (color[BLUE] < 0 || color[BLUE] > 255))
 	{
 		return (ERROR);
 	}
@@ -55,17 +48,17 @@ static int	check_rgb_code(char **split)
 
 static void	extract_floor_rgb(t_data *data, const char *line)
 {
-	data->rgb.floor_string = ft_strtrim(line, " \n\t");
+
+	data->rgb.floor_string = ft_strtrim(line, WHITESPACES);
 	if (!data->rgb.floor_string || ft_strcheck_spaces(data->rgb.floor_string))
 	{
 		printf("\033[31mError\033[0m\nFailed to extract floor rgb code\n");
 		data->flag.error = true;
 		return ;
 	}
-	if (VERBOSE)
-		printf("\tFloor_string: %s", data->rgb.floor_string);
-	data->rgb.floor = ft_split(data->rgb.floor_string, ',');
-	if (!data->rgb.floor || check_rgb_code(data->rgb.floor))
+	data->rgb.floor_split = ft_split(data->rgb.floor_string, ',');
+	if (!data->rgb.floor_split
+		|| check_rgb_code(data->rgb.floor_split, data->rgb.floor))
 	{
 		printf("\033[31mError\033[0m\nextract rgb floor failed\n");
 		data->flag.error = true;
@@ -76,17 +69,15 @@ static void	extract_floor_rgb(t_data *data, const char *line)
 
 static void	extract_ceiling_rgb(t_data *data, const char *line)
 {
-	data->rgb.ceil_string = ft_strtrim(line, " \n\t");
+	data->rgb.ceil_string = ft_strtrim(line, WHITESPACES);
 	if (!data->rgb.ceil_string || ft_strcheck_spaces(data->rgb.ceil_string))
 	{
 		printf("\033[31mError\033[0m\nFailed to extract ceiling rgb code\n");
 		data->flag.error = true;
 		return ;
 	}
-	if (VERBOSE)
-		printf("\tCeiling_string;: %s", data->rgb.ceil_string);
 	data->rgb.ceiling = ft_split(data->rgb.ceil_string, ',');
-	if (!data->rgb.ceiling || check_rgb_code(data->rgb.ceiling))
+	if (!data->rgb.ceiling || check_rgb_code(data->rgb.ceiling, data->rgb.ceil))
 	{
 		printf("\033[31mError\033[0m\nextract rgb ceiling failed\n");
 		data->flag.error = true;
@@ -111,8 +102,7 @@ int	extract_rgb(t_data *data, const char *line)
 	{
 		data->color_pass = true;
 		if (VERBOSE)
-			printf("\033[32mOK\033[0m RGB extraction\n");
+			print_rgb(data);
 	}
-
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/15 18:05:56 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:39:20 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ typedef struct flags
 	bool	error;
 	bool	ceiling;
 	bool	floor;
+	bool	in_map;
+	bool	out_map;
+
 
 	/* ELIAS   */
 }	t_flag;
@@ -87,7 +90,10 @@ typedef struct rgb
 	char *floor_string;
 	char *ceil_string;
 	char **ceiling;
-	char **floor;
+	char **floor_split;
+	int		ceil[3];
+	int		floor[3];
+
 
 
 	/* ELIAS   */
@@ -99,6 +105,8 @@ typedef struct data
 	/* PATRICK */
 	bool		texture_pass;
 	bool		color_pass;
+	bool		map_pass;
+	char		**map;
 
 	t_texture	text;
 	t_flag		flag;

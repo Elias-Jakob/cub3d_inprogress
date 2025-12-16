@@ -6,37 +6,38 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:54:53 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/15 16:17:11 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/16 05:52:43 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	check_line_content(t_data *data, char *line)
+static int	extract_line_content(t_data *data, char *line)
 {
-	if (line[0] == '\n')
+	if (check_empty_line(line) && !data->flag.in_map)
 		return (SUCCESS);
 	else if (!data->texture_pass && extract_texture(data, line))
 		return (ERROR);
 	else if (!data->color_pass && extract_rgb(data, line))
 		return (ERROR);
-	//printf("check line content: %s\n", line);
-
-	if(data->flag.error == ERROR)
+	else if (data->color_pass && data->texture_pass && extract_map(data, line))
+	{
+		data->flag.error = true;
 		return (ERROR);
+	}
 	return (SUCCESS);
 }
 
-int	extract_file(t_data *data, int fd)
+int	extract_files(t_data *data, int fd)
 {
 	char	*line;
 
 	line = get_next_line(fd);
+	if (!line)
+		return (printf("\033[31mError\033[0m\nMap empty\n"), ERROR);
 	while (line)
 	{
-		/* if (VERBOSE)
-			printf("check line: %s\n", line); */
-		if(check_line_content(data, line))
+		if(extract_line_content(data, line))
 		{
 			free (line);
 			break ;
@@ -44,9 +45,11 @@ int	extract_file(t_data *data, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (VERBOSE)
-		printf("exit file extraction\n");
-	if(data->flag.error == ERROR)
+	if(data->flag.error)
 		return (ERROR);
+	else if (!data->texture_pass || !data->color_pass)
+		return (printf("\033[31mError\033[0m\nParsing not completed\n"), ERROR);
+	else if (VERBOSE)
+		print_map(data);
 	return (SUCCESS);
 }
