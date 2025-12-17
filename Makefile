@@ -15,6 +15,7 @@ OBJ_DIR     = obj
 RENDER_SRC = render/init.c \
 						 render/hooks.c \
 						 render/clean_up.c \
+						 render/utils.c \
 
 SRCS = \
 	main.c \

@@ -23,6 +23,8 @@
 # define RED 0
 # define GREEN 1
 # define BLUE 2
+
+
 # define WIDTH 1620
 # define HEIGHT 880
 
@@ -38,8 +40,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <math.h>
 # include "libft/libft.h"
-
 
 
 

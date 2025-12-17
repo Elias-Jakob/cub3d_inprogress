@@ -26,6 +26,19 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	printf("\033[32mOK EXIT\033[0m\n");
+	// init player
+	data.player = (t_player *)malloc(sizeof(t_player));
+	data.image = (t_img_data *)malloc(sizeof(t_img_data));
+	if (!data.player || !data.image)
+		printf("malloc failed\n");
+	else
+	{
+		ft_memset(data.player, 0, sizeof(t_player));
+		render_game(&data);
+	}
+	free(data.player);
+	free(data.image);
+	// TODO: somehow player and image are leaking even if i free them
 	render_game(&data);
 	cleanup_parser(&data, SUCCESS);
 	return (0);
