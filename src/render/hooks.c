@@ -3,6 +3,8 @@
 int	quit_game(t_data *game)
 {
 	clean_up_mlx(game);
+	free(game->player);
+	free(game->image);
 	cleanup_parser(game, SUCCESS);
 	exit(0);
 }

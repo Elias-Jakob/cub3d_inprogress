@@ -16,7 +16,8 @@ static bool	init_mlx(t_data *game)
 		&game->image->endian);
 	// Hooks
 	mlx_hook(game->mlx_win, 17, 1L << 2, quit_game, game);
-	mlx_key_hook(game->mlx_win, key_hook, game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, key_hook, game);
+	// mlx_key_hook(game->mlx_win, key_hook, game);
 	return (true);
 }
 
