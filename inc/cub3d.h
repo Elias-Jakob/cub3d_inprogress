@@ -24,9 +24,10 @@
 # define GREEN 1
 # define BLUE 2
 
-
 # define WIDTH 1620
 # define HEIGHT 880
+
+# define PI 3.14159265
 
 # include <stdio.h>
 # include <limits.h>
@@ -59,8 +60,8 @@
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	int	x;
+	int	y;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;

@@ -13,8 +13,8 @@ SRC_DIR     = src
 OBJ_DIR     = obj
 
 RENDER_SRC = render/init.c \
+						 render/render.c \
 						 render/hooks.c \
-						 render/clean_up.c \
 						 render/utils.c \
 
 SRCS = \
@@ -53,7 +53,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c inc/cub3d.h
 
 # Executable
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L/usr/include -lmlx -lX11 -lXext
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -L/usr/include -lmlx -lX11 -lXext -lm
 
 # Libft bauen
 $(LIBFT):
