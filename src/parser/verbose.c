@@ -6,21 +6,33 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 05:34:13 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/16 05:54:59 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 18:44:31 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	print_coords(t_data *data)
+{
+	printf("%s Player\nStart coords:\tx:%i y:%i\n", OK_MSG, \
+		data->player->x, data->player->y );
+	printf("\n");
+	printf("%s Map\nCoords:\t\tX: 0-%zu Y: 0-%zu\n", OK_MSG, data->map.x - 1,  \
+		data->map.y - 1);
+	printf("Size:\t\t%zu x %zu = %zu tiles\n\n", data->map.x,  \
+		data->map.y, data->map.y*data->map.x);
+	return ;
+}
 
 void	print_map(t_data *data)
 {
 	int i;
 
 	i = 0;
-	printf("\n\033[32mOK\033[0m Map extraction\n");
-	while (data->map[i])
+	printf("\n%s Map extraction\n", OK_MSG);
+	while (data->map.arr[i])
 	{
-		printf("[%i]\t%s", i, data->map[i]);
+		printf("[%i]\t\t%s\n", i, data->map.arr[i]);
 		i++;
 	}
 	printf("\n");
@@ -29,7 +41,7 @@ void	print_map(t_data *data)
 
 void	print_texture(t_data *data)
 {
-	printf("\n\033[32mOK\033[0m Texture extraction\n");
+	printf("\n%s Texture extraction\n", OK_MSG);
 	printf("\tNORTH: %s\n", data->text.north);
 	printf("\tSOUTH: %s\n", data->text.south);
 	printf("\tWEST: %s\n", data->text.west);
@@ -45,12 +57,12 @@ void	print_rgb(t_data *data)
 	ceil = data->rgb.ceil;
 	floor = data->rgb.floor;
 
-	printf("\n\033[32mOK\033[0m RGB extraction\n");
-	printf("\tCeiling_string;: %s", data->rgb.ceil_string);
-	printf("\tRED: %i GREEN: %i BLUE: %i\n", \
+	printf("\n%s RGB extraction\n", OK_MSG);
+	printf("\tCeiling_string: %s", data->rgb.ceil_string);
+	printf("\tRED: %i | GREEN: %i | BLUE: %i\n", \
 		ceil[RED], ceil[GREEN], ceil[BLUE]);
 	printf("\tFloor_string: %s", data->rgb.floor_string);
-	printf("\tRED: %i GREEN: %i BLUE: %i\n", \
+	printf("\tRED: %i | GREEN: %i | BLUE: %i\n", \
 		floor[RED], floor[GREEN], floor[BLUE]);
 	return ;
 }

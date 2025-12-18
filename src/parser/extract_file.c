@@ -6,26 +6,48 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:54:53 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/16 05:52:43 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 14:03:28 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	extract_line_content(t_data *data, char *line)
+int	wrong_input(t_data *data, char *line)
 {
-	if (check_empty_line(line) && !data->flag.in_map)
-		return (SUCCESS);
-	else if (!data->texture_pass && extract_texture(data, line))
-		return (ERROR);
-	else if (!data->color_pass && extract_rgb(data, line))
-		return (ERROR);
-	else if (data->color_pass && data->texture_pass && extract_map(data, line))
+	const char *str;
+
+	str = line;
+	ft_skip_whitespaces(&str);
+	while (*str)
 	{
-		data->flag.error = true;
-		return (ERROR);
+		if (ft_isprint(*str))
+		{
+			data->flag.error = true;
+			if (!print_doubles(data, str))
+				return (ERROR);
+			else
+				printf("%s\nWrong input in line: %s\n", ERROR_MSG, str);
+			return (ERROR);
+		}
+		str++;
 	}
 	return (SUCCESS);
+}
+
+static int	extract_line_content(t_data *data, char *line)
+{
+	if (!data->flag.in_map && check_empty_line(line))
+		return (SUCCESS);
+	else if (!data->texture_pass && extract_texture(data, line))
+		return (SUCCESS);
+	else if (!data->rgb_pass && extract_rgb(data, line))
+		return (SUCCESS);
+	else if (data->rgb_pass && data->texture_pass && extract_map(data, line))
+		return (SUCCESS);
+	else if (!data->flag.in_map && wrong_input(data, line))
+		return (ERROR);
+	return (ERROR);
+
 }
 
 int	extract_files(t_data *data, int fd)
@@ -34,7 +56,7 @@ int	extract_files(t_data *data, int fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		return (printf("\033[31mError\033[0m\nMap empty\n"), ERROR);
+		return (printf("%s\nMap empty\n", ERROR_MSG), ERROR);
 	while (line)
 	{
 		if(extract_line_content(data, line))
@@ -45,11 +67,13 @@ int	extract_files(t_data *data, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if(data->flag.error)
+	if (!data->texture_pass && !data->rgb_pass)
+		return (print_text_error(data), print_rgb_error(data), ERROR);
+	else if (!data->texture_pass)
+		return (print_text_error(data), ERROR);
+	else if (!data->rgb_pass)
+		return (print_rgb_error(data), ERROR);
+	else if(data->flag.error)
 		return (ERROR);
-	else if (!data->texture_pass || !data->color_pass)
-		return (printf("\033[31mError\033[0m\nParsing not completed\n"), ERROR);
-	else if (VERBOSE)
-		print_map(data);
 	return (SUCCESS);
 }

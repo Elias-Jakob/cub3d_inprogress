@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:50:24 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/16 04:54:21 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 18:15:03 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,18 @@ void	cleanup_textures(t_data *data)
 
 void	cleanup_parser(t_data *data, int exit_code)
 {
+	if (data->player)
+	{
+		free(data->player);
+		data->player = NULL;
+	}
+	if (data->image)
+	{
+		free(data->image);
+		data->player = NULL;
+	}
 	cleanup_textures(data);
 	cleanup_rgb(data);
-	free_split(data->map);
+	free_split(data->map.arr);
 	exit(exit_code);
 }

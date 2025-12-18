@@ -6,11 +6,25 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 09:38:00 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/16 05:54:09 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 17:44:33 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+int	check_spaces(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		if (split[i][1] == SPACE)
+			return (ERROR);
+		i++;
+	}
+	return (SUCCESS);
+}
 
 static int	check_hidden_filetyp(char *str, int len)
 {
@@ -23,7 +37,7 @@ static int	check_hidden_filetyp(char *str, int len)
 		len--;
 	}
 	if (VERBOSE)
-		printf("\033[32mOK\033[0m Hidden file check\n");
+		printf("%s Hidden file check\n", OK_MSG);
 	return (SUCCESS);
 }
 
@@ -38,16 +52,16 @@ static int	valid_file(char *str)
 		return (ERROR);
 	if (str[0] == '.' || check_hidden_filetyp(str, len))
 	{
-		printf("\033[31mError\033[0m\nHidden files forbidden\n");
+		printf("%s\nHidden files forbidden\n", ERROR_MSG);
 		return (ERROR);
 	}
 	if (!(ft_memcmp(&str[len - 4], ".cub", 5) == 0))
 	{
-		printf("\033[31mError\033[0m\nWrong file extension\n");
+		printf("%s\nWrong file extension\n", ERROR_MSG);
 		return(ERROR);
 	}
 	if (VERBOSE)
-		printf("\033[32mOK\033[0m File extension\n");
+		printf("%s File extension\n", OK_MSG);
 	return (SUCCESS);
 }
 
@@ -60,18 +74,18 @@ int	parser(t_data *data, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("\033[31mError\033[0m\n");
+		printf("%s\n", ERROR_MSG);
 		perror(file);
 		return (ERROR);
 	}
-	data->map = ft_calloc(2, sizeof(char *));
-	if (!data->map || extract_files(data, fd) || validate_map(data))
+	data->map.arr = ft_calloc(1 + 1, sizeof(char *));
+	if (!data->map.arr || extract_files(data, fd) || validate_map(data))
 	{
 		close(fd);
 		return (ERROR);
 	}
 	close(fd);
 	if (VERBOSE)
-		printf("\033[32mOK\033[0m exit parser\n");
+		printf("%s exit parser\n", OK_MSG);
 	return (SUCCESS);
 }

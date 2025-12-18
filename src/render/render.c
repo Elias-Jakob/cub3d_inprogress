@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 void	draw_wall2d(t_data *game, int x, int y, int color)
 {
@@ -6,18 +6,18 @@ void	draw_wall2d(t_data *game, int x, int y, int color)
 	int	wall_y;
 	int	offset_x = 0;
 	int	offset_y = 0;
-	
+
 	wall_x = 0;
-	while (wall_x < 32)
+	while (wall_x < TILE_2D)
 	{
 		wall_y = 0;
-		while (wall_y < 32)
+		while (wall_y < TILE_2D)
 		{
 			if (wall_x != 0)
 				offset_x = 1;
 			if (wall_y != 0)
 				offset_y = 1;
-			ft_put_pixel(game->image, x*32+wall_x-offset_x, y*32+wall_y-offset_y, color);
+			ft_put_pixel(game->image, x*TILE_2D+wall_x-offset_x, y*TILE_2D+wall_y-offset_y, color);
 			wall_y++;
 			offset_x = 0;
 			offset_y = 0;
@@ -50,12 +50,12 @@ void	draw_map2d(t_data *game)
 	int	y;
 
 	x = 0;
-	while (x < game->map_width)
+	while (x < game->map.x)
 	{
 		y = 0;
-		while (y < game->map_heigth)
+		while (y < game->map.y)
 		{
-			if (game->map[y][x] == '1')
+			if (game->map.arr[y][x] == '1')
 				draw_wall2d(game, x, y, 0x8a8686);
 			else
 				draw_wall2d(game, x, y, 0x000000);
@@ -69,7 +69,7 @@ void	draw_player(t_data *game)
 {
 	int	y;
 	int	x;
-	
+
 	y = 0;
 	while (y < 7)
 	{
@@ -85,8 +85,8 @@ void	draw_player(t_data *game)
 	}
 	// direction
 	ft_put_pixel(game->image, game->player->x, game->player->y, 0xFF0000);
-	// draw line
-	int	line_len = 10;
+	// draw direction line
+	int	line_len = 20;
 	int	i = 1;
 	while (i < line_len)
 	{

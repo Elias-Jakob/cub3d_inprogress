@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 11:23:20 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/15 18:01:55 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/17 16:32:13 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int			ft_isalnum(int str);
 int			ft_isalpha(int str);
 int			ft_isascii(int str);
 int			ft_isdigit(int str);
+size_t		ft_count_char(char *str, int c);
 int			ft_isprint(int str);
 char		*ft_itoa(int n);
 void		*ft_memchr(const void *s, int c, size_t n);
@@ -78,5 +79,7 @@ bool		ll_overflow_check(const char *str);
 bool    	int_overflow_check(const char *str);
 int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strcheck_spaces(char *str);
+void		print_split(char **split);
+
 
 #endif

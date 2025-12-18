@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/16 05:54:00 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 13:36:28 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define PARSER_H
 
 #define WHITESPACES " \n\t\r\v\f"
+#define NOT_MY_LINE 0
+#define FOUND 2
+#define COMMA ','
+#define SPACE ' '
+#define TAB '\t'
+
 
 #include "cub3d.h"
 
@@ -27,7 +33,11 @@ int		extract_map(t_data *data, char *line);
 int		check_empty_line(char *str);
 
 //PARSE MAP
-int	validate_map(t_data *data);
+int		validate_map(t_data *data);
+int		check_spaces(char **split);
+int		check_player_flags(t_data *data, char c);
+int		set_player(t_data *data, char c, size_t y_coord, size_t x_coord);
+
 
 //VERBOSE
 void	print_map(t_data *data);
@@ -37,5 +47,13 @@ void	print_rgb(t_data *data);
 //CLEANUP PARSER
 void	cleanup_parser(t_data *data, int exit_code);
 void	free_split(char **split);
+
+//PRINT
+void	print_rgb_error(t_data *data);
+void	print_text_error(t_data *data);
+void	print_error(char *str, t_data *data);
+int		print_doubles(t_data *data, const char *str);
+void	print_coords(t_data *data);
+
 
 # endif

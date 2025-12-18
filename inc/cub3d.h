@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/15 20:39:20 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 18:45:53 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,15 @@
 
 # define WIDTH 1620
 # define HEIGHT 880
+#define TILE_2D 32
+
 
 # define PI 3.14159265
+
+#define ERROR_MSG "\033[31mError\033[0m"
+#define OK_MSG "\033[32mOK\033[0m"
+
+
 
 # include <stdio.h>
 # include <limits.h>
@@ -49,23 +56,29 @@
 
 
 
-///////////////////////////////
-/* PATRICK PARSER STRUCTS    */
-///////////////////////////////
+
+
 
 
 ///////////////////////////////
 /* ELIAS EXECUTION STRUCTS   */
 ///////////////////////////////
-
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+
+	/*
+	Player directions
+		N 0/1
+		S 0/-1
+		W -1/0
+		E 1/0
+	*/
 }	t_player;
 
 typedef struct s_ray
@@ -80,8 +93,13 @@ typedef struct s_img_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_img_data;
+}	t_img_data;
 
+
+
+///////////////////////////////
+/* PATRICK PARSER STRUCTS    */
+///////////////////////////////
 typedef struct texture
 {	/* PATRICK */
 	char	*north;				// cleanup_parser
@@ -105,6 +123,11 @@ typedef struct flags
 	bool	floor;
 	bool	in_map;
 	bool	out_map;
+	bool	player_set;
+	bool	player_north;
+	bool	player_south;
+	bool	player_west;
+	bool	player_east;
 
 
 	/* ELIAS   */
@@ -126,19 +149,30 @@ typedef struct rgb
 	/* ELIAS   */
 }	t_rgb;
 
+typedef struct map
+{
+	/* PATRICK */
+	char	**arr;
+	char	*line;
+	ssize_t	y;
+	ssize_t	x;
+
+
+
+	/* ELIAS   */
+}	t_map;
 
 typedef struct data
 {
 	/* PATRICK */
 	bool		texture_pass;
-	bool		color_pass;
+	bool		rgb_pass;
 	bool		map_pass;
-	char		**map;
 
 	t_texture	text;
 	t_flag		flag;
 	t_rgb		rgb;
-
+	t_map		map;
 
 
 
@@ -155,4 +189,5 @@ typedef struct data
 
 # include "parser.h"
 # include "render.h"
+
 #endif

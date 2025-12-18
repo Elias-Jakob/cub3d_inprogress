@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 static void rotate_player(t_player *player, double rot_angle)
 {
@@ -16,8 +16,6 @@ static void rotate_player(t_player *player, double rot_angle)
 int	quit_game(t_data *game)
 {
 	clean_up_mlx(game);
-	free(game->player);
-	free(game->image);
 	cleanup_parser(game, SUCCESS);
 	exit(0);
 }

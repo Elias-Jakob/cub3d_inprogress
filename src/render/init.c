@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "cub3d.h"
 
 static bool	init_mlx(t_data *game)
 {

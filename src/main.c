@@ -6,63 +6,68 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:06:18 by netrunner         #+#    #+#             */
-/*   Updated: 2025/12/16 05:37:26 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 18:23:42 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	init_data(t_data *data)
+{
+	ft_memset(data, 0, sizeof(t_data));
+	data->player = (t_player *)ft_calloc(1, sizeof(t_player));
+	data->image = (t_img_data *)ft_calloc(1, sizeof(t_img_data));
+	if (!data->player || !data->image)
+	{
+		print_error("Malloc failed\n", data);
+		cleanup_parser(data, ERROR);
+	}
+
+}
 
 int	main(int ac, char **av)
 {
 	t_data data;
 
 	if (ac != 2)
-		return (printf("\033[31mError\033[0m\nInvalid number of arguments\n"));
-	ft_memset(&data, 0, sizeof(t_data));
+		return (printf("%s\nInvalid number of arguments\n", ERROR_MSG));
+	init_data(&data);
+
+
 	if (parser(&data, av[1]))
 	{
-		printf("\033[31mERROR EXIT\033[0m\n");
+		if (VERBOSE)
+			printf("%s exit\n", ERROR_MSG);
 		cleanup_parser(&data, ERROR);
 		return (1);
 	}
-	printf("\033[32mOK EXIT\033[0m\n");
-	/* Messy renderer stuff */
-	free_split(data.map);
-	data.map = (char **)malloc(sizeof(char *) * 11);
-	data.map[0] = ft_strdup("1111111111");
-	data.map[1] = ft_strdup("1010000001");
-	data.map[2] = ft_strdup("100000S001");
-	data.map[3] = ft_strdup("1000000001");
-	data.map[4] = ft_strdup("1000000001");
-	data.map[5] = ft_strdup("1000000001");
-	data.map[6] = ft_strdup("1000010001");
-	data.map[7] = ft_strdup("1000010001");
-	data.map[8] = ft_strdup("1000010001");
-	data.map[9] = ft_strdup("1111111111");
-	data.map[10] = NULL;
-	data.map_width = 10;
-	data.map_heigth = 10;
-	// init player
-	data.player = (t_player *)malloc(sizeof(t_player));
-	data.image = (t_img_data *)malloc(sizeof(t_img_data));
-	if (!data.player || !data.image)
-		printf("malloc failed\n");
-	else
-	{
-		//-1 0 1
-		//   |  1
-		// -----0
-		//   | -1
-		ft_memset(data.player, 0, sizeof(t_player));
-		data.player->x = 7 * 32;
-		data.player->y = 3 * 32;
-		data.player->dir_x = 0;
-		data.player->dir_y = -1;
-		render(&data);
-	}
-	free(data.player);
-	free(data.image);
+
+
+	/*
+	==365405==	  Invalid write of size 4
+	==365405==    at 0x4041FC: ft_put_pixel (utils.c:19)
+	==365405==    by 0x403D17: draw_player (render.c:79)
+	==365405==    by 0x403E56: render_game (render.c:104)
+	==365405==    by 0x4038BE: render (init.c:27)
+	==365405==    by 0x401395: main (main.c:40)
+	==365405==  Address 0x514ad94 is 3,848,948 bytes inside an
+	unallocated block of size 3,861,824 in arena "client"
+	*/
+
+
+
+	if (!render(&data))
+		print_error("Init MLX failed\n", &data);
+
 	// TODO: somehow player and image are leaking even if i free them
+
+	/////PATRICK
+	if (VERBOSE)
+		printf("%s exit\n", OK_MSG);
 	cleanup_parser(&data, SUCCESS);
 	return (0);
 }
+
+
+
+
