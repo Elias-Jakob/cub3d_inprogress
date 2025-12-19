@@ -15,6 +15,7 @@ OBJ_DIR     = obj
 RENDER_SRC = \
 		render/init.c \
 		render/render.c \
+		render/raycasting.c \
 		render/hooks.c \
 		render/utils.c \
 

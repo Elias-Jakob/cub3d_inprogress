@@ -6,7 +6,12 @@
 
 // init.c
 bool	render(t_data *game);
+
+// render.c
 void	render_game(t_data *game);
+
+// raycasting.c
+int	raycasting(t_data *game);
 
 // hooks.c
 int	key_hook(int key_code, t_data *game);

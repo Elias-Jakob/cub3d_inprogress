@@ -14,12 +14,10 @@
 
 static void	set_direction(t_data *data, char c)
 {
+	data->player->dir_x = 0;
+	data->player->dir_y = 1;
 	if (c == 'N')
-	{
-		data->player->dir_x = 0;
-		data->player->dir_y = 1;
 		data->flag.player_north = true;
-	}
 	else if (c == 'S')
 	{
 		data->player->dir_x = 0;
@@ -38,6 +36,8 @@ static void	set_direction(t_data *data, char c)
 		data->player->dir_y = 0;
 		data->flag.player_east = true;
 	}
+	data->player->plane_x = -data->player->dir_y * 0.66;
+	data->player->plane_y = data->player->dir_x * 0.66;
 }
 
 int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)
@@ -55,8 +55,8 @@ int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)
 	set_direction(data, c);
 	if (y_coord == 0)
 		return (print_error("Player position invalid\n", data), ERROR);
-	data->player->y = y_coord * TILE_2D;
-	data->player->x = x_coord * TILE_2D;
+	data->player->y = y_coord;
+	data->player->x = x_coord;
 	data->flag.player_set = true;
 	return (SUCCESS);
 }

@@ -13,7 +13,7 @@ void	clean_up_mlx(t_data *game)
 void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
 {
 	char	*pixel;
-	// hab bounce check eingefuegt. ohne Bounds check mit negativen
+	// patrick: hab bounce check eingefuegt. ohne Bounds check mit negativen
 	// bzw. zu großen x y Koordinaten in den Image-Buffer geschrieben
 	// hat und dadurch außerhalb des allokierten Speichers 4 Bytes überschrieben wurden
 	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)

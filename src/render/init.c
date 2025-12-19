@@ -4,13 +4,13 @@ static bool	init_mlx(t_data *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (false);
+		return (print_error("mlx_init failed\n", game), false);
 	game->mlx_win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!game->mlx_win)
-		return (clean_up_mlx(game), false);
+		return (clean_up_mlx(game), print_error("mlx_new_window failed\n", game), false);
 	game->image->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!game->image->img)
-		return (clean_up_mlx(game), false);
+		return (clean_up_mlx(game), print_error("mlx_new_image failed\n", game), false);
 	game->image->addr = mlx_get_data_addr(game->image->img,
 		&game->image->bits_per_pixel, &game->image->line_length,
 		&game->image->endian);

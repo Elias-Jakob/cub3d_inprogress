@@ -26,7 +26,12 @@ void	draw_wall2d(t_data *game, int x, int y, int color)
 	}
 }
 
-void	fill_background(t_data *game)
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void	fill_ceil_and_floor(t_data *game)
 {
 	int	x;
 	int	y;
@@ -37,7 +42,10 @@ void	fill_background(t_data *game)
 		y = 0;
 		while (y < HEIGHT)
 		{
-			ft_put_pixel(game->image, x, y, 0x000000);
+			if (y < HEIGHT / 2) // ceil
+				ft_put_pixel(game->image, x, y, create_trgb(0, game->rgb.ceil[RED], game->rgb.ceil[GREEN], game->rgb.ceil[BLUE]));
+			else
+				ft_put_pixel(game->image, x, y, create_trgb(0, game->rgb.floor[RED], game->rgb.floor[GREEN], game->rgb.floor[BLUE]));
 			y++;
 		}
 		x++;
@@ -69,7 +77,11 @@ void	draw_player(t_data *game)
 {
 	int	y;
 	int	x;
+	int	px;
+	int	py;
 
+	px = game->player->x * TILE_2D;
+	py = game->player->y * TILE_2D;
 	y = 0;
 	while (y < 7)
 	{
@@ -77,29 +89,43 @@ void	draw_player(t_data *game)
 		while (x < 7)
 		{
 			ft_put_pixel(game->image,
-				game->player->x + TILE_2D / 2 - 7 / 2 + x,
-				game->player->y + TILE_2D / 2 - 7 / 2 + y, 0xFFFF00);
+				px + TILE_2D / 2 - 7 / 2 + x,
+				py + TILE_2D / 2 - 7 / 2 + y, 0xFFFF00);
 			x++;
 		}
 		y++;
 	}
 	// direction
-	ft_put_pixel(game->image, game->player->x + TILE_2D / 2, game->player->y + TILE_2D / 2, 0xFF0000);
+	ft_put_pixel(game->image, px + TILE_2D / 2, py + TILE_2D / 2, 0xFF0000);
 	// draw direction line
-	int	line_len = 20;
+	int	line_len = raycasting(game);//20;
 	int	i = 1;
 	while (i < line_len)
 	{
 		ft_put_pixel(game->image,
-			(int)(game->player->x + TILE_2D / 2 + game->player->dir_x * i),
-			(int)(game->player->y + TILE_2D / 2 - game->player->dir_y * i), 0xFF0000);
+			(int)(px + TILE_2D / 2 + game->player->dir_x * i),
+			(int)(py + TILE_2D / 2 - game->player->dir_y * i), 0xFF0000);
+		i++;
+	}
+	// draw plane line
+	ft_put_pixel(game->image, px + TILE_2D / 2, py + TILE_2D / 2, 0xFFFFFF);
+	i = 1;
+	while (i < line_len)
+	{
+		ft_put_pixel(game->image,
+			px + TILE_2D / 2 + game->player->plane_x * i,
+			py + TILE_2D / 2 - game->player->plane_y * i, 0x0000FF);
+		ft_put_pixel(game->image,
+			px + TILE_2D / 2 - game->player->plane_x * i,
+			py + TILE_2D / 2 + game->player->plane_y * i, 0x0000FF);
 		i++;
 	}
 }
 
 void	render_game(t_data *game)
 {
-	fill_background(game);
+	fill_ceil_and_floor(game);
+	// raycasting(game);
 	draw_map2d(game);
 	draw_player(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->image->img, 0, 0);
