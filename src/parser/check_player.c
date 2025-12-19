@@ -55,8 +55,8 @@ int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)
 	set_direction(data, c);
 	if (y_coord == 0)
 		return (print_error("Player position invalid\n", data), ERROR);
-	data->player->y = y_coord;
-	data->player->x = x_coord;
+	data->player->y = y_coord * TILE_2D;
+	data->player->x = x_coord * TILE_2D;
 	data->flag.player_set = true;
 	return (SUCCESS);
 }
