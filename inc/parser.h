@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 13:36:28 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 07:55:06 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		extract_texture(t_data *data, const char *line);
 int		extract_rgb(t_data *data, const char *line);
 int		extract_map(t_data *data, char *line);
 int		check_empty_line(char *str);
+size_t	ft_check_valid_chars(t_data *data, char *str, int c);
+
 
 //PARSE MAP
 int		validate_map(t_data *data);
@@ -47,6 +49,7 @@ void	print_rgb(t_data *data);
 //CLEANUP PARSER
 void	cleanup_parser(t_data *data, int exit_code);
 void	free_split(char **split);
+void	safe_free(char **arr);
 
 //PRINT
 void	print_rgb_error(t_data *data);

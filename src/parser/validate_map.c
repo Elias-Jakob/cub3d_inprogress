@@ -6,24 +6,59 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 18:46:31 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/18 20:09:03 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-/* void	replace_whitespaces(t_data *data)
+void	*ft_realloc_str(t_data *data, char *str)
 {
+	char	*tmp;
 	size_t	i;
 
+	tmp = ft_calloc(data->map.x + 1, sizeof(char));
+	if (!tmp)
+		return (print_error("ft_calloc fail in validate map", data), NULL);
 	i = 0;
-	while (data->map[i])
+	while (str[i])
 	{
-
+		tmp[i] = str[i];
 		i++;
 	}
-	return ;
-} */
+	free(str);
+	return (tmp);
+}
+
+void	replace_whitespaces(t_data *data)
+{
+	int i;
+	int	j;
+	int	len;
+
+	i = 0;
+	printf("HIIIIIIIIIII\n");
+
+	while (data->map.arr[i])
+	{
+		len = ft_strlen(data->map.arr[i]);
+		if (len < data->map.x)
+		{
+			data->map.arr[i] = ft_realloc_str(data, data->map.arr[i]);
+			if (!data->map.arr[i])
+				cleanup_parser(data, ERROR);
+		}
+		j = 0;
+		while (j < data->map.x)
+		{
+			if (data->map.arr[i][j] == TAB || data->map.arr[i][j] == '\0')
+				data->map.arr[i][j] = SPACE;
+			j++;
+		}
+		i++;
+	}
+	print_map(data);
+}
 
 int	trim_line(char *str, ssize_t *len)
 {
@@ -56,7 +91,7 @@ void	normalize_map(t_data *data)
 	set_x_coord(data);
 	if (VERBOSE)
 		print_coords(data);
-	//replace_whitespaces(data);
+	replace_whitespaces(data);
 	return ;
 }
 

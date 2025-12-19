@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:50:24 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 07:36:59 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 07:22:32 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	safe_free(char **arr)
 		free(arr[BLUE]);
 	return ;
 }
+
 
 void	free_split(char **split)
 {
@@ -45,7 +46,7 @@ void	cleanup_rgb(t_data *data)
 		free(data->rgb.ceil_string);
 	if (data->rgb.floor_string)
 		free(data->rgb.floor_string);
-	free_split(data->rgb.ceiling);
+	free_split(data->rgb.ceil_split);
 	free_split(data->rgb.floor_split);
 	ft_memset(&data->rgb, 0, sizeof(t_rgb));
 }

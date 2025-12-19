@@ -6,11 +6,29 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 09:38:00 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 17:44:33 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 07:54:55 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+size_t	ft_check_valid_chars(t_data *data, char *str, int c)
+{
+	int	count;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str != ' ' && *str != '\t' && !ft_isdigit(*str) && *str != c)
+			return (print_error("Non-digit char in RGB string\n", data), 5);
+		if (*str == c)
+			count++;
+		str++;
+	}
+	if (count >= 3)
+		print_error("Too many commas found\n", data);
+	return (count);
+}
 
 int	check_spaces(char **split)
 {

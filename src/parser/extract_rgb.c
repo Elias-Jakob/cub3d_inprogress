@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:09:55 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 13:24:11 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 07:55:22 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,29 @@ int	digit_check(char *split)
 
 static int	check_rgb_code(char **split, int *rgb)
 {
-	int	i;
+	int		i;
+	char	*num[4];
 
 	i = 0;
-
-	if (!split[0] || !split[1] || !split[2])
+	ft_bzero(num, sizeof(num));
+	if (!split[0] || !split[1] || !split[2] || split[3] != NULL)
 		return (ERROR);
 	while (split[i])
 	{
-		if (!digit_check(split[i]))
-			return (ERROR);
+		num[i] = ft_strtrim(split[i], WHITESPACES);
+		if (!num[i] || !digit_check(num[i]) || ft_strcheck_spaces(num[i]))
+			return (safe_free(num), ERROR);
 		i++;
 	}
-	rgb[RED] = ft_atoi(split[RED]);
-	rgb[GREEN] = ft_atoi(split[GREEN]);
-	rgb[BLUE] = ft_atoi(split[BLUE]);
-	if (split[3] != NULL
-		|| (rgb[RED] < 0 || rgb[RED] > 255)
-		|| (rgb[GREEN] < 0 || rgb[GREEN] > 255)
+	rgb[RED] = ft_atoi(num[RED]);
+	rgb[GREEN] = ft_atoi(num[GREEN]);
+	rgb[BLUE] = ft_atoi(num[BLUE]);
+	free(num[RED]);
+	free(num[GREEN]);
+	free(num[BLUE]);
+	if ((rgb[RED] < 0 || rgb[RED] > 255) || (rgb[GREEN] < 0 || rgb[GREEN] > 255)
 		|| (rgb[BLUE] < 0 || rgb[BLUE] > 255))
-	{
 		return (ERROR);
-	}
 	return (SUCCESS);
 }
 
@@ -55,13 +56,13 @@ static int extract_floor_rgb(t_data *data, const char *line)
 	data->rgb.floor_string = ft_strtrim(line, WHITESPACES);
 	if (!data->rgb.floor_string || !*data->rgb.floor_string)
 		return (print_error("Malloc failed in flooring rgb code\n", data), ERROR);
-	if (ft_count_char(data->rgb.floor_string, COMMA) >= 3)
-		return (print_error("Too many commas found\n", data), ERROR);
+	if (ft_check_valid_chars(data, data->rgb.floor_string, COMMA) >= 3)
+		return (ERROR);
 	data->rgb.floor_split = ft_split(data->rgb.floor_string, ',');
 	if (!data->rgb.floor_split) // !*data->rgb.flooring
-		return(print_error("ft_split failed in flooring rgb code", data), ERROR);
+		return(print_error("ft_split failed in flooring rgb code\n", data), ERROR);
 	if (check_rgb_code(data->rgb.floor_split, data->rgb.floor))
-		return(print_error("RBG code out of scope", data), ERROR);
+		return(print_error("RBG code out of scope\n", data), ERROR);
 	data->flag.floor = true;
 	return (SUCCESS);
 }
@@ -71,13 +72,13 @@ static int	extract_ceiling_rgb(t_data *data, const char *line)
 	data->rgb.ceil_string = ft_strtrim(line, WHITESPACES);
 	if (!data->rgb.ceil_string || !*data->rgb.ceil_string)
 		return (print_error("Malloc failed in ceiling rgb code\n", data), ERROR);
-	if (ft_count_char(data->rgb.ceil_string, COMMA) >= 3)
-		return (print_error("Too many commas found\n", data), ERROR);
-	data->rgb.ceiling = ft_split(data->rgb.ceil_string, ',');
-	if (!data->rgb.ceiling) // !*data->rgb.ceiling
-		return(print_error("ft_split failed in ceiling rgb code", data), ERROR);
-	if (check_rgb_code(data->rgb.ceiling, data->rgb.ceil))
-		return(print_error("RBG code out of scope", data), ERROR);
+	if (ft_check_valid_chars(data, data->rgb.ceil_string, COMMA) >= 3)
+		return (ERROR);
+	data->rgb.ceil_split = ft_split(data->rgb.ceil_string, ',');
+	if (!data->rgb.ceil_split) // !*data->rgb.ceiling
+		return(print_error("ft_split failed in ceiling rgb code\n", data), ERROR);
+	if (check_rgb_code(data->rgb.ceil_split, data->rgb.ceil))
+		return(print_error("RBG code out of scope\n", data), ERROR);
 	data->flag.ceiling = true;
 	return (SUCCESS);
 }
