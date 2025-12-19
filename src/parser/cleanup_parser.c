@@ -6,12 +6,22 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:50:24 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 18:15:03 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 07:36:59 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+void	safe_free(char **arr)
+{
+	if (arr[RED])
+		free(arr[RED]);
+	if (arr[GREEN])
+		free(arr[GREEN]);
+	if (arr[BLUE])
+		free(arr[BLUE]);
+	return ;
+}
 
 void	free_split(char **split)
 {
