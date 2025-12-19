@@ -139,7 +139,7 @@ typedef struct rgb
 	/* PATRICK */
 	char *floor_string;
 	char *ceil_string;
-	char **ceiling;
+	char **ceil_split;
 	char **floor_split;
 	int		ceil[3];
 	int		floor[3];
