@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 05:34:13 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 18:44:31 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/30 15:52:18 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	print_coords(t_data *data)
 {
-	printf("%s Player\nStart coords:\tx:%i y:%i\n", OK_MSG, \
-		data->player->x, data->player->y );
+	printf("%s Player\nStart coords:\tx:%f y:%f\n", OK_MSG, \
+		data->player->x, data->player->y);
 	printf("\n");
 	printf("%s Map\nCoords:\t\tX: 0-%zu Y: 0-%zu\n", OK_MSG, data->map.x - 1,  \
 		data->map.y - 1);

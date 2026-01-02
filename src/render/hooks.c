@@ -28,17 +28,17 @@ int	key_hook(int key_code, t_data *game)
 	if (key_code == XK_Escape)
 		quit_game(game);
 	else if (key_code == XK_Left)
-		rotate_player(game->player, 0.1);
+		rotate_player(game->player, -0.05);
 	else if (key_code == XK_Right)
-		rotate_player(game->player, -0.1);
+		rotate_player(game->player, 0.05);
 	else if (key_code == XK_w)
-		game->player->y -= 5;
+		game->player->y -= 0.1;
 	else if (key_code == XK_a)
-		game->player->x -= 5;
+		game->player->x -= 0.1;
 	else if (key_code == XK_s)
-		game->player->y += 5;
+		game->player->y += 0.1;
 	else if (key_code == XK_d)
-		game->player->x += 5;
+		game->player->x += 0.1;
 	render_game(game);
 	return (0);
 }

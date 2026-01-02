@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:48:43 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 16:50:28 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/02 14:10:55 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	set_direction(t_data *data, char c)
 {
 	data->player->dir_x = 0;
-	data->player->dir_y = 1;
+	data->player->dir_y = -1;
 	if (c == 'N')
 		data->flag.player_north = true;
 	else if (c == 'S')
 	{
 		data->player->dir_x = 0;
-		data->player->dir_y = -1;
+		data->player->dir_y = 1;
 		data->flag.player_south = true;
 	}
 	else if (c == 'W')
@@ -55,8 +55,8 @@ int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)
 	set_direction(data, c);
 	if (y_coord == 0)
 		return (print_error("Player position invalid\n", data), ERROR);
-	data->player->y = y_coord;
-	data->player->x = x_coord;
+	data->player->y = y_coord + .5;
+	data->player->x = x_coord + .5;
 	data->flag.player_set = true;
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 18:45:53 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/30 15:51:04 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@
 ///////////////////////////////
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
