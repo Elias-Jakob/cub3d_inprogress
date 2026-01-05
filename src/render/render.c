@@ -98,7 +98,7 @@ void	draw_player(t_data *game)
 	// direction
 	ft_put_pixel(game->image, px, py, 0xFF0000);
 	// draw direction line
-	int	line_len = raycasting(game);//20;
+	int	line_len = raycasting(game, WIDTH / 2) * TILE_2D;
 	int	i = 1;
 	while (i < line_len)
 	{
@@ -107,26 +107,28 @@ void	draw_player(t_data *game)
 			(int)(py + game->player->dir_y * i), 0xFF0000);
 		i++;
 	}
+}
 
-	// draw plane line
-	// ft_put_pixel(game->image, px + TILE_2D / 2, py + TILE_2D / 2, 0xFFFFFF);
-	// i = 1;
-	// while (i < line_len)
-	// {
-	// 	ft_put_pixel(game->image,
-	// 		px + TILE_2D / 2 + game->player->plane_x * i,
-	// 		py + TILE_2D / 2 - game->player->plane_y * i, 0x0000FF);
-	// 	ft_put_pixel(game->image,
-	// 		px + TILE_2D / 2 - game->player->plane_x * i,
-	// 		py + TILE_2D / 2 + game->player->plane_y * i, 0x0000FF);
-	// 	i++;
-	// }
+void	draw_walls3d(t_data *game)
+{
+	double	wall_dist;
+
+	for (int x = 0; x < WIDTH; x++)
+	{
+		wall_dist = raycasting(game, x);
+		for (int y = 0; y < HEIGHT / wall_dist; y++)
+		{
+			ft_put_pixel(game->image, x, HEIGHT / 2 + y, 0x87CEEB);
+			ft_put_pixel(game->image, x, HEIGHT / 2 - y, 0x87CEEB);
+		}
+	}
 }
 
 void	render_game(t_data *game)
 {
 	fill_ceil_and_floor(game);
 	// raycasting(game);
+	draw_walls3d(game);
 	draw_map2d(game);
 	draw_player(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->image->img, 0, 0);

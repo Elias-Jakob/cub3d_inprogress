@@ -11,7 +11,7 @@ bool	render(t_data *game);
 void	render_game(t_data *game);
 
 // raycasting.c
-int	raycasting(t_data *game);
+double	raycasting(t_data *game, int current_x_col);
 
 // hooks.c
 int	key_hook(int key_code, t_data *game);

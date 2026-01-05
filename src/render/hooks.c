@@ -23,6 +23,33 @@ int	quit_game(t_data *game)
 	exit(0);
 }
 
+void	set_new_player_pos(t_data *game, double x, double y)
+{
+	if (game->map.arr[(int)y][(int)x] == '1')
+		return ;
+	game->player->x = x;
+	game->player->y = y;
+}
+
+static void	handle_player_movement(t_data *game, int key_code)
+{
+	t_player	*p;
+	double	step_x;
+	double	step_y;
+
+	p = game->player;
+	step_x = p->dir_x * 0.1;
+	step_y = p->dir_y * 0.1;
+	if (key_code == XK_w)
+		set_new_player_pos(game, p->x + step_x, p->y + step_y);
+	else if (key_code == XK_a)
+		set_new_player_pos(game, p->x + step_y, p->y - step_x);
+	else if (key_code == XK_s)
+		set_new_player_pos(game, p->x - step_x, p->y - step_y);
+	else if (key_code == XK_d)
+		set_new_player_pos(game, p->x - step_y, p->y + step_x);
+}
+
 int	key_hook(int key_code, t_data *game)
 {
 	if (key_code == XK_Escape)
@@ -31,14 +58,8 @@ int	key_hook(int key_code, t_data *game)
 		rotate_player(game->player, -0.05);
 	else if (key_code == XK_Right)
 		rotate_player(game->player, 0.05);
-	else if (key_code == XK_w)
-		game->player->y -= 0.1;
-	else if (key_code == XK_a)
-		game->player->x -= 0.1;
-	else if (key_code == XK_s)
-		game->player->y += 0.1;
-	else if (key_code == XK_d)
-		game->player->x += 0.1;
+	else
+		handle_player_movement(game, key_code);
 	render_game(game);
 	return (0);
 }
