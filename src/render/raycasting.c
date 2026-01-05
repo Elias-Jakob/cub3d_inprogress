@@ -1,11 +1,6 @@
 #include "cub3d.h"
 
-// static void	cast_ray(t_data *game, int x)
-// {
-//
-// }
-
-static double	cast_2d_ray(t_data *game, int current_x_col)
+double	raycasting(t_data *game, int current_x_col)
 {
 	bool	hit;
 	int	map_x;
@@ -70,9 +65,4 @@ static double	cast_2d_ray(t_data *game, int current_x_col)
 		return (side_dist_x - delta_dist_x);
 	else
 		return (side_dist_y - delta_dist_y);
-}
-
-double	raycasting(t_data *game, int current_x_col)
-{
-	return (cast_2d_ray(game, current_x_col));// * TILE_2D);
 }

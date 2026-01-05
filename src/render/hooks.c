@@ -25,10 +25,21 @@ int	quit_game(t_data *game)
 
 void	set_new_player_pos(t_data *game, double x, double y)
 {
-	if (game->map.arr[(int)y][(int)x] == '1')
-		return ;
-	game->player->x = x;
-	game->player->y = y;
+	char	**map;
+	t_player	*p;
+
+	map = game->map.arr;
+	p = game->player;
+	if (map[(int)p->y][(int)(x + COLLISION_MARGIN)] != '1'
+		&& map[(int)p->y][(int)(x - COLLISION_MARGIN)] != '1'
+		&& map[(int)(p->y + COLLISION_MARGIN)][(int)x] != '1'
+		&& map[(int)(p->y - COLLISION_MARGIN)][(int)x] != '1')
+		game->player->x = x;
+	if (map[(int)y][(int)(p->x + COLLISION_MARGIN)] != '1'
+		&& map[(int)y][(int)(p->x - COLLISION_MARGIN)] != '1'
+		&& map[(int)(y + COLLISION_MARGIN)][(int)p->x] != '1'
+		&& map[(int)(y - COLLISION_MARGIN)][(int)p->x] != '1')
+		game->player->y = y;
 }
 
 static void	handle_player_movement(t_data *game, int key_code)

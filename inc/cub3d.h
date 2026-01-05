@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/30 15:51:04 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/05 11:49:01 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 
 # define WIDTH 1620
 # define HEIGHT 880
-#define TILE_2D 32
+# define TILE_2D 32
 
+# define COLLISION_MARGIN 0.1
 
 # define PI 3.14159265
 
