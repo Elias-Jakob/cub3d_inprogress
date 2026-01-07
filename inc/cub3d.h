@@ -26,7 +26,9 @@
 
 # define WIDTH 1620
 # define HEIGHT 880
-# define TILE_2D 32
+# define MINIMAP_SIZE 160
+# define MINIMAP_CENTER 80
+# define TILE_2D 16
 
 # define COLLISION_MARGIN 0.1
 
@@ -99,6 +101,16 @@ typedef struct s_ray
 	int		step_x; // Tells us in which direction we're moving through the map
 	int		step_y;
 }	t_ray;
+
+typedef struct	s_minimap
+{
+	int	start_col;
+	int	start_row;
+	int	end_col;
+	int	end_row;
+	int	x;
+	int	y;
+}	t_minimap;
 
 typedef struct s_img_data
 {
@@ -196,7 +208,7 @@ typedef struct data
 	t_img_data	*image;
 	// char	**map;
 	int	map_width;
-	int	map_heigth;
+	int	map_height;
 	t_player	*player;
 }	t_data;
 
