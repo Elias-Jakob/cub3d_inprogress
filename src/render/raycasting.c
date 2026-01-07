@@ -1,68 +1,57 @@
 #include "cub3d.h"
 
-double	raycasting(t_data *game, int current_x_col)
+double	raycasting(t_data *game, t_ray *ray)
 {
-	bool	hit;
-	int	map_x;
-	int	map_y;
-	double	camera_x; // current x column normalized to direction vector
-	double	ray_dir_x; // ray direction vector
-	double	ray_dir_y;
-	double	delta_dist_x; // ray length to travel one grid unit
-	double	delta_dist_y;
-	bool	side; // was a NS or a EW wall hit?
-	double side_dist_x; // the distance to the NEXT grid line position that is checked
-	double side_dist_y;
-	int	step_x; // Tells us in which direction we're moving through the map
-	int	step_y;
-
-	camera_x = 2 * current_x_col / (double)WIDTH - 1;
+	ray->camera_x = 2 * ray->col / (double)WIDTH - 1;
 	// camera_x = 0; // straight ahead
-	ray_dir_x = game->player->dir_x + game->player->plane_x * camera_x;
-	ray_dir_y = game->player->dir_y + game->player->plane_y * camera_x;
-	delta_dist_x = fabs(1 / ray_dir_x);
-	delta_dist_y = fabs(1 / ray_dir_y);
+	ray->dir_x = game->player->dir_x + game->player->plane_x * ray->camera_x;
+	ray->dir_y = game->player->dir_y + game->player->plane_y * ray->camera_x;
+	// for dirx = 0.149438 diry = -0.988771
+	// delta_dist_x = 6.71
+	// delta_dist_y = 1.01
+	ray->delta_dist_x = fabs(1 / ray->dir_x);
+	ray->delta_dist_y = fabs(1 / ray->dir_y);
 	// INFO: ray vectors evaluate to respective direction vector if camera_x == 0
-	hit = false;
-	map_x = (int)game->player->x;
-	map_y = (int)game->player->y;
-	step_x = -1;
-	step_y = -1;
-	side_dist_x = (game->player->x - map_x) * delta_dist_x;
-	side_dist_y = (game->player->y - map_y) * delta_dist_y;
-	if (ray_dir_x > 0)
+	ray->hit = false;
+	ray->map_x = (int)game->player->x;
+	ray->map_y = (int)game->player->y;
+	ray->step_x = -1;
+	ray->step_y = -1;
+	ray->side_dist_x = (game->player->x - ray->map_x) * ray->delta_dist_x;
+	ray->side_dist_y = (game->player->y - ray->map_y) * ray->delta_dist_y;
+	if (ray->dir_x > 0)
 	{
-		step_x = 1;
-		side_dist_x = (map_x + 1.0 - game->player->x) * delta_dist_x;
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - game->player->x) * ray->delta_dist_x;
 	}
-	if (ray_dir_y > 0)
+	if (ray->dir_y > 0)
 	{
-		step_y = 1;
-		side_dist_y = (map_y + 1.0 - game->player->y) * delta_dist_y;
+		ray->step_y = 1;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player->y) * ray->delta_dist_y;
 	}
 	// DDA loop
-	while (!hit)
+	while (!ray->hit)
 	{
-		if (side_dist_x < side_dist_y)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			side_dist_x += delta_dist_x;
-			map_x += step_x;
-			side = false;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = false;
 		}
 		else
 		{
-			side_dist_y += delta_dist_y;
-			map_y += step_y;
-			side = true;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = true;
 		}
-		if (game->map.arr[map_y][map_x] == '1')
+		if (game->map.arr[ray->map_y][ray->map_x] == '1')
 		{
 			// printf("player_x = %f player_y = %f map_x = %d map_y = %d side_dist_x = %f side_dist_y = %f\n", game->player->x, game->player->y, map_x, map_y, side_dist_x, side_dist_y);
-			hit = true;
+			ray->hit = true;
 		}
 	}
-	if (!side)
-		return (side_dist_x - delta_dist_x);
+	if (!ray->side)
+		return (ray->side_dist_x - ray->delta_dist_x);
 	else
-		return (side_dist_y - delta_dist_y);
+		return (ray->side_dist_y - ray->delta_dist_y);
 }

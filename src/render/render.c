@@ -79,6 +79,7 @@ void	draw_player(t_data *game)
 	int	x;
 	int	px;
 	int	py;
+	t_ray	ray;
 
 	px = game->player->x * TILE_2D;
 	py = game->player->y * TILE_2D;
@@ -97,8 +98,9 @@ void	draw_player(t_data *game)
 	}
 	// direction
 	ft_put_pixel(game->image, px, py, 0xFF0000);
+	ray.col = WIDTH / 2;
 	// draw direction line
-	int	line_len = raycasting(game, WIDTH / 2) * TILE_2D;
+	int	line_len = raycasting(game, &ray) * TILE_2D;
 	int	i = 1;
 	while (i < line_len)
 	{
@@ -112,10 +114,12 @@ void	draw_player(t_data *game)
 void	draw_walls3d(t_data *game)
 {
 	double	wall_dist;
+	t_ray	ray;
 
 	for (int x = 0; x < WIDTH; x++)
 	{
-		wall_dist = raycasting(game, x);
+		ray.col = x;
+		wall_dist = raycasting(game, &ray);
 		for (int y = 0; y < HEIGHT / wall_dist; y++)
 		{
 			ft_put_pixel(game->image, x, HEIGHT / 2 + y, 0x87CEEB);

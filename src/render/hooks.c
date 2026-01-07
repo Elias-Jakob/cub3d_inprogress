@@ -9,9 +9,8 @@ static void rotate_player(t_player *player, double rot_angle)
 	old_dir_y = player->dir_y;
 	player->dir_x = old_dir_x * cos(rot_angle) - old_dir_y * sin(rot_angle);
 	player->dir_y = old_dir_x * sin(rot_angle) + old_dir_y * cos(rot_angle);
-	// printf("old_dir_x: %f * cos(rot_angle): %f - old_dir_y: %f * sin(rot_angle): %f\n", old_dir_x, cos(rot_angle), old_dir_y, sin(rot_angle));
-	// printf("dir_x = %f dir_y = %f\n", player->dir_x, player->dir_y);
-	// plane
+	// TODO:
+	// printf("dirx = %f diry = %f\n", player->dir_x, player->dir_y);
 	player->plane_x = -player->dir_y * 0.66;
 	player->plane_y = player->dir_x * 0.66;
 }
