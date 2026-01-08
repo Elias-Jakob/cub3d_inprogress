@@ -28,6 +28,7 @@
 # define HEIGHT 880
 # define MINIMAP_SIZE 160
 # define MINIMAP_CENTER 80
+# define MINIMAP_GRID_COLOR 0x8a8686
 # define TILE_2D 16
 
 # define COLLISION_MARGIN 0.1
