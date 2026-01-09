@@ -28,8 +28,14 @@
 # define HEIGHT 880
 # define MINIMAP_SIZE 160
 # define MINIMAP_CENTER 80
+# define TILE_2D_BIG 16
+# define TILE_2D_SMALL 8
+
+# define MINIMAP_BG_COLOR 0x000000
+# define MINIMAP_WALL_COLOR 0xFFFFFF
 # define MINIMAP_GRID_COLOR 0x8a8686
-# define TILE_2D 16
+# define MINIMAP_PLAYER_COLOR 0xFFFF00
+# define MINIMAP_RAY_COLOR 0xFF0000
 
 # define COLLISION_MARGIN 0.1
 
@@ -105,12 +111,15 @@ typedef struct s_ray
 
 typedef struct	s_minimap
 {
+	int	n_tiles;
 	int	start_col;
 	int	start_row;
 	int	end_col;
 	int	end_row;
 	int	x;
 	int	y;
+	double	x_fract;
+	double	y_fract;
 }	t_minimap;
 
 typedef struct s_img_data
@@ -210,6 +219,7 @@ typedef struct data
 	// char	**map;
 	int	map_width;
 	int	map_height;
+	int	tile_size;
 	t_player	*player;
 }	t_data;
 

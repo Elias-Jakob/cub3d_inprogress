@@ -26,3 +26,8 @@ void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
 	// printf("MLX image\naddr: %p\nimg: %p\nbits_per_pixel: %d\nline_length: %d\nendian: %d\n",
 	// 			image_data->addr, image_data->img, image_data->bits_per_pixel, image_data->line_length, image_data->endian);
 }
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}

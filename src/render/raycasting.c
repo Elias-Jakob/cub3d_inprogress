@@ -1,37 +1,37 @@
 #include "cub3d.h"
 
-static void	init_ray(t_data *game, t_ray *ray)
+static void	init_ray(t_player *player, t_ray *ray)
 {
 	ray->camera_x = 2 * ray->col / (double)WIDTH - 1;
-	ray->dir_x = game->player->dir_x + game->player->plane_x * ray->camera_x;
-	ray->dir_y = game->player->dir_y + game->player->plane_y * ray->camera_x;
+	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
+	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	// for dirx = 0.149438 diry = -0.988771
 	// delta_dist_x = 6.71
 	// delta_dist_y = 1.01
 	ray->delta_dist_x = fabs(1 / ray->dir_x);
 	ray->delta_dist_y = fabs(1 / ray->dir_y);
 	ray->hit = false;
-	ray->map_x = (int)game->player->x;
-	ray->map_y = (int)game->player->y;
+	ray->map_x = (int)player->x;
+	ray->map_y = (int)player->y;
 	ray->step_x = -1;
 	ray->step_y = -1;
-	ray->side_dist_x = (game->player->x - ray->map_x) * ray->delta_dist_x;
-	ray->side_dist_y = (game->player->y - ray->map_y) * ray->delta_dist_y;
+	ray->side_dist_x = (player->x - ray->map_x) * ray->delta_dist_x;
+	ray->side_dist_y = (player->y - ray->map_y) * ray->delta_dist_y;
 	if (ray->dir_x > 0)
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - game->player->x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - player->x) * ray->delta_dist_x;
 	}
 	if (ray->dir_y > 0)
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - game->player->y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - player->y) * ray->delta_dist_y;
 	}
 }
 
 double	raycasting(t_data *game, t_ray *ray)
 {
-	init_ray(game, ray);
+	init_ray(game->player, ray);
 	// DDA loop
 	while (!ray->hit)
 	{

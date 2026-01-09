@@ -22,6 +22,13 @@ static bool	init_mlx(t_data *game)
 
 bool	render(t_data *game)
 {
+	// TODO: init map width and height @ patrick
+	while (game->map.arr[game->map_height])
+		game->map_height++;
+	game->tile_size = TILE_2D_BIG;
+	if (game->map_height > MINIMAP_SIZE / TILE_2D_BIG)
+		game->tile_size = TILE_2D_SMALL;
+	//
 	if (!init_mlx(game))
 		return (false);
 	render_game(game);
