@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 05:34:13 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 14:04:45 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:42:37 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,12 @@ void	print_normalized_map(t_data *data)
 
 void	print_map_coords(t_data *data)
 {
+	printf("%s Player\nStart coords:\tx:%f y:%f\n", OK_MSG, \
+		data->player->x, data->player->y);
+	printf("\n");
 	printf("%s Map\nCoords:\t\tX: 0-%i Y: 0-%i\n", OK_MSG, data->map.x - 1,  \
 		data->map.y - 1);
-	printf("Size:\t\t%i x %i = %i tiles\n\n", data->map.x,  \
+	printf("Size:\t\t%ix %i = %i tiles\n\n", data->map.x,  \
 		data->map.y, data->map.y*data->map.x);
 	return ;
 }
