@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:09:55 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 09:05:50 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:46:12 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,14 @@ int	digit_check(char *split)
 		split++;
 	}
 	return (SUCCESS);
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	if ((r < 0 || r > 255) || (g < 0 || g > 255)
+		|| (b < 0 || b > 255))
+		return (-1);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 static int	check_rgb_code(char **split, int *rgb)
@@ -39,14 +47,12 @@ static int	check_rgb_code(char **split, int *rgb)
 			return (safe_free(num), ERROR);
 		i++;
 	}
-	rgb[RED] = ft_atoi(num[RED]);
-	rgb[GREEN] = ft_atoi(num[GREEN]);
-	rgb[BLUE] = ft_atoi(num[BLUE]);
+	*rgb = create_trgb(0, ft_atoi(num[RED]), \
+		ft_atoi(num[GREEN]), ft_atoi(num[BLUE]));
 	free(num[RED]);
 	free(num[GREEN]);
 	free(num[BLUE]);
-	if ((rgb[RED] < 0 || rgb[RED] > 255) || (rgb[GREEN] < 0 || rgb[GREEN] > 255)
-		|| (rgb[BLUE] < 0 || rgb[BLUE] > 255))
+	if (*rgb == -1)
 		return (ERROR);
 	return (SUCCESS);
 }
@@ -61,7 +67,7 @@ static int extract_floor_rgb(t_data *data, const char *line)
 	data->rgb.floor_split = ft_split(data->rgb.floor_string, ',');
 	if (!data->rgb.floor_split) // !*data->rgb.flooring
 		return(print_error("ft_split failed in flooring rgb code\n", data), ERROR);
-	if (check_rgb_code(data->rgb.floor_split, data->rgb.floor))
+	if (check_rgb_code(data->rgb.floor_split, &data->rgb.floor))
 		return(print_error("RBG code out of scope\n", data), ERROR);
 	data->flag.floor = true;
 	return (SUCCESS);
@@ -77,7 +83,7 @@ static int	extract_ceiling_rgb(t_data *data, const char *line)
 	data->rgb.ceil_split = ft_split(data->rgb.ceil_string, ',');
 	if (!data->rgb.ceil_split) // !*data->rgb.ceiling
 		return(print_error("ft_split failed in ceiling rgb code\n", data), ERROR);
-	if (check_rgb_code(data->rgb.ceil_split, data->rgb.ceil))
+	if (check_rgb_code(data->rgb.ceil_split, &data->rgb.ceil))
 		return(print_error("RBG code out of scope\n", data), ERROR);
 	data->flag.ceiling = true;
 	return (SUCCESS);

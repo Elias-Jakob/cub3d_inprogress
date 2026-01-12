@@ -77,23 +77,22 @@ void	draw_player(t_data *game)
 		while (x < 7)
 		{
 			ft_put_pixel(game->image,
-				game->player->x - 7 / 2 + x,
-				game->player->y - 7 / 2 + y, 0xFFFF00);
+				game->player->x + TILE_2D / 2 - 7 / 2 + x,
+				game->player->y +TILE_2D / 2 - 7 / 2 + y, 0xFFFF00);
 			x++;
 		}
 		y++;
 	}
 	// direction
-	ft_put_pixel(game->image, game->player->x, game->player->y, 0xFF0000);
+	ft_put_pixel(game->image, game->player->x + TILE_2D / 2, game->player->y + TILE_2D / 2, 0xFF0000);
 	// draw direction line
 	int	line_len = 20;
 	int	i = 1;
 	while (i < line_len)
 	{
 		ft_put_pixel(game->image,
-			(int)(game->player->x + game->player->dir_x * i),
-			(int)(game->player->y - game->player->dir_y * i), 0xFF0000);
-		i++;
+			(int)(game->player->x + TILE_2D / 2 + game->player->dir_x * i),
+			(int)(game->player->y + TILE_2D / 2 - game->player->dir_y * i), 0xFF0000);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 05:34:13 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 14:42:37 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:47:25 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,16 @@ void	print_texture(t_data *data)
 
 void	print_rgb(t_data *data)
 {
-	int *ceil;
-	int *floor;
+	int ceil;
+	int floor;
 
 	ceil = data->rgb.ceil;
 	floor = data->rgb.floor;
 
 	printf("\n%s RGB extraction\n", OK_MSG);
 	printf("\tCeiling_string: %s", data->rgb.ceil_string);
-	printf("\tRED: %i | GREEN: %i | BLUE: %i\n", \
-		ceil[RED], ceil[GREEN], ceil[BLUE]);
+	printf("\tRGB: %i\n", data->rgb.ceil);
 	printf("\tFloor_string: %s", data->rgb.floor_string);
-	printf("\tRED: %i | GREEN: %i | BLUE: %i\n", \
-		floor[RED], floor[GREEN], floor[BLUE]);
+	printf("\tRGB %i\n", data->rgb.floor);
 	return ;
 }

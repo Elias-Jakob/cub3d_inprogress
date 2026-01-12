@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 14:35:43 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/12 16:43:07 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@
 typedef struct s_player
 {
 	double	x;
-	double		y;
+	double	y;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
@@ -146,10 +146,8 @@ typedef struct rgb
 	char *ceil_string;
 	char **ceil_split;
 	char **floor_split;
-	int		ceil[3];
-	int		floor[3];
-
-
+	int		ceil;
+	int		floor;
 
 	/* ELIAS   */
 }	t_rgb;
