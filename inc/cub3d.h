@@ -37,7 +37,14 @@
 # define MINIMAP_PLAYER_COLOR 0xFFFF00
 # define MINIMAP_RAY_COLOR 0xFF0000
 
+# define N_TEXTURES 4
+
 # define COLLISION_MARGIN 0.1
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
 # define PI 3.14159265
 
@@ -137,15 +144,17 @@ typedef struct s_img_data
 /* PATRICK PARSER STRUCTS    */
 ///////////////////////////////
 typedef struct texture
-{	/* PATRICK */
-	char	*north;				// cleanup_parser
-	char	*south;				// cleanup_parser
-	char	*west;				// cleanup_parser
-	char	*east;				// cleanup_parser
+{
+	/* PATRICK */
+	char	*path;
+	/* parser init file type .png/.xpm */
+	bool	is_png;
 
 	/* ELIAS   */
+	void	*src;
+	int	width;
+	int	height;
 }	t_texture;
-
 
 typedef struct flags
 {
@@ -205,7 +214,7 @@ typedef struct data
 	bool		rgb_pass;
 	bool		map_pass;
 
-	t_texture	text;
+	t_texture	text[N_TEXTURES];
 	t_flag		flag;
 	t_rgb		rgb;
 	t_map		map;

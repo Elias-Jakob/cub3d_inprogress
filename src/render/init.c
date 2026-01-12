@@ -1,5 +1,28 @@
 #include "cub3d.h"
 
+static bool	load_textures(t_data *game)
+{
+	int	i_tex;
+	t_texture	texture;
+
+	i_tex = 0;
+	while (i_tex < N_TEXTURES)
+	{
+		texture = game->text[i_tex++];
+		if (!texture.is_png)
+			texture.src = mlx_xpm_file_to_image(game->mlx, texture.path, &texture.width, &texture.height);
+		// TODO: mlx_png_file_to_image does not work... Check if its OK to only allow the use of .xpm files?
+		// else
+		// 	texture.src = mlx_png_file_to_image(game->mlx, texture.path, &texture.width, &texture.height);
+		if (!texture.src)
+			return (print_error("failed to load texture: ", game),
+				printf("%s\n", texture.path), false);
+		printf("w = %d h = %d\n", texture.width, texture.height);
+		// TODO: (possible) should we error out if a texture is not quadratic?
+	}
+	return (true);
+}
+
 static bool	init_mlx(t_data *game)
 {
 	game->mlx = mlx_init();
@@ -14,6 +37,8 @@ static bool	init_mlx(t_data *game)
 	game->image->addr = mlx_get_data_addr(game->image->img,
 		&game->image->bits_per_pixel, &game->image->line_length,
 		&game->image->endian);
+	if (!load_textures(game))
+		return (clean_up_mlx(game), false);
 	// Hooks
 	mlx_hook(game->mlx_win, 17, 1L << 2, quit_game, game);
 	mlx_hook(game->mlx_win, 2, 1L << 0, key_hook, game);
