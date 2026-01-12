@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:09:55 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 07:55:22 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 09:05:50 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_rgb_code(char **split, int *rgb)
 	while (split[i])
 	{
 		num[i] = ft_strtrim(split[i], WHITESPACES);
-		if (!num[i] || !digit_check(num[i]) || ft_strcheck_spaces(num[i]))
+		if (!num[i] || ft_strcheck_spaces(num[i]))
 			return (safe_free(num), ERROR);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:43:11 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 07:29:45 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 14:31:56 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_rgb_error(t_data *data)
 		printf("Floor RGB missing\n");
 }
 
-void	print_text_error(t_data *data)
+void	print_text_rgb_error(t_data *data)
 {
 	t_flag flag;
 
@@ -72,4 +72,12 @@ void	print_text_error(t_data *data)
 		printf("West texture missing\n");
 	if (!flag.east)
 		printf("East texture missing\n");
+	if (!data->rgb_pass)
+	{
+		printf("\033[31mRGB erxtraction incomplete\033[0m\n");
+		if (!flag.ceiling)
+			printf("Ceiling RGB missing\n");
+		if (!flag.floor)
+			printf("Floor RGB missing\n");
+	}
 }

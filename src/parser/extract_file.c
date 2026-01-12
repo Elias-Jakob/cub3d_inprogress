@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:54:53 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 14:03:28 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:51:32 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ int	extract_files(t_data *data, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (!data->texture_pass && !data->rgb_pass)
-		return (print_text_error(data), print_rgb_error(data), ERROR);
-	else if (!data->texture_pass)
-		return (print_text_error(data), ERROR);
-	else if (!data->rgb_pass)
-		return (print_rgb_error(data), ERROR);
+	if (!data->texture_pass || !data->rgb_pass)
+		return (print_text_rgb_error(data), ERROR);
 	else if(data->flag.error)
 		return (ERROR);
+	else if(!data->flag.player_set)
+		return (print_error("Player not found on map\n", data), ERROR);
 	return (SUCCESS);
 }

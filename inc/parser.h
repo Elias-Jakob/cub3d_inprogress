@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 07:55:06 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 14:34:12 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int		validate_map(t_data *data);
 int		check_spaces(char **split);
 int		check_player_flags(t_data *data, char c);
 int		set_player(t_data *data, char c, size_t y_coord, size_t x_coord);
+void	check_walling(t_data *data, t_map map, int x, int y);
+int		create_padding_map(t_data *data, t_map map);
+
 
 
 //VERBOSE
@@ -52,11 +55,12 @@ void	free_split(char **split);
 void	safe_free(char **arr);
 
 //PRINT
-void	print_rgb_error(t_data *data);
-void	print_text_error(t_data *data);
+void	print_text_rgb_error(t_data *data);
 void	print_error(char *str, t_data *data);
 int		print_doubles(t_data *data, const char *str);
-void	print_coords(t_data *data);
+void	print_map_coords(t_data *data);
+void	print_normalized_map(t_data *data);
+
 
 
 # endif

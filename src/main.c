@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:06:18 by netrunner         #+#    #+#             */
-/*   Updated: 2025/12/18 18:23:42 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 12:59:36 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ int	main(int ac, char **av)
 	*/
 
 
-
+/*
 	if (!render(&data))
-		print_error("Init MLX failed\n", &data);
+	printf("%s\n", ERROR_MSG);
+	printf("%s", str);
+	data->flag.error = true;
+	return ;
+		print_error("Init MLX failed\n", &data); */
 
 	// TODO: somehow player and image are leaking even if i free them
 

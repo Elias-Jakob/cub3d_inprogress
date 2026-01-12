@@ -12,7 +12,7 @@ INCLUDES    = -I inc -I $(LIBFT_DIR)
 SRC_DIR     = src
 OBJ_DIR     = obj
 
-RENDER_SRC = \
+#RENDER_SRC = \
 		render/init.c \
 		render/render.c \
 		render/hooks.c \
@@ -22,6 +22,7 @@ SRCS = \
 	main.c \
 	parser/parser.c \
 	parser/verbose.c \
+	parser/check_walls.c \
 	parser/extract_map.c \
 	parser/extract_rgb.c \
 	parser/check_player.c \
@@ -58,7 +59,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c inc/cub3d.h
 
 # Executable
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)  -L/usr/include -lmlx -lX11 -lXext -lm
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+
+# -L/usr/include -lmlx -lX11 -lXext -lm
 
 # Libft bauen
 $(LIBFT):

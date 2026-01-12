@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 18:45:53 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:02:25 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # define WIDTH 1620
 # define HEIGHT 880
 #define TILE_2D 32
+
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
 
 # define PI 3.14159265
@@ -50,6 +56,7 @@
 # include <signal.h>
 # include <math.h>
 # include "libft/libft.h"
+
 
 
 
@@ -102,10 +109,8 @@ typedef struct s_img_data
 ///////////////////////////////
 typedef struct texture
 {	/* PATRICK */
-	char	*north;				// cleanup_parser
-	char	*south;				// cleanup_parser
-	char	*west;				// cleanup_parser
-	char	*east;				// cleanup_parser
+	char	*path;
+
 
 	/* ELIAS   */
 }	t_texture;
@@ -154,8 +159,8 @@ typedef struct map
 	/* PATRICK */
 	char	**arr;
 	char	*line;
-	ssize_t	y;
-	ssize_t	x;
+	int		y;
+	int		x;
 
 
 
@@ -169,7 +174,7 @@ typedef struct data
 	bool		rgb_pass;
 	bool		map_pass;
 
-	t_texture	text;
+	t_texture	text[4];
 	t_flag		flag;
 	t_rgb		rgb;
 	t_map		map;
@@ -188,6 +193,7 @@ typedef struct data
 
 
 # include "parser.h"
-# include "render.h"
+
+//# include "render.h"
 
 #endif

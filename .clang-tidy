@@ -1,0 +1,11 @@
+Checks: >
+  clang-analyzer-core.*,
+  clang-analyzer-unix.Malloc,
+  clang-analyzer-unix.MallocSizeof,
+  clang-analyzer-deadcode.*,
+  clang-analyzer-unix.*
+
+WarningsAsErrors: ''
+HeaderFilterRegex: "^(?!.*inc/libft).*"
+AnalyzeTemporaryDtors: true
+FormatStyle: none

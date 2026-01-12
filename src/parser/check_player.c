@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:48:43 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 16:50:28 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/19 18:53:00 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 static void	set_direction(t_data *data, char c)
 {
+	data->player->dir_x = 0;
+	data->player->dir_y = 1;
 	if (c == 'N')
-	{
-		data->player->dir_x = 0;
-		data->player->dir_y = 1;
 		data->flag.player_north = true;
-	}
 	else if (c == 'S')
 	{
 		data->player->dir_x = 0;
@@ -38,6 +36,8 @@ static void	set_direction(t_data *data, char c)
 		data->player->dir_y = 0;
 		data->flag.player_east = true;
 	}
+	data->player->plane_x = -data->player->dir_y * 0.66;
+	data->player->plane_y = data->player->dir_x * 0.66;
 }
 
 int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)
@@ -53,8 +53,8 @@ int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)
 	if (data->flag.player_set)
 		return (print_error("2 Player positions found\n", data), ERROR);
 	set_direction(data, c);
-	if (y_coord == 0)
-		return (print_error("Player position invalid\n", data), ERROR);
+	/* if (y_coord == 0)
+		return (print_error("Player position invalid\n", data), ERROR); */
 	data->player->y = y_coord * TILE_2D;
 	data->player->x = x_coord * TILE_2D;
 	data->flag.player_set = true;
