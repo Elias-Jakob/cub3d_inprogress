@@ -1,4 +1,4 @@
-NAME        = cub3d
+NAME        = cub3D
 CC          = cc
 CFLAGS      = -Wall -Werror -Wextra
 DEBUG_FLAGS = -g -DVERBOSE=1
@@ -12,9 +12,28 @@ INCLUDES    = -I inc -I $(LIBFT_DIR)
 SRC_DIR     = src
 OBJ_DIR     = obj
 
+#RENDER_SRC = \
+		render/init.c \
+		render/render.c \
+		render/hooks.c \
+		render/utils.c \
+
 SRCS = \
 	main.c \
 	parser/parser.c \
+	parser/verbose.c \
+	parser/check_walls.c \
+	parser/extract_map.c \
+	parser/extract_rgb.c \
+	parser/check_player.c \
+	parser/extract_file.c \
+	parser/print_errors.c \
+	parser/validate_map.c \
+	parser/cleanup_parser.c \
+	parser/extract_texture.c \
+	$(RENDER_SRC) \
+
+
 
 
 # baue aus z.B. "executor/landing_file.c" -> "obj/executor/landing_file.o"
@@ -41,6 +60,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c inc/cub3d.h
 # Executable
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+
+# -L/usr/include -lmlx -lX11 -lXext -lm
 
 # Libft bauen
 $(LIBFT):

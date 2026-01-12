@@ -144,7 +144,8 @@
     // CYBERPUNK-VIOLETTE FENSTER-HERVORHEBUNG
     // (Editor, Terminal, Panel)
     // =========================================================
-    "workbench.colorCustomizations": {
+    "workbench.colorCustomizations":
+	{
         // 🔥 AKTIVE EDITOR-GRUPPE / TAB
         //"tab.activeBorderTop": "#09ff00",
         //"editorGroupHeader.tabsBorder": "#11ff00",
@@ -157,8 +158,8 @@
         "editor.lineHighlightBackground": "#011544",
         "editor.lineHighlightBorder": "#6a0269",
 
-        "activityBar.background": "#2a0018",
-        "titleBar.activeBackground": "#2a0018",
+        "activityBar.background": "#2a0024",
+        "titleBar.activeBackground": "#2a001a",
         "titleBar.activeForeground": "#FDFBF7"
     },
 

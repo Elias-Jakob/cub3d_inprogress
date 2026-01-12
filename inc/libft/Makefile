@@ -29,6 +29,7 @@ MKDIR           := mkdir -p
 # -----------------------------------------
 SRC := \
 	ft_isalnum.c \
+	print_split.c \
 	ft_isalpha.c \
 	ft_isascii.c \
 	ft_isdigit.c \
@@ -38,6 +39,7 @@ SRC := \
 	ft_split.c \
 	ft_strlen.c \
 	ft_strlcpy.c \
+	ft_count_char.c \
 	ft_strlcat.c \
 	ft_strncmp.c \
 	ft_strchr.c \
@@ -61,6 +63,7 @@ SRC := \
 	ft_skip_zeros.c \
 	ft_strcmp.c \
 	ft_atoll.c \
+	ft_strcheck_spaces.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \

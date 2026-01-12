@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:36:15 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/03 23:11:29 by pjelinek         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:42:34 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_atoi(const char *str)
 
 	minus = 1;
 	num = 0;
+	if (int_overflow_check(str))
+		return (2147483647);
 	ft_skip_whitespaces(&str);
 	minus_flag = ft_skip_signs(&str);
 	if (minus_flag)
