@@ -15,7 +15,7 @@ double	raycasting(t_data *game, t_ray *ray);
 
 // minimap.c
 void	player_centered_minimap(t_data *game);
-void	draw_minimap_ray(t_data *game, t_ray *ray, int wall_dist);
+void	draw_minimap_ray(t_data *game, t_ray *ray, double wall_dist);
 
 // hooks.c
 int	key_hook(int key_code, t_data *game);

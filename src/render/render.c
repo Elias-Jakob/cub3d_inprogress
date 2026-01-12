@@ -33,7 +33,7 @@ static void	draw_rays(t_data *game)
 	{
 		ray.col = x;
 		wall_dist = raycasting(game, &ray);
-		draw_minimap_ray(game, &ray, (int)(wall_dist * game->tile_size));
+		draw_minimap_ray(game, &ray, wall_dist);
 		for (int y = 0; y < HEIGHT / wall_dist; y++)
 		{
 			color = 0x87CEEB;
