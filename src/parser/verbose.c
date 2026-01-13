@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 05:34:13 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 16:47:25 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:51:29 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,3 +79,5 @@ void	print_rgb(t_data *data)
 	printf("\tRGB %i\n", data->rgb.floor);
 	return ;
 }
+
+

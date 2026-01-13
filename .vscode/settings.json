@@ -13,9 +13,11 @@
     "editor.minimap.enabled": false,                   // kein Mini-Map rechts
     "editor.renderWhitespace": "selection",            // zeigt Leerzeichen nur bei Auswahl
     "editor.rulers": [80],                             // visuelle 80-Zeichen-Grenze
-    "editor.smoothScrolling": true,                    // weiches Scrollen
+    "editor.smoothScrolling": true,                    	// weiches Scrollen
     "editor.wordWrap": "off",                           // automatische Zeilenumbrüche
-	"editor.inlineSuggest.enabled": false,			  // Inline-Vorschläge deaktiviert
+	"editor.inlineSuggest.enabled": false,			  	// Inline-Vorschläge deaktiviert
+	"editor.definitionLinkOpensInPeek": false,			// Deaktiviert popup-fenster bei strg + rechtklick auf funktion
+
 
 
 

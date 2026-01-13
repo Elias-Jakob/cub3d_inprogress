@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:15:17 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 14:06:45 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:45:04 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	extract_texture(t_data *data, const char *line)
 	if (flag->north && flag->south && flag->west && flag->east)
 	{
 		data->texture_pass = true;
-		if (VERBOSE)
+		if (VERBOSE)						/// DELETE for norm
 			print_texture(data);
 	}
 	return (FOUND);

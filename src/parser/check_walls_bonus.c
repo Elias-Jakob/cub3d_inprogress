@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_walls.c                                      :+:      :+:    :+:   */
+/*   check_walls_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:38:26 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/13 15:16:31 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/13 14:50:23 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	flood_fill(char **pad_map, t_data *data, int x, int y)
 		return ;
 	if (pad_map[y][x] == '0' || pad_map[y][x] == 'N'
 		|| pad_map[y][x] == 'S' || pad_map[y][x] == 'W'
-		|| pad_map[y][x] == 'E')
+		|| pad_map[y][x] == 'E' || pad_map[y][x] == 'D')
 	{
 		data->flag.error = true;
 		printf("%s\nMap not proper walled\n", ERROR_MSG);
