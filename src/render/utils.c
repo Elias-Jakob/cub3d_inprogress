@@ -3,17 +3,16 @@
 void	clean_up_mlx(t_data *game)
 {
 	int	i_tex;
-	
+
 	if (game->image)
 		mlx_destroy_image(game->mlx, game->image->img);
 	if (game->mlx_win)
 		mlx_destroy_window(game->mlx, game->mlx_win);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-	// INFO: does not have any effect...
 	i_tex = 0;
 	while (i_tex < N_TEXTURES && game->text[i_tex].image.img)
 		mlx_destroy_image(game->mlx, game->text[i_tex++].image.img);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 }
 
 void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
