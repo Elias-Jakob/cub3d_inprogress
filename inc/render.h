@@ -8,7 +8,7 @@
 bool	render(t_data *game);
 
 // render.c
-void	render_game(t_data *game);
+int	render_game(t_data *game);
 
 // raycasting.c
 double	raycasting(t_data *game, t_ray *ray);
@@ -24,6 +24,7 @@ int	quit_game(t_data *game);
 // utils.c
 void	clean_up_mlx(t_data *game);
 void	ft_put_pixel(t_img_data *image_data, int x, int y, int color);
+unsigned long	get_timestamp(void);
 
 int	create_trgb(int t, int r, int g, int b);
 

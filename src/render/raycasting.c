@@ -39,21 +39,23 @@ double	raycasting(t_data *game, t_ray *ray)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->side = false;
+			ray->side = WEST;
 		}
 		else
 		{
 			ray->side_dist_y += ray->delta_dist_y;
 			ray->map_y += ray->step_y;
-			ray->side = true;
+			ray->side = NORTH;
 		}
 		if (game->map.arr[ray->map_y][ray->map_x] == '1')
-		{
-			// printf("player_x = %f player_y = %f map_x = %d map_y = %d side_dist_x = %f side_dist_y = %f\n", game->player->x, game->player->y, map_x, map_y, side_dist_x, side_dist_y);
 			ray->hit = true;
-		}
 	}
-	if (!ray->side)
+	if (ray->side == WEST && ray->step_x == 1)
+		ray->side = EAST;
+	if (ray->side == NORTH && ray->step_y == 1)
+		ray->side = SOUTH;
+
+	if (ray->side == WEST || ray->side == EAST)
 		return (ray->side_dist_x - ray->delta_dist_x);
 	else
 		return (ray->side_dist_y - ray->delta_dist_y);

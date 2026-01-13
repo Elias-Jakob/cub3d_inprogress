@@ -12,8 +12,8 @@ void	clean_up_mlx(t_data *game)
 	free(game->mlx);
 	// INFO: does not have any effect...
 	i_tex = 0;
-	while (i_tex < N_TEXTURES && game->text[i_tex].src)
-		mlx_destroy_image(game->mlx, game->text[i_tex++].src);
+	while (i_tex < N_TEXTURES && game->text[i_tex].image.img)
+		mlx_destroy_image(game->mlx, game->text[i_tex++].image.img);
 }
 
 void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
@@ -36,4 +36,12 @@ void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+unsigned long	get_timestamp(void)
+{
+	struct timeval	current_time;
+
+	gettimeofday(&current_time, NULL);
+	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
 }

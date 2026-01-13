@@ -66,6 +66,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <math.h>
+# include <sys/time.h>
 # include "libft/libft.h"
 
 
@@ -91,8 +92,8 @@ typedef struct s_player
 
 	/*
 	Player directions
-		N 0/1
-		S 0/-1
+		N 0/-1
+		S 0/1
 		W -1/0
 		E 1/0
 	*/
@@ -109,7 +110,7 @@ typedef struct s_ray
 	double	dir_y;
 	double	delta_dist_x; // ray length to travel one grid unit
 	double	delta_dist_y;
-	bool	side; // was a NS or a EW wall hit?
+	int	side; // was a NS or a EW wall hit?
 	double	side_dist_x; // the distance to the NEXT grid line position that is checked
 	double	side_dist_y;
 	int		step_x; // Tells us in which direction we're moving through the map
@@ -128,6 +129,19 @@ typedef struct	s_minimap
 	double	x_fract;
 	double	y_fract;
 }	t_minimap;
+
+typedef struct	s_column
+{
+	int	x;
+	int	y;
+	double	wall_x;
+	int	line_height;
+	int	y_start;
+	int	y_end;
+		int	tex_x;
+	double	tex_y;
+	double	y_step_size;
+}	t_column;
 
 typedef struct s_img_data
 {
@@ -151,7 +165,7 @@ typedef struct texture
 	bool	is_png;
 
 	/* ELIAS   */
-	void	*src;
+	t_img_data	image;
 	int	width;
 	int	height;
 }	t_texture;
@@ -230,6 +244,7 @@ typedef struct data
 	int	map_height;
 	int	tile_size;
 	t_player	*player;
+	unsigned long	last_time_rendered;
 }	t_data;
 
 
