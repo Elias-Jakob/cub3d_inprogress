@@ -70,6 +70,7 @@ int	key_hook(int key_code, t_data *game)
 		rotate_player(game->player, 0.05);
 	else
 		handle_player_movement(game, key_code);
-	render_game(game);
+	if (get_timestamp() - game->last_time_rendered > 15)
+		render_game(game);
 	return (0);
 }

@@ -17,6 +17,7 @@ RENDER_SRC = \
 		render/render.c \
 		render/raycasting.c \
 		render/minimap.c \
+		render/texture_mapping.c \
 		render/hooks.c \
 		render/utils.c \
 

@@ -25,31 +25,25 @@ static void	fill_backgrounds(t_data *game)
 
 static void	draw_rays(t_data *game)
 {
-	double	wall_dist;
 	t_ray	ray;
-	int	color;
+	t_column	col;
 
-	for (int x = 0; x < WIDTH; x++)
+	col.x = 0;
+	while (col.x < WIDTH)
 	{
-		ray.col = x;
-		wall_dist = raycasting(game, &ray);
-		draw_minimap_ray(game, &ray, wall_dist);
-		for (int y = 0; y < HEIGHT / wall_dist; y++)
-		{
-			color = 0x87CEEB;
-			if (ray.side)
-				color = 0xFFFFC5;
-			if (x > MINIMAP_SIZE || HEIGHT / 2 - y > MINIMAP_SIZE) // dont overwrite the minimap
-				ft_put_pixel(game->image, x, HEIGHT / 2 - y, color);
-			ft_put_pixel(game->image, x, HEIGHT / 2 + y, color);
-		}
+		raycasting(game, &ray, col.x);
+		draw_minimap_ray(game, &ray);
+		draw_texture_line(game, &ray, &col);
+		col.x++;
 	}
 }
 
-void	render_game(t_data *game)
+int	render_game(t_data *game)
 {
+	game->last_time_rendered = get_timestamp();
 	fill_backgrounds(game);
 	player_centered_minimap(game);
 	draw_rays(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->image->img, 0, 0);
+	return (0);
 }

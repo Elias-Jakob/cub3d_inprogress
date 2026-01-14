@@ -37,7 +37,14 @@
 # define MINIMAP_PLAYER_COLOR 0xFFFF00
 # define MINIMAP_RAY_COLOR 0xFF0000
 
+# define N_TEXTURES 4
+
 # define COLLISION_MARGIN 0.1
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
 # define PI 3.14159265
 
@@ -59,6 +66,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <math.h>
+# include <sys/time.h>
 # include "libft/libft.h"
 
 
@@ -73,6 +81,16 @@
 ///////////////////////////////
 /* ELIAS EXECUTION STRUCTS   */
 ///////////////////////////////
+
+typedef struct s_img_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img_data;
+
 typedef struct s_player
 {
 	double		x;
@@ -84,8 +102,8 @@ typedef struct s_player
 
 	/*
 	Player directions
-		N 0/1
-		S 0/-1
+		N 0/-1
+		S 0/1
 		W -1/0
 		E 1/0
 	*/
@@ -93,7 +111,6 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	int		col;
 	bool	hit;
 	int		map_x;
 	int		map_y;
@@ -102,11 +119,12 @@ typedef struct s_ray
 	double	dir_y;
 	double	delta_dist_x; // ray length to travel one grid unit
 	double	delta_dist_y;
-	bool	side; // was a NS or a EW wall hit?
+	int	side; // was a NS or a EW wall hit?
 	double	side_dist_x; // the distance to the NEXT grid line position that is checked
 	double	side_dist_y;
 	int		step_x; // Tells us in which direction we're moving through the map
 	int		step_y;
+	double	wall_dist;
 }	t_ray;
 
 typedef struct	s_minimap
@@ -122,30 +140,35 @@ typedef struct	s_minimap
 	double	y_fract;
 }	t_minimap;
 
-typedef struct s_img_data
+typedef struct	s_column
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img_data;
-
-
+	int	x;
+	int	y;
+	double	wall_x;
+	int	line_height;
+	int	y_start;
+	int	y_end;
+	int	tex_x;
+	double	tex_y;
+	double	y_step_size;
+	t_img_data	*tex;
+}	t_column;
 
 ///////////////////////////////
 /* PATRICK PARSER STRUCTS    */
 ///////////////////////////////
 typedef struct texture
-{	/* PATRICK */
-	char	*north;				// cleanup_parser
-	char	*south;				// cleanup_parser
-	char	*west;				// cleanup_parser
-	char	*east;				// cleanup_parser
+{
+	/* PATRICK */
+	char	*path;
+	/* parser init file type .png/.xpm */
+	bool	is_png;
 
 	/* ELIAS   */
+	t_img_data	image;
+	int	width;
+	int	height;
 }	t_texture;
-
 
 typedef struct flags
 {
@@ -205,7 +228,7 @@ typedef struct data
 	bool		rgb_pass;
 	bool		map_pass;
 
-	t_texture	text;
+	t_texture	text[N_TEXTURES];
 	t_flag		flag;
 	t_rgb		rgb;
 	t_map		map;
@@ -221,6 +244,7 @@ typedef struct data
 	int	map_height;
 	int	tile_size;
 	t_player	*player;
+	unsigned long	last_time_rendered;
 }	t_data;
 
 

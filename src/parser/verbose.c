@@ -42,10 +42,10 @@ void	print_map(t_data *data)
 void	print_texture(t_data *data)
 {
 	printf("\n%s Texture extraction\n", OK_MSG);
-	printf("\tNORTH: %s\n", data->text.north);
-	printf("\tSOUTH: %s\n", data->text.south);
-	printf("\tWEST: %s\n", data->text.west);
-	printf("\tEAST: %s\n", data->text.east);
+	printf("\tNORTH: %s\n", data->text[NORTH].path);
+	printf("\tSOUTH: %s\n", data->text[SOUTH].path);
+	printf("\tWEST: %s\n", data->text[WEST].path);
+	printf("\tEAST: %s\n", data->text[EAST].path);
 	return ;
 }
 

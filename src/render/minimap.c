@@ -91,19 +91,19 @@ void	player_centered_minimap(t_data *game)
 	draw_minimap_player(game);
 }
 
-void	draw_minimap_ray(t_data *game, t_ray *ray, double wall_dist)
+void	draw_minimap_ray(t_data *game, t_ray *ray)
 {
 	// TODO: use DDA like approach to make the lines smother
-	double	i;
+	int	i;
 
 	i = 0;
-	while (i < wall_dist
-		&& MINIMAP_CENTER + ray->dir_x * i * game->tile_size < MINIMAP_SIZE
-		&& MINIMAP_CENTER + ray->dir_y * i * game->tile_size < MINIMAP_SIZE)
+	while (i < (int)(ray->wall_dist * game->tile_size)
+		&& MINIMAP_CENTER + ray->dir_x * i < MINIMAP_SIZE
+		&& MINIMAP_CENTER + ray->dir_y * i < MINIMAP_SIZE)
 	{
 		ft_put_pixel(game->image,
-			(int)(MINIMAP_CENTER + ray->dir_x * i * game->tile_size),
-			(int)(MINIMAP_CENTER + ray->dir_y * i * game->tile_size), MINIMAP_RAY_COLOR);
-		i += 0.05;
+			(int)(MINIMAP_CENTER + ray->dir_x * i),
+			(int)(MINIMAP_CENTER + ray->dir_y * i), MINIMAP_RAY_COLOR);
+		i++;
 	}
 }

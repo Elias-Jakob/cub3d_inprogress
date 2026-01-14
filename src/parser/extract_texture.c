@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:15:17 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/18 09:25:35 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/12 14:06:45 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	set_north(t_data *data, const char *line)
 {
-	data->text.north = ft_strtrim(line, WHITESPACES);
-	if (!data->text.north || !*data->text.north
-		|| ft_strcheck_spaces(data->text.north))
+	data->text[NORTH].path = ft_strtrim(line, WHITESPACES);
+	if (!data->text[NORTH].path || !*data->text[NORTH].path
+		|| ft_strcheck_spaces(data->text[NORTH].path))
 	{
 		printf("%s\nFailed to extract north texture\n", ERROR_MSG);
 		data->flag.error = true;
@@ -27,9 +27,9 @@ static void	set_north(t_data *data, const char *line)
 
 static void	set_south(t_data *data, const char *line)
 {
-	data->text.south = ft_strtrim(line, WHITESPACES);
-	if (!data->text.south || !*data->text.south
-		|| ft_strcheck_spaces(data->text.south))
+	data->text[SOUTH].path = ft_strtrim(line, WHITESPACES);
+	if (!data->text[SOUTH].path || !*data->text[SOUTH].path
+		|| ft_strcheck_spaces(data->text[SOUTH].path))
 	{
 		printf("%s\nFailed to extract south texture\n", ERROR_MSG);
 		data->flag.error = true;
@@ -40,9 +40,9 @@ static void	set_south(t_data *data, const char *line)
 
 static void	set_west(t_data *data, const char *line)
 {
-	data->text.west = ft_strtrim(line, WHITESPACES);
-	if (!data->text.west || !*data->text.west
-		|| ft_strcheck_spaces(data->text.west))
+	data->text[WEST].path = ft_strtrim(line, WHITESPACES);
+	if (!data->text[WEST].path || !*data->text[WEST].path
+		|| ft_strcheck_spaces(data->text[WEST].path))
 	{
 		printf("%s\nFailed to extract west texture\n", ERROR_MSG);
 		data->flag.error = true;
@@ -53,9 +53,9 @@ static void	set_west(t_data *data, const char *line)
 
 static void	set_east(t_data *data, const char *line)
 {
-	data->text.east = ft_strtrim(line, WHITESPACES);
-	if (!data->text.east || !*data->text.east
-		|| ft_strcheck_spaces(data->text.east))
+	data->text[EAST].path = ft_strtrim(line, WHITESPACES);
+	if (!data->text[EAST].path || !*data->text[EAST].path
+		|| ft_strcheck_spaces(data->text[EAST].path))
 	{
 		printf("%s \nFailed to extract east texture\n", ERROR_MSG);
 		data->flag.error = true;
