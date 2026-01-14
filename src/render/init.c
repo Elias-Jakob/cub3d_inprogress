@@ -43,9 +43,10 @@ static bool	init_mlx(t_data *game)
 		return (clean_up_mlx(game), false);
 	// Hooks
 	mlx_hook(game->mlx_win, 17, 1L << 2, quit_game, game);
-	mlx_hook(game->mlx_win, 2, 1L << 0, key_hook, game);
+	// mlx_hook(game->mlx_win, 2, 1L << 0, key_hook, game);
 	// TODO: add on key release key hook
-	// mlx_hook(game->mlx_win, 3, 1L << 0, key_hook, game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, key_press_hook, game);
+	mlx_hook(game->mlx_win, 3, 1L << 1, key_release_hook, game);
 	return (true);
 }
 
@@ -58,10 +59,11 @@ bool	render(t_data *game)
 	if (game->map_height > MINIMAP_SIZE / TILE_2D_BIG)
 		game->tile_size = TILE_2D_SMALL;
 	//
+	game->action = NONE;
 	if (!init_mlx(game))
 		return (false);
 	render_game(game);
-	// mlx_loop_hook(game->mlx, render_game, game);
+	mlx_loop_hook(game->mlx, render_loop_hook, game);
 	mlx_loop(game->mlx);
 	return (true);
 }

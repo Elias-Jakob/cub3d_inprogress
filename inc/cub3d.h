@@ -39,12 +39,10 @@
 
 # define N_TEXTURES 4
 
-# define COLLISION_MARGIN 0.1
+# define STEP_SIZE 0.1
+# define ROTATION_ANGLE 0.05 // in radians approx. eq. to 3
 
-# define NORTH 0
-# define SOUTH 1
-# define WEST 2
-# define EAST 3
+# define COLLISION_MARGIN 0.1
 
 # define NORTH 0
 # define SOUTH 1
@@ -71,9 +69,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
-# include <math.h>
 # include <sys/time.h>
+# include <math.h>
+# include <mlx.h>
+# include <X11/keysym.h>
+
 # include "libft/libft.h"
+
 
 
 
@@ -88,6 +90,16 @@
 ///////////////////////////////
 /* ELIAS EXECUTION STRUCTS   */
 ///////////////////////////////
+
+typedef enum	e_action {
+	NONE = 0,
+	ROTATE_LEFT = XK_Left,
+	ROTATE_RIGHT = XK_Right,
+	MOVE_FORWARD = XK_w,
+	MOVE_BACKWARD = XK_s,
+	MOVE_LEFT = XK_d,
+	MOVE_RIGHT = XK_a,
+}	t_action;
 
 typedef struct s_player
 {
@@ -251,11 +263,9 @@ typedef struct data
 	int	tile_size;
 	t_player	*player;
 	unsigned long	last_time_rendered;
+	t_action	action;
 }	t_data;
 
-
 # include "parser.h"
-
 # include "render.h"
-
 #endif
