@@ -19,16 +19,15 @@ static void	init_col(t_data *game, t_ray *ray, t_column *col)
 		col->tex_y = -col->y * col->y_step_size;
 		col->y = 0;
 	}
-	col->tex = &game->text[ray->side].image;
+	col->tex = &game->text[ray->side];
 }
 
-static int	get_pixel_from_image(t_img_data *img, int x, int y)
+static int	get_pixel_from_image(t_texture *tex, int x, int y)
 {
-	int	pos_1d;
-
-	pos_1d = y * img->line_length
-		+ x * (img->bits_per_pixel / 8);
-	return (*(int *)(img->addr + pos_1d));
+	if (y >= tex->height)
+		return (*(int *)(tex->image.addr + tex->height - 1));
+	return (*(int *)(tex->image.addr + y * tex->image.line_length
+		+ x * (tex->image.bits_per_pixel / 8)));
 }
 
 void	draw_texture_line(t_data *game, t_ray *ray, t_column *col)
@@ -40,7 +39,6 @@ void	draw_texture_line(t_data *game, t_ray *ray, t_column *col)
 			ft_put_pixel(game->image, col->x, col->y,
 				get_pixel_from_image(col->tex, col->tex_x, (int)col->tex_y));
 		col->y++;
-		if ((int)(col->tex_y + col->y_step_size) < game->text[ray->side].height)
-			col->tex_y += col->y_step_size;
+		col->tex_y += col->y_step_size;
 	}
 }

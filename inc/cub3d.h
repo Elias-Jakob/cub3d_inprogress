@@ -82,15 +82,6 @@
 /* ELIAS EXECUTION STRUCTS   */
 ///////////////////////////////
 
-typedef struct s_img_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img_data;
-
 typedef struct s_player
 {
 	double		x;
@@ -140,23 +131,15 @@ typedef struct	s_minimap
 	double	y_fract;
 }	t_minimap;
 
-typedef struct	s_column
+typedef struct s_img_data
 {
-	int	x;
-	int	y;
-	double	wall_x;
-	int	line_height;
-	int	y_start;
-	int	y_end;
-	int	tex_x;
-	double	tex_y;
-	double	y_step_size;
-	t_img_data	*tex;
-}	t_column;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img_data;
 
-///////////////////////////////
-/* PATRICK PARSER STRUCTS    */
-///////////////////////////////
 typedef struct texture
 {
 	/* PATRICK */
@@ -170,6 +153,23 @@ typedef struct texture
 	int	height;
 }	t_texture;
 
+typedef struct	s_column
+{
+	int	x;
+	int	y;
+	double	wall_x;
+	int	line_height;
+	int	y_start;
+	int	y_end;
+	int	tex_x;
+	double	tex_y;
+	double	y_step_size;
+	t_texture	*tex;
+}	t_column;
+
+///////////////////////////////
+/* PATRICK PARSER STRUCTS    */
+///////////////////////////////
 typedef struct flags
 {
 	/* PATRICK */
