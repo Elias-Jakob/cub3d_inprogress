@@ -55,15 +55,8 @@ int	main(int ac, char **av)
 	*/
 
 
-/*
 	if (!render(&data))
-	printf("%s\n", ERROR_MSG);
-	printf("%s", str);
-	data->flag.error = true;
-	return ;
-		print_error("Init MLX failed\n", &data); */
-
-	// TODO: somehow player and image are leaking even if i free them
+		print_error("Init MLX failed\n", &data); // redundant already printing an error message
 
 	/////PATRICK
 	if (VERBOSE)

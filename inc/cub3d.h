@@ -26,8 +26,25 @@
 
 # define WIDTH 1620
 # define HEIGHT 880
-#define TILE_2D 32
+# define MINIMAP_SIZE 160
+# define MINIMAP_CENTER 80
+# define TILE_2D_BIG 16
+# define TILE_2D_SMALL 8
 
+# define MINIMAP_BG_COLOR 0x000000
+# define MINIMAP_WALL_COLOR 0xFFFFFF
+# define MINIMAP_GRID_COLOR 0x8a8686
+# define MINIMAP_PLAYER_COLOR 0xFFFF00
+# define MINIMAP_RAY_COLOR 0xFF0000
+
+# define N_TEXTURES 4
+
+# define COLLISION_MARGIN 0.1
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
 # define NORTH 0
 # define SOUTH 1
@@ -55,6 +72,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <math.h>
+# include <sys/time.h>
 # include "libft/libft.h"
 
 
@@ -70,6 +88,7 @@
 ///////////////////////////////
 /* ELIAS EXECUTION STRUCTS   */
 ///////////////////////////////
+
 typedef struct s_player
 {
 	double	x;
@@ -81,8 +100,8 @@ typedef struct s_player
 
 	/*
 	Player directions
-		N 0/1
-		S 0/-1
+		N 0/-1
+		S 0/1
 		W -1/0
 		E 1/0
 	*/
@@ -90,8 +109,34 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	/* ... */
+	bool	hit;
+	int		map_x;
+	int		map_y;
+	double	camera_x; // current x column normalized to direction vector
+	double	dir_x; // ray direction vector
+	double	dir_y;
+	double	delta_dist_x; // ray length to travel one grid unit
+	double	delta_dist_y;
+	int	side; // was a NS or a EW wall hit?
+	double	side_dist_x; // the distance to the NEXT grid line position that is checked
+	double	side_dist_y;
+	int		step_x; // Tells us in which direction we're moving through the map
+	int		step_y;
+	double	wall_dist;
 }	t_ray;
+
+typedef struct	s_minimap
+{
+	int	n_tiles;
+	int	start_col;
+	int	start_row;
+	int	end_col;
+	int	end_row;
+	int	x;
+	int	y;
+	double	x_fract;
+	double	y_fract;
+}	t_minimap;
 
 typedef struct s_img_data
 {
@@ -102,19 +147,36 @@ typedef struct s_img_data
 	int		endian;
 }	t_img_data;
 
+typedef struct texture
+{
+	/* PATRICK */
+	char	*path;
+	/* parser init file type .png/.xpm */
+	bool	is_png;
 
+	/* ELIAS   */
+	t_img_data	image;
+	int	width;
+	int	height;
+}	t_texture;
+
+typedef struct	s_column
+{
+	int	x;
+	int	y;
+	double	wall_x;
+	int	line_height;
+	int	y_start;
+	int	y_end;
+	int	tex_x;
+	double	tex_y;
+	double	y_step_size;
+	t_texture	*tex;
+}	t_column;
 
 ///////////////////////////////
 /* PATRICK PARSER STRUCTS    */
 ///////////////////////////////
-typedef struct texture
-{	/* PATRICK */
-	char	*path;
-
-
-	/* ELIAS   */
-}	t_texture;
-
 
 typedef struct flags
 {
@@ -172,7 +234,7 @@ typedef struct data
 	bool		rgb_pass;
 	bool		map_pass;
 
-	t_texture	text[4];
+	t_texture	text[N_TEXTURES];
 	t_flag		flag;
 	t_rgb		rgb;
 	t_map		map;
@@ -185,13 +247,15 @@ typedef struct data
 	t_img_data	*image;
 	// char	**map;
 	int	map_width;
-	int	map_heigth;
+	int	map_height;
+	int	tile_size;
 	t_player	*player;
+	unsigned long	last_time_rendered;
 }	t_data;
 
 
 # include "parser.h"
 
-//# include "render.h"
+# include "render.h"
 
 #endif

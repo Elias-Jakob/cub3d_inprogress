@@ -11,6 +11,7 @@ DEBUG_FLAGS     = -g -DVERBOSE=1
 # =========================
 LIBFT_DIR       = inc/libft
 LIBFT           = $(LIBFT_DIR)/libft.a
+LIBS            = -L/usr/include -lmlx -lX11 -lXext -lm
 INCLUDES        = -I inc -I $(LIBFT_DIR)
 
 # =========================
@@ -41,7 +42,13 @@ SRCS_MAND = \
 	parser/validate_map.c \
 	parser/cleanup_parser.c \
 	parser/extract_texture.c \
-
+	render/init.c \
+	render/render.c \
+	render/raycasting.c \
+	render/minimap.c \
+	render/texture_mapping.c \
+	render/hooks.c \
+	render/utils.c \
 
 # =========================
 # Bonus replacements/additions
@@ -82,7 +89,7 @@ verbose: CFLAGS += $(DEBUG_FLAGS)
 verbose: re
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME)
 
 $(OBJDIR)/%.o: $(SRC_DIR)/%.c inc/cub3d.h
 	@mkdir -p $(dir $@)

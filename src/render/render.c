@@ -1,105 +1,49 @@
 #include "cub3d.h"
 
-void	draw_wall2d(t_data *game, int x, int y, int color)
-{
-	int	wall_x;
-	int	wall_y;
-	int	offset_x = 0;
-	int	offset_y = 0;
-
-	wall_x = 0;
-	while (wall_x < TILE_2D)
-	{
-		wall_y = 0;
-		while (wall_y < TILE_2D)
-		{
-			if (wall_x != 0)
-				offset_x = 1;
-			if (wall_y != 0)
-				offset_y = 1;
-			ft_put_pixel(game->image, x*TILE_2D+wall_x-offset_x, y*TILE_2D+wall_y-offset_y, color);
-			wall_y++;
-			offset_x = 0;
-			offset_y = 0;
-		}
-		wall_x++;
-	}
-}
-
-void	fill_background(t_data *game)
+static void	fill_backgrounds(t_data *game)
 {
 	int	x;
 	int	y;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		y = 0;
-		while (y < HEIGHT)
-		{
-			ft_put_pixel(game->image, x, y, 0x000000);
-			y++;
-		}
-		x++;
-	}
-}
-
-void	draw_map2d(t_data *game)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < game->map.x)
-	{
-		y = 0;
-		while (y < game->map.y)
-		{
-			if (game->map.arr[y][x] == '1')
-				draw_wall2d(game, x, y, 0x8a8686);
-			else
-				draw_wall2d(game, x, y, 0x000000);
-			y++;
-		}
-		x++;
-	}
-}
-
-void	draw_player(t_data *game)
-{
-	int	y;
-	int	x;
 
 	y = 0;
-	while (y < 7)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < 7)
+		while (x < WIDTH)
 		{
-			ft_put_pixel(game->image,
-				game->player->x + TILE_2D / 2 - 7 / 2 + x,
-				game->player->y +TILE_2D / 2 - 7 / 2 + y, 0xFFFF00);
+			if (x <= MINIMAP_SIZE && y <= MINIMAP_SIZE)
+				ft_put_pixel(game->image, x, y, MINIMAP_BG_COLOR);
+			else if (y < HEIGHT / 2)
+				ft_put_pixel(game->image, x, y, game->rgb.ceil);
+			else
+				ft_put_pixel(game->image, x, y, game->rgb.floor);
 			x++;
 		}
 		y++;
 	}
-	// direction
-	ft_put_pixel(game->image, game->player->x + TILE_2D / 2, game->player->y + TILE_2D / 2, 0xFF0000);
-	// draw direction line
-	int	line_len = 20;
-	int	i = 1;
-	while (i < line_len)
+}
+
+static void	draw_rays(t_data *game)
+{
+	t_ray	ray;
+	t_column	col;
+
+	col.x = 0;
+	while (col.x < WIDTH)
 	{
-		ft_put_pixel(game->image,
-			(int)(game->player->x + TILE_2D / 2 + game->player->dir_x * i),
-			(int)(game->player->y + TILE_2D / 2 - game->player->dir_y * i), 0xFF0000);
+		raycasting(game, &ray, col.x);
+		draw_minimap_ray(game, &ray);
+		draw_texture_line(game, &ray, &col);
+		col.x++;
 	}
 }
 
-void	render_game(t_data *game)
+int	render_game(t_data *game)
 {
-	fill_background(game);
-	draw_map2d(game);
-	draw_player(game);
+	game->last_time_rendered = get_timestamp();
+	fill_backgrounds(game);
+	player_centered_minimap(game);
+	draw_rays(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->image->img, 0, 0);
+	return (0);
 }
