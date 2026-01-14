@@ -25,67 +25,15 @@ static void	fill_backgrounds(t_data *game)
 
 static void	draw_rays(t_data *game)
 {
-	double	wall_dist;
 	t_ray	ray;
 	t_column	col;
-	t_img_data	text_img;
-	// int	color;
 
 	col.x = 0;
 	while (col.x < WIDTH)
 	{
-		ray.col = col.x;
-		wall_dist = raycasting(game, &ray);
-		draw_minimap_ray(game, &ray, (int)(wall_dist * game->tile_size));
-		if (ray.side == WEST || ray.side == EAST)
-			col.wall_x = game->player->y + wall_dist * ray.dir_y;
-		else
-			col.wall_x = game->player->x + wall_dist * ray.dir_x;
-		col.wall_x -= (int)col.wall_x;
-		col.tex_x = game->text[ray.side].width * col.wall_x;
-		col.y_start = HEIGHT / 2 - HEIGHT / wall_dist;
-		col.y_end = HEIGHT / 2 + HEIGHT / wall_dist;
-		col.line_height = (HEIGHT / wall_dist) * 2;
-		if (wall_dist < 1)
-			wall_dist = 1;
-		col.y_step_size = (double)game->text[ray.side].height / col.line_height;
-		col.tex_y = 0;
-		col.y = col.y_start;
-		if (col.y < 0)
-		{
-			col.tex_y = -col.y * col.y_step_size;
-			col.y = 0;
-		}
-		while (col.y < col.y_end && col.y < HEIGHT)
-		{
-			if ((int)col.tex_y >= game->text[ray.side].height)
-				col.tex_y = game->text[ray.side].height - 1;
-			text_img = game->text[ray.side].image;
-			// printf("tex_x: %d tex_y: %f\n", col.tex_x, col.tex_y);
-			// printf("%c\n", (unsigned int)text_img.addr[63]);
-			if (col.x > MINIMAP_SIZE || col.y > MINIMAP_SIZE)
-				ft_put_pixel(game->image, col.x, col.y,
-				*(int *)(text_img.addr + (int)col.tex_y * text_img.line_length + col.tex_x * (text_img.bits_per_pixel / 8)));
-			col.y++;
-			col.tex_y += col.y_step_size;
-		}
-			// return ;
-		// draw_minimap_ray(game, &ray, (int)(wall_dist * game->tile_size));
-		// if (wall_dist < 1)
-		// 	wall_dist = 1;
-		// for (; col.y < HEIGHT / wall_dist; col.y++)
-		// {
-		// 	color = 0xFF0000;
-		// 	if (ray.side == SOUTH)
-		// 		color = 0x00FF00;
-		// 	else if (ray.side == WEST)
-		// 		color = 0x0000FF;
-		// 	else if (ray.side == EAST)
-		// 		color = 0x000000;
-		// 	if (col.x > MINIMAP_SIZE || HEIGHT / 2 - col.y > MINIMAP_SIZE) // dont overwrite the minimap
-		// 		ft_put_pixel(game->image, col.x, HEIGHT / 2 - col.y, color);
-		// 	ft_put_pixel(game->image, col.x, HEIGHT / 2 + col.y, color);
-		// }
+		raycasting(game, &ray, col.x);
+		draw_minimap_ray(game, &ray);
+		draw_texture_line(game, &ray, &col);
 		col.x++;
 	}
 }

@@ -81,6 +81,16 @@
 ///////////////////////////////
 /* ELIAS EXECUTION STRUCTS   */
 ///////////////////////////////
+
+typedef struct s_img_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img_data;
+
 typedef struct s_player
 {
 	double		x;
@@ -101,7 +111,6 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	int		col;
 	bool	hit;
 	int		map_x;
 	int		map_y;
@@ -115,6 +124,7 @@ typedef struct s_ray
 	double	side_dist_y;
 	int		step_x; // Tells us in which direction we're moving through the map
 	int		step_y;
+	double	wall_dist;
 }	t_ray;
 
 typedef struct	s_minimap
@@ -138,21 +148,11 @@ typedef struct	s_column
 	int	line_height;
 	int	y_start;
 	int	y_end;
-		int	tex_x;
+	int	tex_x;
 	double	tex_y;
 	double	y_step_size;
+	t_img_data	*tex;
 }	t_column;
-
-typedef struct s_img_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_img_data;
-
-
 
 ///////////////////////////////
 /* PATRICK PARSER STRUCTS    */

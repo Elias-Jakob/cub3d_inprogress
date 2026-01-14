@@ -91,12 +91,12 @@ void	player_centered_minimap(t_data *game)
 	draw_minimap_player(game);
 }
 
-void	draw_minimap_ray(t_data *game, t_ray *ray, int wall_dist)
+void	draw_minimap_ray(t_data *game, t_ray *ray)
 {
 	int	i;
 
 	i = 0;
-	while (i < wall_dist
+	while (i < (int)(ray->wall_dist * game->tile_size)
 		&& MINIMAP_CENTER + ray->dir_x * i < MINIMAP_SIZE
 		&& MINIMAP_CENTER + ray->dir_y * i < MINIMAP_SIZE)
 	{

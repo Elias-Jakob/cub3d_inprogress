@@ -1,8 +1,8 @@
 #include "cub3d.h"
 
-static void	init_ray(t_player *player, t_ray *ray)
+static void	init_ray(t_player *player, t_ray *ray, int x)
 {
-	ray->camera_x = 2 * ray->col / (double)WIDTH - 1;
+	ray->camera_x = 2 * x / (double)WIDTH - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
 	// for dirx = 0.149438 diry = -0.988771
@@ -29,9 +29,9 @@ static void	init_ray(t_player *player, t_ray *ray)
 	}
 }
 
-double	raycasting(t_data *game, t_ray *ray)
+void	raycasting(t_data *game, t_ray *ray, int x)
 {
-	init_ray(game->player, ray);
+	init_ray(game->player, ray, x);
 	// DDA loop
 	while (!ray->hit)
 	{
@@ -54,9 +54,7 @@ double	raycasting(t_data *game, t_ray *ray)
 		ray->side = EAST;
 	if (ray->side == NORTH && ray->step_y == 1)
 		ray->side = SOUTH;
-
+	ray->wall_dist = ray->side_dist_y - ray->delta_dist_y;
 	if (ray->side == WEST || ray->side == EAST)
-		return (ray->side_dist_x - ray->delta_dist_x);
-	else
-		return (ray->side_dist_y - ray->delta_dist_y);
+		ray->wall_dist = ray->side_dist_x - ray->delta_dist_x;
 }
