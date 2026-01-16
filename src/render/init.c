@@ -59,7 +59,7 @@ bool	render(t_data *game)
 	if (game->map_height > MINIMAP_SIZE / TILE_2D_BIG)
 		game->tile_size = TILE_2D_SMALL;
 	//
-	game->action = NONE;
+	// game->action = NONE;
 	if (!init_mlx(game))
 		return (false);
 	render_game(game);

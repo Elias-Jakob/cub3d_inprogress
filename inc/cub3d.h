@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 16:43:07 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:58:27 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,12 @@ typedef struct s_player
 		W -1/0
 		E 1/0
 	*/
+	long	start_time;
+	double	full_rotation;
 }	t_player;
 
 typedef struct s_ray
 {
-	bool	hit;
 	int		map_x;
 	int		map_y;
 	double	camera_x; // current x column normalized to direction vector
@@ -130,8 +131,8 @@ typedef struct s_ray
 	double	delta_dist_x; // ray length to travel one grid unit
 	double	delta_dist_y;
 	int	side; // was a NS or a EW wall hit?
-	double	side_dist_x; // the distance to the NEXT grid line position that is checked
-	double	side_dist_y;
+	double	wall_dist_x; // the distance to the NEXT grid line position that is checked
+	double	wall_dist_y;
 	int		step_x; // Tells us in which direction we're moving through the map
 	int		step_y;
 	double	wall_dist;
@@ -263,7 +264,8 @@ typedef struct data
 	int	tile_size;
 	t_player	*player;
 	unsigned long	last_time_rendered;
-	t_action	action;
+	t_action	turn_action;
+	t_action	move_action;
 }	t_data;
 
 # include "parser.h"

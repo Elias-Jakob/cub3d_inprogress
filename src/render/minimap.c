@@ -56,8 +56,8 @@ static void	draw_minimap_player(t_data *game)
 		while (x < 7)
 		{
 			ft_put_pixel(game->image,
-				MINIMAP_CENTER - 3 + x,
-				MINIMAP_CENTER - 3 + y, MINIMAP_PLAYER_COLOR);
+				MINIMAP_CENTER - 4 + x,
+				MINIMAP_CENTER - 4 + y, MINIMAP_PLAYER_COLOR);
 			x++;
 		}
 		y++;
