@@ -187,6 +187,12 @@ typedef struct	s_column
 	t_texture	*tex;
 }	t_column;
 
+typedef struct	s_door
+{
+	bool	open_door;
+	bool	state;
+}	t_door;
+
 ///////////////////////////////
 /* PATRICK PARSER STRUCTS    */
 ///////////////////////////////
@@ -266,6 +272,7 @@ typedef struct data
 	unsigned long	last_time_rendered;
 	t_action	turn_action;
 	t_action	move_action;
+	t_door	door;
 }	t_data;
 
 # include "parser.h"

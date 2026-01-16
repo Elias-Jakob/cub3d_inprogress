@@ -5,6 +5,30 @@ static bool	wall_collision(char **map, double x, double y)
 	return (map[(int)y][(int)x] == '1');
 }
 
+static bool	near_door(t_data *game)
+{
+	int	map_x;
+	int	map_y;
+	int	row;
+	int	col;
+
+	map_x = (int)game->player->x;
+	map_y = (int)game->player->y;
+	row = -3;
+	while (row <= 3)
+	{
+		col = -3;
+		while (col <= 3)
+		{
+			if (game->map.arr[map_y + row][map_x + col] == 'D')
+				return (true);
+			col++;
+		}
+		row++;
+	}
+	return (false);
+}
+
 void	set_new_player_pos(t_data *game, double x, double y)
 {
 	char	**map;
@@ -22,6 +46,7 @@ void	set_new_player_pos(t_data *game, double x, double y)
 		&& !wall_collision(map, p->x, y + COLLISION_MARGIN)
 		&& !wall_collision(map, p->x, y - COLLISION_MARGIN))
 		p->y = y;
+	game->door.state = near_door(game);
 }
 
 void rotate_player(t_player *player, double rot_angle)

@@ -52,6 +52,9 @@ void	raycasting(t_data *game, t_ray *ray, int x)
 			ray->map_y += ray->step_y;
 			ray->side = NORTH;
 		}
+		if (game->map.arr[ray->map_y][ray->map_x] == 'D'
+			&& game->door.state != true)
+			break ;
 	}
 	if (ray->side == WEST && ray->step_x == 1)
 		ray->side = EAST;
