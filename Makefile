@@ -48,6 +48,7 @@ SRCS_MAND = \
 	render/minimap.c \
 	render/texture_mapping.c \
 	render/hooks.c \
+	render/actions.c \
 	render/utils.c \
 
 # =========================

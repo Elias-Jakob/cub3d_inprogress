@@ -4,7 +4,7 @@ void	clean_up_mlx(t_data *game)
 {
 	int	i_tex;
 
-	if (game->image)
+	if (game->image->img)
 		mlx_destroy_image(game->mlx, game->image->img);
 	if (game->mlx_win)
 		mlx_destroy_window(game->mlx, game->mlx_win);

@@ -55,9 +55,7 @@ int	main(int ac, char **av)
 	*/
 
 
-	if (!render(&data))
-		print_error("Init MLX failed\n", &data); // redundant already printing an error message
-
+	render(&data);
 	/////PATRICK
 	if (VERBOSE)
 		printf("%s exit\n", OK_MSG);

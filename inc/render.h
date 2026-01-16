@@ -18,11 +18,14 @@ void	draw_minimap_ray(t_data *game, t_ray *ray);
 void	draw_texture_line(t_data *game, t_ray *ray, t_column *col);
 
 // hooks.c
-int	render_loop_hook(t_data *game);
-int	key_hook(int key_code, t_data *game);
-int	key_press_hook(int key_code, t_data *game);
-int	key_release_hook(int key_code, t_data *game);
-int	quit_game(t_data *game);
+int		render_loop_hook(t_data *game);
+int		key_press_hook(int key_code, t_data *game);
+int		key_release_hook(int key_code, t_data *game);
+
+// actions.c
+void	set_new_player_pos(t_data *game, double x, double y);
+void	rotate_player(t_player *player, double rot_angle);
+int		quit_game(t_data *game);
 
 // utils.c
 void	clean_up_mlx(t_data *game);

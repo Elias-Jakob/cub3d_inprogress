@@ -38,7 +38,7 @@ void	raycasting(t_data *game, t_ray *ray, int x)
 {
 	init_ray(game->player, ray, x);
 	// DDA loop
-	while (true)
+	while (game->map.arr[ray->map_y][ray->map_x] != '1')
 	{
 		if (ray->wall_dist_x < ray->wall_dist_y)
 		{
@@ -52,8 +52,6 @@ void	raycasting(t_data *game, t_ray *ray, int x)
 			ray->map_y += ray->step_y;
 			ray->side = NORTH;
 		}
-		if (game->map.arr[ray->map_y][ray->map_x] == '1')
-			break ;
 	}
 	if (ray->side == WEST && ray->step_x == 1)
 		ray->side = EAST;

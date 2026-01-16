@@ -39,8 +39,8 @@
 
 # define N_TEXTURES 4
 
-# define STEP_SIZE 0.1
-# define ROTATION_ANGLE 0.05 // in radians approx. eq. to 3
+# define STEP_SIZE 0.08
+# define ROTATION_ANGLE 0.05 // ~2.8°
 
 # define COLLISION_MARGIN 0.1
 
