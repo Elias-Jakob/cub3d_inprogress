@@ -6,6 +6,8 @@ static void	init_col(t_data *game, t_ray *ray, t_column *col)
 	if (ray->side == WEST || ray->side == EAST)
 		col->wall_x = game->player->y + ray->wall_dist * ray->dir_y;
 	col->wall_x -= (int)col->wall_x;
+	if (ray->side == WEST || ray->side == SOUTH)
+		col->wall_x = fabs(col->wall_x - 1);
 	col->tex = &game->text[ray->side];
 	col->tex_x = col->tex->width * col->wall_x;
 	col->y_start = HEIGHT / 2 - HEIGHT / ray->wall_dist;
