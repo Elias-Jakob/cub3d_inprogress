@@ -49,6 +49,7 @@
 # define WEST 2
 # define EAST 3
 
+# define TIME_TO_OPEN 500
 
 # define PI 3.14159265
 
@@ -73,7 +74,6 @@
 # include <math.h>
 # include <mlx.h>
 # include <X11/keysym.h>
-
 # include "libft/libft.h"
 
 
@@ -136,6 +136,7 @@ typedef struct s_ray
 	int		step_x; // Tells us in which direction we're moving through the map
 	int		step_y;
 	double	wall_dist;
+	double	wall_x;
 }	t_ray;
 
 typedef struct	s_minimap
@@ -189,8 +190,9 @@ typedef struct	s_column
 
 typedef struct	s_door
 {
-	bool	open_door;
+	bool	opening;
 	bool	state;
+	unsigned long	start_opening;
 }	t_door;
 
 ///////////////////////////////

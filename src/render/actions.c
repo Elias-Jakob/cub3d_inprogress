@@ -21,12 +21,16 @@ static bool	near_door(t_data *game)
 		while (col <= 3)
 		{
 			if (game->map.arr[map_y + row][map_x + col] == 'D')
+			{
+				if (game->door.start_opening == 0)
+					game->door.start_opening = get_timestamp();
 				return (true);
+			}
 			col++;
 		}
 		row++;
 	}
-	return (false);
+	return (game->door.start_opening = 0, false);
 }
 
 void	set_new_player_pos(t_data *game, double x, double y)
@@ -46,7 +50,7 @@ void	set_new_player_pos(t_data *game, double x, double y)
 		&& !wall_collision(map, p->x, y + COLLISION_MARGIN)
 		&& !wall_collision(map, p->x, y - COLLISION_MARGIN))
 		p->y = y;
-	game->door.state = near_door(game);
+	game->door.opening = near_door(game);
 }
 
 void rotate_player(t_player *player, double rot_angle)

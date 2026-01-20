@@ -32,6 +32,30 @@ static void	init_ray(t_player *player, t_ray *ray, int x)
 		ray->step_y = 1;
 		ray->wall_dist_y = (ray->map_y + 1.0 - player->y) * ray->delta_dist_y;
 	}
+	ray->wall_x = 0;
+}
+
+static bool	door_closed(t_data *game, t_ray *ray)
+{
+	double	time_passed;
+
+	ray->wall_x = game->player->x + (ray->wall_dist_y - ray->delta_dist_y) * ray->dir_x;
+	if (ray->side == WEST || ray->side == EAST)
+		ray->wall_x = game->player->y + (ray->wall_dist_x - ray->delta_dist_x) * ray->dir_y;
+	ray->wall_x -= (int)ray->wall_x;
+
+	if (game->door.opening)
+	{
+		// if (ray->wall_x != 0)
+		// {
+		// 	printf("ray->wall_x = %f, %f %f %f\n", ray->wall_x, game->player->x, ray->wall_dist_x, ray->dir_x);
+		// 	printf("ray->wall_y = %f, %f %f %f\n", ray->wall_x, game->player->y, ray->wall_dist_y, ray->dir_y);
+		// }
+		time_passed = (double)(get_timestamp() - game->door.start_opening);
+		if (ray->wall_x < time_passed / TIME_TO_OPEN)
+			return (false);
+	}
+	return (true);
 }
 
 void	raycasting(t_data *game, t_ray *ray, int x)
@@ -52,8 +76,7 @@ void	raycasting(t_data *game, t_ray *ray, int x)
 			ray->map_y += ray->step_y;
 			ray->side = NORTH;
 		}
-		if (game->map.arr[ray->map_y][ray->map_x] == 'D'
-			&& game->door.state != true)
+		if (game->map.arr[ray->map_y][ray->map_x] == 'D' && door_closed(game, ray))
 			break ;
 	}
 	if (ray->side == WEST && ray->step_x == 1)
