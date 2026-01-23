@@ -1,8 +1,28 @@
 #include "cub3d.h"
 
+static void	draw_minimap_player(t_data *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < game->player_size)
+	{
+		x = 0;
+		while (x < game->player_size)
+		{
+			ft_put_pixel(game->image,
+				MINIMAP_CENTER - game->player_center + x,
+				MINIMAP_CENTER - game->player_center + y, MINIMAP_PLAYER_COLOR);
+			x++;
+		}
+		y++;
+	}
+}
+
 static void	init_minimap(t_data *game, t_minimap *map)
 {
-	map->n_tiles = MINIMAP_SIZE / game->tile_size;
+	map->n_tiles = MINIMAP_SIZE / TILE_SIZE_2D;
 	map->start_col = (int)game->player->x - map->n_tiles / 2;
 	map->start_row = (int)game->player->y - map->n_tiles / 2;
 	map->end_col = (int)game->player->x + map->n_tiles / 2 + 1;
@@ -10,8 +30,8 @@ static void	init_minimap(t_data *game, t_minimap *map)
 	map->y = map->start_row;
 	if (game->map_height < map->end_row)
 		map->end_row = game->map_height;
-	map->x_fract = game->player->x - (int)game->player->x;
-	map->y_fract = game->player->y - (int)game->player->y;
+	map->x_fract = game->player->x - (int)game->player->x - 0.1;
+	map->y_fract = game->player->y - (int)game->player->y - 0.1;
 }
 
 static void	draw_minimap_square(t_data *game, double x, double y, int color)
@@ -22,45 +42,26 @@ static void	draw_minimap_square(t_data *game, double x, double y, int color)
 	int	wall_end_y;
 	int	y_start;
 
-	px = floor(x * game->tile_size);
-	py = floor(y * game->tile_size);
-	wall_end_x = px + game->tile_size - 1;
-	wall_end_y = py + game->tile_size - 1;
+	px = floor(x * TILE_SIZE_2D);
+	py = floor(y * TILE_SIZE_2D);
+	wall_end_x = px + TILE_SIZE_2D - 1;
+	wall_end_y = py + TILE_SIZE_2D - 1;
 	y_start = py;
+	if (wall_end_x <= MINIMAP_SIZE && wall_end_y <= MINIMAP_SIZE)
+		ft_put_pixel(game->image, wall_end_x, wall_end_y, MINIMAP_GRID_COLOR);
 	while (px < wall_end_x && px < MINIMAP_SIZE)
 	{
 		while (py < wall_end_y && py < MINIMAP_SIZE)
 		{
-			if (wall_end_y < MINIMAP_SIZE)
+			if (wall_end_y <= MINIMAP_SIZE)
 				ft_put_pixel(game->image, px, wall_end_y, MINIMAP_GRID_COLOR);
-			if (wall_end_x < MINIMAP_SIZE)
+			if (wall_end_x <= MINIMAP_SIZE)
 				ft_put_pixel(game->image, wall_end_x, py, MINIMAP_GRID_COLOR);
 			ft_put_pixel(game->image, px, py, color);
 			py++;
 		}
 		py = y_start;
 		px++;
-	}
-}
-
-static void	draw_minimap_player(t_data *game)
-{
-	int	y;
-	int	x;
-
-	// TODO: replace with a circle
-	y = 0;
-	while (y < 7)
-	{
-		x = 0;
-		while (x < 7)
-		{
-			ft_put_pixel(game->image,
-				MINIMAP_CENTER - 4 + x,
-				MINIMAP_CENTER - 4 + y, MINIMAP_PLAYER_COLOR);
-			x++;
-		}
-		y++;
 	}
 }
 
@@ -91,19 +92,36 @@ void	player_centered_minimap(t_data *game)
 	draw_minimap_player(game);
 }
 
+static void	dda_line(t_data *game, t_ray *ray, int x1, int y1)
+{
+	int	x0;
+	int	y0;
+
+	x0 = MINIMAP_CENTER;
+	y0 = MINIMAP_CENTER;
+	ray->wall_dist_x = ray->delta_dist_x;
+	ray->wall_dist_y = ray->delta_dist_y;
+	while (x0 != x1 && y0 != y1 && x0 < MINIMAP_SIZE && y0 < MINIMAP_SIZE)
+	{
+		ft_put_pixel(game->image, x0, y0, MINIMAP_RAY_COLOR);
+		if (ray->wall_dist_x < ray->wall_dist_y)
+		{
+			ray->wall_dist_x += ray->delta_dist_x;
+			x0 += ray->step_x;
+		}
+		else
+		{
+			ray->wall_dist_y += ray->delta_dist_y;
+			y0 += ray->step_y;
+		}
+	}
+}
 void	draw_minimap_ray(t_data *game, t_ray *ray)
 {
-	// TODO: use DDA like approach to make the lines smother
-	int	i;
+	int	end_x;
+	int	end_y;
 
-	i = 0;
-	while (i < (int)(ray->wall_dist * game->tile_size)
-		&& MINIMAP_CENTER + ray->dir_x * i < MINIMAP_SIZE
-		&& MINIMAP_CENTER + ray->dir_y * i < MINIMAP_SIZE)
-	{
-		ft_put_pixel(game->image,
-			(int)(MINIMAP_CENTER + ray->dir_x * i),
-			(int)(MINIMAP_CENTER + ray->dir_y * i), MINIMAP_RAY_COLOR);
-		i++;
-	}
+	end_x = (int)round(MINIMAP_CENTER + ray->dir_x * ray->wall_dist * TILE_SIZE_2D);
+	end_y = (int)round(MINIMAP_CENTER + ray->dir_y * ray->wall_dist * TILE_SIZE_2D);
+	dda_line(game, ray, end_x, end_y);
 }

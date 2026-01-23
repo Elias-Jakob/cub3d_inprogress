@@ -53,13 +53,9 @@ static bool	init_mlx(t_data *game)
 
 bool	render(t_data *game)
 {
-	// TODO: init map width and height @ patrick
-	while (game->map.arr[game->map_height])
-		game->map_height++;
-	game->tile_size = TILE_2D_BIG;
-	if (game->map_height > MINIMAP_SIZE / TILE_2D_BIG)
-		game->tile_size = TILE_2D_SMALL;
-	//
+	game->map_height = game->map.y;
+	game->player_size = TILE_SIZE_2D - 1;
+	game->player_center = game->player_size / 2;
 	if (!init_mlx(game))
 		return (false);
 	mlx_loop_hook(game->mlx, render_loop_hook, game);

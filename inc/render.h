@@ -31,5 +31,6 @@ int		quit_game(t_data *game);
 void	clean_up_mlx(t_data *game);
 void	ft_put_pixel(t_img_data *image_data, int x, int y, int color);
 unsigned long	get_timestamp(void);
+void	angle_to_vector(t_player *player);
 
 #endif

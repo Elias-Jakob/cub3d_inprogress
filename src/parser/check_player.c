@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:48:43 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 14:35:26 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/23 11:16:31 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,25 @@
 
 static void	set_direction(t_data *data, char c)
 {
-	data->player->dir_x = 0;
-	data->player->dir_y = -1;
+	data->player->angle = 0;
 	if (c == 'N')
 		data->flag.player_north = true;
 	else if (c == 'S')
 	{
-		data->player->dir_x = 0;
-		data->player->dir_y = 1;
+		data->player->angle = PI;
 		data->flag.player_south = true;
 	}
 	else if (c == 'W')
 	{
-		data->player->dir_x = -1;
-		data->player->dir_y = 0;
+		data->player->angle = PI + PI / 2;
 		data->flag.player_west = true;
 	}
 	else if (c == 'E')
 	{
-		data->player->dir_x = 1;
-		data->player->dir_y = 0;
+		data->player->angle = PI / 2;
 		data->flag.player_east = true;
 	}
-	data->player->plane_x = -data->player->dir_y * 0.66;
-	data->player->plane_y = data->player->dir_x * 0.66;
+	angle_to_vector(data->player);
 }
 
 int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)

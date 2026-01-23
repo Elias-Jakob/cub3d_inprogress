@@ -26,15 +26,10 @@ void	set_new_player_pos(t_data *game, double x, double y)
 
 void rotate_player(t_player *player, double rot_angle)
 {
-	double old_dir_x;
-	double old_dir_y;
-
-	old_dir_x = player->dir_x;
-	old_dir_y = player->dir_y;
-	player->dir_x = old_dir_x * cos(rot_angle) - old_dir_y * sin(rot_angle);
-	player->dir_y = old_dir_x * sin(rot_angle) + old_dir_y * cos(rot_angle);
-	player->plane_x = -player->dir_y * 0.66;
-	player->plane_y = player->dir_x * 0.66;
+	player->angle += rot_angle;
+	if (player->angle > PI * 2)
+		player->angle -= PI * 2;
+	angle_to_vector(player);
 	// TIME ROTATION
 	/*
 	if (old_dir_x == 0 && old_dir_y == -1)

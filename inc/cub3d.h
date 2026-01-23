@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/15 14:58:27 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/01/22 19:14:24 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@
 
 # define WIDTH 1620
 # define HEIGHT 880
-# define MINIMAP_SIZE 160
-# define MINIMAP_CENTER 80
-# define TILE_2D_BIG 16
-# define TILE_2D_SMALL 8
+# define MINIMAP_SIZE 181
+# define MINIMAP_CENTER 90
+# define TILE_SIZE_2D 10
 
 # define MINIMAP_BG_COLOR 0x000000
 # define MINIMAP_WALL_COLOR 0xFFFFFF
@@ -105,6 +104,7 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
+	double	angle;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
@@ -261,7 +261,8 @@ typedef struct data
 	// char	**map;
 	int	map_width;
 	int	map_height;
-	int	tile_size;
+	int	player_size;
+	int	player_center;
 	t_player	*player;
 	unsigned long	last_time_rendered;
 	t_action	turn_action;

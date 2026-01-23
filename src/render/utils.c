@@ -15,6 +15,14 @@ void	clean_up_mlx(t_data *game)
 	free(game->mlx);
 }
 
+void	angle_to_vector(t_player *player)
+{
+	player->dir_x = cos(player->angle);
+	player->dir_y = sin(player->angle);
+	player->plane_x = -player->dir_y * 0.66;
+	player->plane_y = player->dir_x * 0.66;
+}
+
 void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
 {
 	char	*pixel;
