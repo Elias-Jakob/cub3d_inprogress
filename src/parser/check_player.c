@@ -14,22 +14,22 @@
 
 static void	set_direction(t_data *data, char c)
 {
-	data->player->angle = 0;
+	data->player->angle = PI + PI / 2;
 	if (c == 'N')
 		data->flag.player_north = true;
 	else if (c == 'S')
 	{
-		data->player->angle = PI;
+		data->player->angle = PI / 2;
 		data->flag.player_south = true;
 	}
 	else if (c == 'W')
 	{
-		data->player->angle = PI + PI / 2;
+		data->player->angle = PI;
 		data->flag.player_west = true;
 	}
 	else if (c == 'E')
 	{
-		data->player->angle = PI / 2;
+		data->player->angle = 0;
 		data->flag.player_east = true;
 	}
 	angle_to_vector(data->player);

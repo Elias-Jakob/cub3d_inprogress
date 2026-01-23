@@ -22,11 +22,13 @@ static void	draw_minimap_player(t_data *game)
 
 static void	init_minimap(t_data *game, t_minimap *map)
 {
-	map->n_tiles = MINIMAP_SIZE / TILE_SIZE_2D;
-	map->start_col = (int)game->player->x - map->n_tiles / 2;
-	map->start_row = (int)game->player->y - map->n_tiles / 2;
-	map->end_col = (int)game->player->x + map->n_tiles / 2 + 1;
-	map->end_row = (int)game->player->y + map->n_tiles / 2 + 1;
+	int	n_tiles;
+
+	n_tiles = MINIMAP_SIZE / TILE_SIZE_2D;
+	map->start_col = (int)game->player->x - n_tiles / 2;
+	map->start_row = (int)game->player->y - n_tiles / 2;
+	map->end_col = (int)game->player->x + n_tiles / 2 + 1;
+	map->end_row = (int)game->player->y + n_tiles / 2 + 1;
 	map->y = map->start_row;
 	if (game->map_height < map->end_row)
 		map->end_row = game->map_height;
@@ -92,13 +94,15 @@ void	player_centered_minimap(t_data *game)
 	draw_minimap_player(game);
 }
 
-static void	dda_line(t_data *game, t_ray *ray, int x1, int y1)
+void	draw_minimap_ray(t_data *game, t_ray *ray, int x1, int y1)
 {
 	int	x0;
 	int	y0;
 
 	x0 = MINIMAP_CENTER;
 	y0 = MINIMAP_CENTER;
+	x1 += x0;
+	y1 += y0;
 	ray->wall_dist_x = ray->delta_dist_x;
 	ray->wall_dist_y = ray->delta_dist_y;
 	while (x0 != x1 && y0 != y1 && x0 < MINIMAP_SIZE && y0 < MINIMAP_SIZE)
@@ -115,13 +119,4 @@ static void	dda_line(t_data *game, t_ray *ray, int x1, int y1)
 			y0 += ray->step_y;
 		}
 	}
-}
-void	draw_minimap_ray(t_data *game, t_ray *ray)
-{
-	int	end_x;
-	int	end_y;
-
-	end_x = (int)round(MINIMAP_CENTER + ray->dir_x * ray->wall_dist * TILE_SIZE_2D);
-	end_y = (int)round(MINIMAP_CENTER + ray->dir_y * ray->wall_dist * TILE_SIZE_2D);
-	dda_line(game, ray, end_x, end_y);
 }

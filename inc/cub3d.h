@@ -140,13 +140,14 @@ typedef struct s_ray
 
 typedef struct	s_minimap
 {
-	int	n_tiles;
 	int	start_col;
 	int	start_row;
 	int	end_col;
 	int	end_row;
 	int	x;
 	int	y;
+	int	tile_x;
+	int	tile_y;
 	double	x_fract;
 	double	y_fract;
 }	t_minimap;
