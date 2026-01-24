@@ -16,7 +16,6 @@ static bool	load_textures(t_data *game)
 				printf("%s\n", texture->path), false);
 		texture->image.addr = mlx_get_data_addr(texture->image.img,
 			&texture->image.bits_per_pixel, &texture->image.line_length, &texture->image.endian);
-		printf("w = %d h = %d\n", texture->width, texture->height);
 	}
 	return (true);
 }

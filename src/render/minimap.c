@@ -22,71 +22,55 @@ static void	draw_minimap_player(t_data *game)
 
 static void	init_minimap(t_data *game, t_minimap *map)
 {
-	map->start_col = (int)game->player->x - N_TILES / 2;
-	map->start_row = (int)game->player->y - N_TILES / 2;
-	map->end_col = (int)game->player->x + N_TILES / 2 + 1;
-	map->end_row = (int)game->player->y + N_TILES / 2 + 1;
+	map->start_col = (int)game->player->x - N_TILES;
+	map->start_row = (int)game->player->y - N_TILES;
+	map->end_col = (int)game->player->x + N_TILES + 1;
+	map->end_row = (int)game->player->y + N_TILES + 1;
+	map->x = map->start_col - 1;
 	map->y = map->start_row;
 	if (game->map_height < map->end_row)
 		map->end_row = game->map_height;
-	map->x_fract = game->player->x - (int)game->player->x - 0.1;
-	map->y_fract = game->player->y - (int)game->player->y - 0.1;
+	map->x_offset = game->player->x - (int)game->player->x - 0.1;
+	map->y_offset = game->player->y - (int)game->player->y - 0.1;
 }
 
-static void	draw_minimap_square(t_data *game, double x, double y, int color)
+static void	draw_minimap_tile(t_data *game, t_minimap *map)
 {
-	int	px;
-	int	py;
-	int	wall_end_x;
-	int	wall_end_y;
-	int	y_start;
-
-	px = floor(x * TILE_SIZE_2D);
-	py = floor(y * TILE_SIZE_2D);
-	wall_end_x = px + TILE_SIZE_2D - 1;
-	wall_end_y = py + TILE_SIZE_2D - 1;
-	y_start = py;
-	if (wall_end_x <= MINIMAP_SIZE && wall_end_y <= MINIMAP_SIZE)
-		ft_put_pixel(game->image, wall_end_x, wall_end_y, MINIMAP_GRID_COLOR);
-	while (px < wall_end_x && px < MINIMAP_SIZE)
+	map->x1 = map->x0 + TILE_SIZE_2D - 1;
+	map->y1 = map->y0 + TILE_SIZE_2D - 1;
+	while (map->y0 < map->y1 && map->y0 <= MINIMAP_SIZE)
 	{
-		while (py < wall_end_y && py < MINIMAP_SIZE)
-		{
-			if (wall_end_y <= MINIMAP_SIZE)
-				ft_put_pixel(game->image, px, wall_end_y, MINIMAP_GRID_COLOR);
-			if (wall_end_x <= MINIMAP_SIZE)
-				ft_put_pixel(game->image, wall_end_x, py, MINIMAP_GRID_COLOR);
-			ft_put_pixel(game->image, px, py, color);
-			py++;
-		}
-		py = y_start;
-		px++;
+		draw_tile_line(game, map, map->x0);
+		map->y0++;
+	}
+	if (map->y0 < MINIMAP_SIZE)
+	{
+		map->tile_color = MINIMAP_GRID_COLOR;
+		draw_tile_line(game, map, map->x0);
 	}
 }
 
-void	player_centered_minimap(t_data *game)
+void	draw_minimap(t_data *game)
 {
 	t_minimap	map;
-	int	square_color;
-
+	
 	init_minimap(game, &map);
 	while (map.y < map.end_row)
 	{
-		map.x = map.start_col;
-		while (map.x < map.end_col)
+		while (++map.x < map.end_col)
 		{
-			if (map.y >= 0 && map.x >= 0 && map.y < game->map_height
-				&& (size_t)map.x < ft_strlen(game->map.arr[map.y]))
-			{
-				square_color = MINIMAP_BG_COLOR;
-				if (game->map.arr[map.y][map.x] == '1')
-					square_color = MINIMAP_WALL_COLOR;
-				draw_minimap_square(game, map.x - map.start_col - map.x_fract,
-					map.y - map.start_row - map.y_fract, square_color);
-			}
-			map.x++;
+			if (map.y < 0 || map.x < 0 || map.y >= game->map_height
+				|| (size_t)map.x >= ft_strlen(game->map.arr[map.y]))
+				continue ;
+			map.tile_color = MINIMAP_BG_COLOR;
+			if (game->map.arr[map.y][map.x] == '1')
+				map.tile_color = MINIMAP_WALL_COLOR;
+			map.x0 = (int)floor((map.x - map.start_col - map.x_offset) * TILE_SIZE_2D);
+			map.y0 = (int)floor((map.y - map.start_row - map.y_offset) * TILE_SIZE_2D);
+			draw_minimap_tile(game, &map);
 		}
 		map.y++;
+		map.x = map.start_col - 1;
 	}
 	draw_minimap_player(game);
 }

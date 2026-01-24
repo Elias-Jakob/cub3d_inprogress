@@ -1,17 +1,25 @@
 #include "cub3d.h"
 
+static double	get_wall_x(t_data *game, t_ray	*ray)
+{
+	double	wall_x;
+	
+	wall_x = game->player->x + ray->wall_dist * ray->dir_x;
+	if (ray->side == WEST || ray->side == EAST)
+		wall_x = game->player->y + ray->wall_dist * ray->dir_y;
+	wall_x -= (int)wall_x;
+	if (ray->side == WEST || ray->side == SOUTH)
+		wall_x = fabs(wall_x - 1);
+	return (wall_x);
+}
+
 static void	init_col(t_data *game, t_ray *ray, t_column *col)
 {
-	col->wall_x = game->player->x + ray->wall_dist * ray->dir_x;
-	if (ray->side == WEST || ray->side == EAST)
-		col->wall_x = game->player->y + ray->wall_dist * ray->dir_y;
-	col->wall_x -= (int)col->wall_x;
-	if (ray->side == WEST || ray->side == SOUTH)
-		col->wall_x = fabs(col->wall_x - 1);
+	col->wall_x = get_wall_x(game, ray);
 	col->tex = &game->text[ray->side];
 	col->tex_x = col->tex->width * col->wall_x;
 	col->y_start = HEIGHT / 2 - HEIGHT / ray->wall_dist;
-	col->y_end = HEIGHT / 2 + HEIGHT / ray->wall_dist;
+	col->y_end = col->y_end * 2;
 	if (col->y_end > HEIGHT)
 		col->y_end = HEIGHT;
 	col->line_height = (HEIGHT / ray->wall_dist) * 2;

@@ -11,7 +11,7 @@ int	render_game(t_data *game);
 void	raycasting(t_data *game, t_ray *ray, int x);
 
 // minimap.c
-void	player_centered_minimap(t_data *game);
+void	draw_minimap(t_data *game);
 void	draw_minimap_ray(t_data *game, t_ray *ray, int x1, int y1);
 
 // texture_mapping.c
@@ -29,8 +29,9 @@ int		quit_game(t_data *game);
 
 // utils.c
 void	clean_up_mlx(t_data *game);
-void	ft_put_pixel(t_img_data *image_data, int x, int y, int color);
-unsigned long	get_timestamp(void);
 void	angle_to_vector(t_player *player);
+unsigned long	get_timestamp(void);
+void	ft_put_pixel(t_img_data *image_data, int x, int y, int color);
+void	draw_tile_line(t_data *game, t_minimap *map, int x);
 
 #endif

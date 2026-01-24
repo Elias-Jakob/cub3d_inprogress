@@ -30,7 +30,7 @@ int	render_game(t_data *game)
 
 	game->last_time_rendered = get_timestamp();
 	fill_backgrounds(game);
-	player_centered_minimap(game);
+	draw_minimap(game);
 	col.x = 0;
 	while (col.x < WIDTH)
 	{

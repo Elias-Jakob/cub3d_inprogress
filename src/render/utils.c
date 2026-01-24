@@ -23,27 +23,30 @@ void	angle_to_vector(t_player *player)
 	player->plane_y = player->dir_x * 0.66;
 }
 
-void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
-{
-	char	*pixel;
-	// patrick: hab bounce check eingefuegt. ohne Bounds check mit negativen
-	// bzw. zu großen x y Koordinaten in den Image-Buffer geschrieben
-	// hat und dadurch außerhalb des allokierten Speichers 4 Bytes überschrieben wurden
-	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
-    	return;
-
-	pixel = image_data->addr + (y * image_data->line_length + x
-		* (image_data->bits_per_pixel / 8));
-	*(unsigned int *)pixel = color;
-	// printf("x: %d y: %d pixel: %x\n", x, y, *pixel);
-	// printf("MLX image\naddr: %p\nimg: %p\nbits_per_pixel: %d\nline_length: %d\nendian: %d\n",
-	// 			image_data->addr, image_data->img, image_data->bits_per_pixel, image_data->line_length, image_data->endian);
-}
-
 unsigned long	get_timestamp(void)
 {
 	struct timeval	current_time;
 
 	gettimeofday(&current_time, NULL);
 	return ((current_time.tv_sec * 1000) + (current_time.tv_usec / 1000));
+}
+
+void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
+{
+	char	*pixel;
+
+	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
+    	return;
+
+	pixel = image_data->addr + (y * image_data->line_length + x
+		* (image_data->bits_per_pixel / 8));
+	*(unsigned int *)pixel = color;
+}
+
+void	draw_tile_line(t_data *game, t_minimap *map, int x)
+{
+	while (x < map->x1 && x <= MINIMAP_SIZE)
+		ft_put_pixel(game->image, x++, map->y0, map->tile_color);
+	if (x < MINIMAP_SIZE)
+		ft_put_pixel(game->image, x, map->y0, MINIMAP_GRID_COLOR);
 }
