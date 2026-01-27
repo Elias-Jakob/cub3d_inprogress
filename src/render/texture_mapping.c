@@ -3,7 +3,7 @@
 static double	get_wall_x(t_data *game, t_ray	*ray)
 {
 	double	wall_x;
-	
+
 	wall_x = game->player->x + ray->wall_dist * ray->dir_x;
 	if (ray->side == WEST || ray->side == EAST)
 		wall_x = game->player->y + ray->wall_dist * ray->dir_y;
@@ -16,13 +16,13 @@ static double	get_wall_x(t_data *game, t_ray	*ray)
 static void	init_col(t_data *game, t_ray *ray, t_column *col)
 {
 	col->wall_x = get_wall_x(game, ray);
+	col->line_height = (int)((HEIGHT / ray->wall_dist) * 2);
 	col->tex = &game->text[ray->side];
-	col->tex_x = col->tex->width * col->wall_x;
 	col->y_start = HEIGHT / 2 - HEIGHT / ray->wall_dist;
-	col->y_end = col->y_end * 2;
+	col->y_end = col->y_start + col->line_height;
 	if (col->y_end > HEIGHT)
 		col->y_end = HEIGHT;
-	col->line_height = (HEIGHT / ray->wall_dist) * 2;
+	col->tex_x = (int)(col->tex->width * col->wall_x);
 	col->y_step_size = (double)col->tex->height / col->line_height;
 	col->tex_y = 0;
 	col->y = col->y_start;

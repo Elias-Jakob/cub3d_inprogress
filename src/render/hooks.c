@@ -29,11 +29,12 @@ int	render_loop_hook(t_data *game)
 
 int	key_press_hook(int key_code, t_data *game)
 {
-	if (key_code == XK_Left || key_code == XK_Right)
-		game->turn_action = key_code;
-	else if (key_code == XK_Escape)
+	if (key_code == XK_Escape)
 		quit_game(game);
-	else
+	else if (key_code == XK_Left || key_code == XK_Right)
+		game->turn_action = key_code;
+	else if (key_code == XK_w || key_code == XK_a || key_code == XK_s
+			|| key_code == XK_d)
 		game->move_action = key_code;
 	return (0);
 }
@@ -42,7 +43,8 @@ int	key_release_hook(int key_code, t_data *game)
 {
 	if (key_code == XK_Left || key_code == XK_Right)
 		game->turn_action = NONE;
-	else
+	else if (key_code == XK_w || key_code == XK_a || key_code == XK_s
+			|| key_code == XK_d)
 		game->move_action = NONE;
 	return (0);
 }
