@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:06:18 by netrunner         #+#    #+#             */
-/*   Updated: 2026/02/06 18:43:33 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 19:46:46 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	main(int ac, char **av)
 	*/
 
 
-	render(&data);
-
+	if (!render(&data))
+		cleanup_parser(&data, ERROR);
 
 	/////PATRICK
 	if (VERBOSE)
