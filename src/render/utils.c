@@ -10,7 +10,14 @@ void	clean_up_mlx(t_data *game)
 		mlx_destroy_window(game->mlx, game->mlx_win);
 	i_tex = 0;
 	while (i_tex < N_TEXTURES && game->text[i_tex].image.img)
-		mlx_destroy_image(game->mlx, game->text[i_tex++].image.img);
+	{
+		if (game->text[i_tex].image.img)
+		{
+			mlx_destroy_image(game->mlx, game->text[i_tex].image.img);
+			game->text[i_tex].image.img = NULL;
+		}
+		i_tex++;
+	}
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 }
