@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:54:53 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 18:51:32 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:12:24 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ int	extract_files(t_data *data, int fd)
 	else if(data->flag.error)
 		return (ERROR);
 	else if(!data->flag.player_set)
-		return (print_error("Player not found on map\n", data), ERROR);
+		return (print_error("Player not found on map\n", data, 0), ERROR);
 	return (SUCCESS);
 }

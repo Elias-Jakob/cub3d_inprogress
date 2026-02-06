@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:43:11 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 14:31:56 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:22:49 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,32 @@ int	print_doubles(t_data *data, const char *str)
 	f = data->flag;
 	if (f.north && (ft_memcmp("NO ", str, 3) == 0
 		|| ft_memcmp("NO\t", str, 3) == 0))
-		return (print_error("North texture already extracted\n", data), SUCCESS);
+		return (print_error("North texture already extracted\n", data, 0), 0);
 	else if (f.south && (ft_memcmp("SO ", str, 3) == 0
 		|| ft_memcmp("SO\t", str, 3) == 0))
-		return (print_error("South texture already extracted\n", data), SUCCESS);
+		return (print_error("South texture already extracted\n", data, 0), 0);
 	else if (f.west && (ft_memcmp("WE ", str, 3) == 0
 		|| ft_memcmp("WE\t", str, 3) == 0))
-		return (print_error("West texture already extracted\n", data), SUCCESS);
+		return (print_error("West texture already extracted\n", data, 0), 0);
 	else if (f.east && (ft_memcmp("EA ", str, 3) == 0
 		|| ft_memcmp("EA\t", str, 3) == 0))
-		return (print_error("East texture already extracted\n", data), SUCCESS);
+		return (print_error("East texture already extracted\n", data, 0), 0);
 	else if (f.ceiling && (ft_memcmp("C ", str, 2) == 0
 		|| ft_memcmp("C\t", str, 2) == 0))
-		return (print_error("Ceiling RGB already extracted\n", data), SUCCESS);
+		return (print_error("Ceiling RGB already extracted\n", data, 0), 0);
 	else if (f.floor && (ft_memcmp("F ", str, 2) == 0
 		|| ft_memcmp("F\t", str, 2) == 0))
-		return (print_error("Floor RGB already extracted\n", data), SUCCESS);
+		return (print_error("Floor RGB already extracted\n", data, 0), 0);
 	return (ERROR);
 }
 
-void	print_error(char *str, t_data *data)
+void	print_error(char *str, t_data *data, char c)
 {
 	printf("%s\n", ERROR_MSG);
-	printf("%s", str);
+	if (c != 0)
+		printf("%s '%c' in map\n", str, c);
+	else
+		printf("%s", str);
 	data->flag.error = true;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 10:48:43 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/23 11:16:31 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:43:51 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ static void	set_direction(t_data *data, char c)
 int	set_player(t_data *data, char c, size_t y_coord, size_t x_coord)
 {
 	if (data->flag.player_north && c == 'N')
-		return(print_error("N - double apperance\n", data), ERROR);
+		return(print_error("N - double apperance\n", data, 0), ERROR);
 	else if (data->flag.player_south && c == 'S')
-		return(print_error("S - double apperance\n", data), ERROR);
+		return(print_error("S - double apperance\n", data, 0), ERROR);
 	else if (data->flag.player_west && c == 'W')
-		return(print_error("W - double apperance\n", data), ERROR);
+		return(print_error("W - double apperance\n", data, 0), ERROR);
 	else if (data->flag.player_east && c == 'E')
-		return(print_error("E - double apperance\n", data), ERROR);
+		return(print_error("E - double apperance\n", data, 0), ERROR);
 	if (data->flag.player_set)
-		return (print_error("2 Player positions found\n", data), ERROR);
+		return (print_error("2 Player positions found\n", data, 0), ERROR);
 	set_direction(data, c);
 	if (y_coord == 0)
-		return (print_error("Player position invalid\n", data), ERROR);
+		return (print_error("Player position invalid\n", data, 0), ERROR);
 	data->player->y = y_coord + .5;
 	data->player->x = x_coord + .5;
 	data->flag.player_set = true;

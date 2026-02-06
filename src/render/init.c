@@ -12,7 +12,7 @@ static bool	load_textures(t_data *game)
 		if (!texture->is_png)
 			texture->image.img = mlx_xpm_file_to_image(game->mlx, texture->path, &texture->width, &texture->height);
 		if (!texture->image.img)
-			return (print_error("failed to load texture: ", game),
+			return (print_error("failed to load texture: ", game, 0),
 				printf("%s\n", texture->path), false);
 		texture->image.addr = mlx_get_data_addr(texture->image.img,
 			&texture->image.bits_per_pixel, &texture->image.line_length, &texture->image.endian);
@@ -24,20 +24,18 @@ static bool	init_mlx(t_data *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		return (print_error("mlx_init failed\n", game), false);
-	if (!load_textures(game))
-		return (clean_up_mlx(game), false);
+		return (print_error("mlx_init failed\n", game, 0), false);
 	game->mlx_win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!game->mlx_win)
-		return (clean_up_mlx(game), print_error("mlx_new_window failed\n", game), false);
+		return (clean_up_mlx(game), print_error("mlx_new_window failed\n", game, 0), false);
 	game->image->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	if (!game->image->img)
-		return (clean_up_mlx(game), print_error("mlx_new_image failed\n", game), false);
+		return (clean_up_mlx(game), print_error("mlx_new_image failed\n", game, 0), false);
 	game->image->addr = mlx_get_data_addr(game->image->img,
 		&game->image->bits_per_pixel, &game->image->line_length,
 		&game->image->endian);
 	if (!game->image->addr)
-		return (clean_up_mlx(game), print_error("mlx_get_data_addr failed\n", game), false);
+		return (clean_up_mlx(game), print_error("mlx_get_data_addr failed\n", game, 0), false);
 	return (true);
 }
 

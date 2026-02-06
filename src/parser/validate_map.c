@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 11:55:32 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:14:59 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*ft_realloc_str(t_data *data, char *str)
 
 	tmp = ft_calloc(data->map.x + 1, sizeof(char));
 	if (!tmp)
-		return (print_error("ft_calloc fail in validate map", data), NULL);
+		return (print_error("ft_calloc fail in validate map", data, 0), NULL);
 	i = 0;
 	while (str[i])
 	{
@@ -87,7 +87,7 @@ void	set_x_coord(t_data *data)
 int	validate_map(t_data *data)
 {
 	if (data->map.x == 0 && data->map.y == 0)
-		return (print_error("No Map in file\n", data), ERROR);
+		return (print_error("No Map in file\n", data, 0), ERROR);
 	if (VERBOSE)
 		print_map(data);
 	set_x_coord(data);
