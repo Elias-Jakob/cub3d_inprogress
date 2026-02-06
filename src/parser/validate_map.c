@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 17:14:59 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 21:03:41 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	replace_whitespaces(t_data *data)
 		j = 0;
 		while (j < data->map.x)
 		{
-			if (data->map.arr[i][j] == TAB || data->map.arr[i][j] == '\0')
+			if (data->map.arr[i][j] == '\0')
 				data->map.arr[i][j] = SPACE;
 			j++;
 		}
@@ -83,7 +83,6 @@ void	set_x_coord(t_data *data)
 	}
 }
 
-
 int	validate_map(t_data *data)
 {
 	if (data->map.x == 0 && data->map.y == 0)
@@ -98,6 +97,5 @@ int	validate_map(t_data *data)
 		print_normalized_map(data);
 	if (create_padding_map(data, data->map))
 		return (ERROR);
-
 	return (SUCCESS);
 }
