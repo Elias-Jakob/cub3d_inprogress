@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:38:26 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/13 14:50:23 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:12:17 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	check_inner_walling(char **map, t_data *data)
 	size_t	i;
 	size_t	j;
 
-
 	i = 0;
 	while (map[i])
 	{
@@ -80,7 +79,7 @@ int	create_padding_map(t_data *data, t_map map)
 
 	pad_map = ft_calloc(map.y + 2 + 1, sizeof(char *));
 	if (!pad_map)
-		return (print_error("Calloc for pad_map failed\n", data), ERROR);
+		return (print_error("Calloc for pad_map failed\n", data, 0), ERROR);
 	i = 0;
 	while (i < map.y + 2)
 	{

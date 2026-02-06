@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:06:18 by netrunner         #+#    #+#             */
-/*   Updated: 2025/12/19 12:59:36 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:17:11 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_data(t_data *data)
 	data->image = (t_img_data *)ft_calloc(1, sizeof(t_img_data));
 	if (!data->player || !data->image)
 	{
-		print_error("Malloc failed\n", data);
+		print_error("Malloc failed\n", data, 0);
 		cleanup_parser(data, ERROR);
 	}
 
@@ -55,8 +55,7 @@ int	main(int ac, char **av)
 	*/
 
 
-	if (!render(&data))
-		print_error("Init MLX failed\n", &data); // redundant already printing an error message
+	
 
 	/////PATRICK
 	if (VERBOSE)

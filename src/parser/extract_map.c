@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:09:04 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 14:28:31 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:22:00 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_map_chars(t_data *data, char *str, size_t map_y)
 			&& str[i] != 'S' && str[i] != 'W' && str[i] != 'E')
 		{
 			data->flag.in_map = false;
-			return (print_error("Found invalid char in map\n", data), 0);
+			return (print_error("Found invalid char", data, str[i]), 0);
 		}
 		else if (str[i] == 'N' || str[i] == 'S'
 			|| str[i] == 'W' || str[i] == 'E')
@@ -100,12 +100,12 @@ int	extract_map(t_data *data, char *line)
 		return (FOUND);
 	}
 	if (data->flag.out_map && !check_line_isprint(line))
-		return (print_error("Empty line in map\n", data), 0);
+		return (print_error("Empty line in map\n", data, 0), 0);
 	if (data->map.arr != NULL && *data->map.arr != NULL)
 	{
 		data->map.arr = ft_realloc_map(data->map.arr, idx + 1);
 		if (!data->map.arr)
-			return (print_error("Map realloc failed\n", data), 0);
+			return (print_error("Map realloc failed\n", data, 0), 0);
 	}
 	data->map.arr[idx++] = ft_strtrim(line, "\n");
 	if (!data->map.arr[idx - 1])

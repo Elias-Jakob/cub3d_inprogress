@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 09:38:00 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 10:30:49 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:14:04 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ size_t	ft_check_valid_chars(t_data *data, char *str, int c)
 	while (*str)
 	{
 		if (*str != ' ' && *str != '\t' && !ft_isdigit(*str) && *str != c)
-			return (print_error("Non-digit char in RGB string\n", data), 5);
+			return (print_error("Non-digit char in RGB string\n", data, 0), 5);
 		if (*str == c)
 			count++;
 		str++;
 	}
 	if (count >= 3)
-		print_error("Too many commas found\n", data);
+		print_error("Too many commas found\n", data, 0);
 	return (count);
 }
 

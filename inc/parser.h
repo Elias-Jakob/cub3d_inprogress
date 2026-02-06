@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 20:26:38 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/19 14:34:12 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/06 17:11:32 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	safe_free(char **arr);
 
 //PRINT
 void	print_text_rgb_error(t_data *data);
-void	print_error(char *str, t_data *data);
+void	print_error(char *str, t_data *data, char flag);
 int		print_doubles(t_data *data, const char *str);
 void	print_map_coords(t_data *data);
 void	print_normalized_map(t_data *data);
