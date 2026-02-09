@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 09:38:00 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 17:14:04 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:10:41 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	valid_file(char *str)
 	if (!(ft_memcmp(&str[len - 4], ".cub", 5) == 0))
 	{
 		printf("%s\nWrong file extension\n", ERROR_MSG);
-		return(ERROR);
+		return (ERROR);
 	}
 	if (VERBOSE)
 		printf("%s File extension\n", OK_MSG);
@@ -85,9 +85,9 @@ static int	valid_file(char *str)
 
 int	parser(t_data *data, char *file)
 {
-	int fd;
+	int	fd;
 
-	if(valid_file(file))
+	if (valid_file(file))
 		return (ERROR);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)

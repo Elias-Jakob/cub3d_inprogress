@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:09:04 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 14:59:42 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:07:22 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_map_chars(t_data *data, char *str, size_t map_y)
 char	**ft_realloc_map(char **map, size_t map_size)
 {
 	size_t		i;
-	char	**tmp;
+	char		**tmp;
 
 	tmp = ft_calloc(map_size + 1, sizeof(char *));
 	if (!tmp)
@@ -61,7 +61,7 @@ char	**ft_realloc_map(char **map, size_t map_size)
 
 int	check_empty_line(char *str)
 {
-	const char *line;
+	const char	*line;
 
 	line = (const char *) str;
 	while (*line == 32 || *line == 9 || (*line > 10 && *line <= 13))
@@ -87,8 +87,8 @@ int	check_line_isprint(char *str)
 
 int	extract_map(t_data *data, char *line)
 {
-	static	size_t idx = 0;
-	static	size_t id = 0;
+	static size_t	idx = 0;
+	static size_t	id = 0;
 
 	data->flag.in_map = true;
 	if (!check_map_chars(data, line, id++))

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 05:34:13 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 21:06:13 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:17:45 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	print_normalized_map(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("%s Normalized map with X\n", OK_MSG);
-	while(data->map.arr[i])
+	while (data->map.arr[i])
 	{
 		printf("[%i]\t\t%s\n", i, data->map.arr[i]);
 		i++;
@@ -29,19 +29,19 @@ void	print_normalized_map(t_data *data)
 
 void	print_map_coords(t_data *data)
 {
-	printf("%s Player\nStart coords:\tx:%f y:%f\n", OK_MSG, \
+	printf("%s Player\nStart coords:\tx:%f y:%f\n", OK_MSG,
 		data->player->x, data->player->y);
 	printf("\n");
-	printf("%s Map\nCoords:\t\tX: 0-%i Y: 0-%i\n", OK_MSG, data->map.x - 1,  \
+	printf("%s Map\nCoords:\t\tX: 0-%i Y: 0-%i\n", OK_MSG, data->map.x - 1,
 		data->map.y - 1);
-	printf("Size:\t\t%ix %i = %i tiles\n\n", data->map.x,  \
-		data->map.y, data->map.y*data->map.x);
+	printf("Size:\t\t%ix %i = %i tiles\n\n", data->map.x, data->map.y,
+		data->map.y * data->map.x);
 	return ;
 }
 
 void	print_map(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	printf("\n%s Map extraction\n", OK_MSG);

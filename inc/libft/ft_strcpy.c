@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_split.c                                      :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 13:16:36 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/17 13:26:14 by pjelinek         ###   ########.fr       */
+/*   Created: 2026/01/16 17:14:21 by pjelinek          #+#    #+#             */
+/*   Updated: 2026/01/16 17:14:30 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_split(char **split)
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	if (!split && !*split)
-		return ;
-	while (split[i])
+	while (src[i] != '\0')
 	{
-		printf("%s\n", split[i]);
+		dest[i] = src[i];
 		i++;
 	}
-	printf("LEN: %i\n", i);
-	
+	dest[i] = '\0';
+	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:54:53 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 14:53:06 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:06:34 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	wrong_input(t_data *data, char *line)
 {
-	const char *str;
+	const char	*str;
 
 	str = line;
 	ft_skip_whitespaces(&str);
@@ -47,7 +47,6 @@ static int	extract_line_content(t_data *data, char *line)
 	else if (!data->flag.in_map && wrong_input(data, line))
 		return (ERROR);
 	return (ERROR);
-
 }
 
 int	extract_files(t_data *data, int fd)
@@ -59,7 +58,7 @@ int	extract_files(t_data *data, int fd)
 		return (printf("%s\nMap empty\n", ERROR_MSG), ERROR);
 	while (line && !data->flag.error)
 	{
-		if(extract_line_content(data, line))
+		if (extract_line_content(data, line))
 		{
 			free (line);
 			break ;
@@ -69,9 +68,9 @@ int	extract_files(t_data *data, int fd)
 	}
 	if (!data->texture_pass || !data->rgb_pass)
 		return (print_text_rgb_error(data), ERROR);
-	else if(data->flag.error)
+	else if (data->flag.error)
 		return (ERROR);
-	else if(!data->flag.player_set)
+	else if (!data->flag.player_set)
 		return (print_error("Player not found on map\n", data, 0), ERROR);
 	return (SUCCESS);
 }

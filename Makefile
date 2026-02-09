@@ -42,6 +42,7 @@ SRCS_MAND = \
 	parser/validate_map.c \
 	parser/cleanup_parser.c \
 	parser/extract_texture.c \
+	parser/utils.c \
 	render/init.c \
 	render/render.c \
 	render/raycasting.c \
@@ -54,15 +55,12 @@ SRCS_MAND = \
 # =========================
 # Bonus replacements/additions
 # =========================
-# Diese Dateien ersetzen die gleichnamigen Mandatory-Dateien:
-SRCS_BONUS_ONLY = \
-	parser/extract_map_bonus.c \
-	parser/check_walls_bonus.c
 
-# Mandatory-Dateien, die im Bonus-Modus NICHT kompiliert werden sollen:
+SRCS_BONUS_ONLY = \
+	main_bonus.c \
+
 SRCS_MAND_REPLACED = \
-	parser/extract_map.c \
-	parser/check_walls.c
+	main.c
 
 # =========================
 # Mode selection

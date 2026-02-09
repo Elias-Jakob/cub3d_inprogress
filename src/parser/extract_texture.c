@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 13:15:17 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 20:48:29 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:09:45 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ int	extract_texture(t_data *data, const char *line)
 	flag = &data->flag;
 	ft_skip_whitespaces(&line);
 	if (!flag->north && (ft_memcmp("NO ", line, 3) == 0
-		|| ft_memcmp("NO\t", line, 3) == 0))
+			|| ft_memcmp("NO\t", line, 3) == 0))
 		set_north(data, &line[2]);
 	else if (!flag->south && (ft_memcmp("SO ", line, 3) == 0
-		|| ft_memcmp("SO\t", line, 3) == 0))
+			|| ft_memcmp("SO\t", line, 3) == 0))
 		set_south(data, &line[2]);
 	else if (!flag->west && (ft_memcmp("WE ", line, 3) == 0
-		|| ft_memcmp("WE\t", line, 3) == 0))
+			|| ft_memcmp("WE\t", line, 3) == 0))
 		set_west(data, &line[2]);
 	else if (!flag->east && (ft_memcmp("EA ", line, 3) == 0
-		|| ft_memcmp("EA\t", line, 3) == 0))
+			|| ft_memcmp("EA\t", line, 3) == 0))
 		set_east(data, &line[2]);
 	else
 		return (NOT_MY_LINE);

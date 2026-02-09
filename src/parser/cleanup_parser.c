@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 14:50:24 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/01/12 14:02:42 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:06:17 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	safe_free(char **arr)
 		free(arr[BLUE]);
 	return ;
 }
-
 
 void	free_split(char **split)
 {

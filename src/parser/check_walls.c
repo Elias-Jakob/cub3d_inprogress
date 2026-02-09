@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:38:26 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 17:12:21 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:18:38 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	flood_fill(char **pad_map, t_data *data, int x, int y)
 {
 	if (data->flag.error)
 		return ;
-	if (x < 0 || y < 0  || x >= data->map.x + 2 || y >= data->map.y + 2
-		|| pad_map[y][x] == '1'	|| pad_map[y][x] == 'X')
+	if (x < 0 || y < 0 || x >= data->map.x + 2 || y >= data->map.y + 2
+		|| pad_map[y][x] == '1' || pad_map[y][x] == 'X')
 		return ;
 	if (pad_map[y][x] == '0' || pad_map[y][x] == 'N'
 		|| pad_map[y][x] == 'S' || pad_map[y][x] == 'W'
@@ -56,7 +56,6 @@ void	check_inner_walling(char **map, t_data *data)
 	size_t	i;
 	size_t	j;
 
-
 	i = 0;
 	while (map[i])
 	{
@@ -76,7 +75,7 @@ void	check_inner_walling(char **map, t_data *data)
 int	create_padding_map(t_data *data, t_map map)
 {
 	char	**pad_map;
-	int	i;
+	int		i;
 
 	pad_map = ft_calloc(map.y + 2 + 1, sizeof(char *));
 	if (!pad_map)
@@ -84,7 +83,7 @@ int	create_padding_map(t_data *data, t_map map)
 	i = 0;
 	while (i < map.y + 2)
 	{
-		pad_map[i] = ft_calloc(map.x + 2 + 1,  sizeof(char ));
+		pad_map[i] = ft_calloc(map.x + 2 + 1, sizeof(char ));
 		if (!pad_map[i])
 		{
 			free_split(pad_map);

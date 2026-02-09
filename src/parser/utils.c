@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_count_char.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 13:41:23 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/12/17 13:43:30 by pjelinek         ###   ########.fr       */
+/*   Created: 2026/02/09 17:13:37 by pjelinek          #+#    #+#             */
+/*   Updated: 2026/02/09 18:31:06 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-size_t	ft_count_char(char *str, int c)
+int	ft_strcheck_spaces(char *str)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	while (*str)
+	i = 0;
+	while (str[i])
 	{
-		if (*str == c)
-			count++;
-		str++;
+		if (ft_isspace(str[i]))
+			return (1);
+		i++;
 	}
-	return (count);
+	return (0);
+}
+
+int	digit_check(char *split)
+{
+	while (split)
+	{
+		if (!ft_isdigit(*split))
+			return (ERROR);
+		split++;
+	}
+	return (SUCCESS);
 }

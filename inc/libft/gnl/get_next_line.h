@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: netrunner <netrunner@student.42.fr>        +#+  +:+       +#+        */
+/*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:41:04 by pjelinek          #+#    #+#             */
-/*   Updated: 2025/11/22 02:43:34 by netrunner        ###   ########.fr       */
+/*   Updated: 2026/02/09 17:24:21 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 # include <fcntl.h>
 # include "../libft.h"
 
-char *get_next_line(int fd);
+char	*get_next_line(int fd);
 
 #endif

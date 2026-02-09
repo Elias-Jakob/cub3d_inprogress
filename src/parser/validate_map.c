@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 13:47:16 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:11:42 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static void	*ft_realloc_str(t_data *data, char *str)
 
 static void	replace_whitespaces(t_data *data)
 {
-	int i;
-	int	j;
-	int	len;
-	char *tmp;
+	int		i;
+	int		j;
+	int		len;
+	char	*tmp;
 
 	i = 0;
 	while (data->map.arr[i])
