@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 11:56:07 by ejakob            #+#    #+#             */
+/*   Updated: 2026/02/09 11:56:10 by ejakob           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "cub3d.h"
 
 static void	draw_minimap_player(t_data *game)
@@ -65,8 +76,10 @@ void	draw_minimap(t_data *game)
 			map.tile_color = MINIMAP_BG_COLOR;
 			if (game->map.arr[map.y][map.x] == '1')
 				map.tile_color = MINIMAP_WALL_COLOR;
-			map.x0 = (int)floor((map.x - map.start_col - map.x_offset) * TILE_SIZE_2D);
-			map.y0 = (int)floor((map.y - map.start_row - map.y_offset) * TILE_SIZE_2D);
+			map.x0 = (int)floor((map.x - map.start_col - map.x_offset)
+					* TILE_SIZE_2D);
+			map.y0 = (int)floor((map.y - map.start_row - map.y_offset)
+					* TILE_SIZE_2D);
 			draw_minimap_tile(game, &map);
 		}
 		map.y++;

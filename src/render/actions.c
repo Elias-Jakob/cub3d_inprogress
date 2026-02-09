@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 11:33:37 by ejakob            #+#    #+#             */
+/*   Updated: 2026/02/09 11:34:22 by ejakob           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "cub3d.h"
 
 static bool	wall_collision(char **map, double x, double y)
@@ -7,7 +18,7 @@ static bool	wall_collision(char **map, double x, double y)
 
 void	set_new_player_pos(t_data *game, double x, double y)
 {
-	char	**map;
+	char		**map;
 	t_player	*p;
 
 	map = game->map.arr;
@@ -24,25 +35,12 @@ void	set_new_player_pos(t_data *game, double x, double y)
 		p->y = y;
 }
 
-void rotate_player(t_player *player, double rot_angle)
+void	rotate_player(t_player *player, double rot_angle)
 {
 	player->angle += rot_angle;
 	if (player->angle > PI * 2)
 		player->angle -= PI * 2;
 	angle_to_vector(player);
-	// TIME ROTATION
-	/*
-	if (old_dir_x == 0 && old_dir_y == -1)
-		player->start_time = get_timestamp();
-	player->full_rotation += rot_angle;
-	if (player->full_rotation >= PI * 2)
-	{
-		printf("time to rotate 360: %lums\n", get_timestamp() - player->start_time);
-		player->full_rotation = 0;
-	}
-	*/
-	// TODO:
-	// printf("dirx = %f diry = %f\n", player->dir_x, player->dir_y);
 }
 
 int	quit_game(t_data *game)

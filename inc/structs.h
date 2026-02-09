@@ -6,7 +6,7 @@
 /*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:21:54 by ejakob            #+#    #+#             */
-/*   Updated: 2026/01/24 14:24:32 by ejakob           ###   ########.fr       */
+/*   Updated: 2026/02/09 12:39:21 by ejakob           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 # ifndef STRUCTS_H
@@ -31,31 +31,21 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-
-	/*
-	Player directions
-		N 0/-1
-		S 0/1
-		W -1/0
-		E 1/0
-	*/
-	long	start_time;
-	double	full_rotation;
 }	t_player;
 
 typedef struct s_ray
 {
 	int		map_x;
 	int		map_y;
-	double	camera_x; // current x column normalized to direction vector
-	double	dir_x; // ray direction vector
+	double	camera_x;
+	double	dir_x;
 	double	dir_y;
-	double	delta_dist_x; // ray length to travel one grid unit
+	double	delta_dist_x;
 	double	delta_dist_y;
-	int	side; // was a NS or a EW wall hit?
-	double	wall_dist_x; // the distance to the NEXT grid line position that is checked
+	int	side;
+	double	wall_dist_x;
 	double	wall_dist_y;
-	int		step_x; // Tells us in which direction we're moving through the map
+	int		step_x;
 	int		step_y;
 	double	wall_dist;
 }	t_ray;
@@ -184,8 +174,6 @@ typedef struct data
 	void	*mlx;
 	void	*mlx_win;
 	t_img_data	*image;
-	// char	**map;
-	int	map_width;
 	int	map_height;
 	int	player_size;
 	int	player_center;

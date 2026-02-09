@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_mapping.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 12:17:19 by ejakob            #+#    #+#             */
+/*   Updated: 2026/02/09 12:29:18 by ejakob           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "cub3d.h"
 
-static double	get_wall_x(t_data *game, t_ray	*ray)
+static double	get_wall_x(t_data *game, t_ray *ray)
 {
 	double	wall_x;
 
@@ -18,7 +29,7 @@ static void	init_col(t_data *game, t_ray *ray, t_column *col)
 	col->wall_x = get_wall_x(game, ray);
 	col->line_height = (int)((HEIGHT / ray->wall_dist) * 2);
 	col->tex = &game->text[ray->side];
-	col->y_start = HEIGHT / 2 - HEIGHT / ray->wall_dist;
+	col->y_start = (HEIGHT - col->line_height) / 2;
 	col->y_end = col->y_start + col->line_height;
 	if (col->y_end > HEIGHT)
 		col->y_end = HEIGHT;
@@ -31,7 +42,7 @@ static void	init_col(t_data *game, t_ray *ray, t_column *col)
 		col->tex_y = -col->y * col->y_step_size;
 		col->y = 0;
 	}
-	if (col->x <= MINIMAP_SIZE && col->y < MINIMAP_SIZE)
+	if (col->x <= MINIMAP_SIZE && col->y <= MINIMAP_SIZE)
 	{
 		col->tex_y += (MINIMAP_SIZE - col->y) * col->y_step_size;
 		col->y = MINIMAP_SIZE + 1;

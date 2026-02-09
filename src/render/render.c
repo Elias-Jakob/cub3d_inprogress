@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 12:16:44 by ejakob            #+#    #+#             */
+/*   Updated: 2026/02/09 12:17:13 by ejakob           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "cub3d.h"
 
-static void	fill_backgrounds(t_data *game)
+static void	fill_background(t_data *game)
 {
 	int	x;
 	int	y;
@@ -25,11 +36,11 @@ static void	fill_backgrounds(t_data *game)
 
 int	render_game(t_data *game)
 {
-	t_ray	ray;
+	t_ray		ray;
 	t_column	col;
 
 	game->last_time_rendered = get_timestamp();
-	fill_backgrounds(game);
+	fill_background(game);
 	draw_minimap(game);
 	col.x = 0;
 	while (col.x < WIDTH)

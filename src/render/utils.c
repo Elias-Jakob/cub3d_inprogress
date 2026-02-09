@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 12:31:39 by ejakob            #+#    #+#             */
+/*   Updated: 2026/02/09 12:37:14 by ejakob           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "cub3d.h"
 
 void	clean_up_mlx(t_data *game)
@@ -43,10 +54,9 @@ void	ft_put_pixel(t_img_data *image_data, int x, int y, int color)
 	char	*pixel;
 
 	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
-    	return;
-
+		return ;
 	pixel = image_data->addr + (y * image_data->line_length + x
-		* (image_data->bits_per_pixel / 8));
+			* (image_data->bits_per_pixel / 8));
 	*(unsigned int *)pixel = color;
 }
 

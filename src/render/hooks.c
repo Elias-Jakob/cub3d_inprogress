@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 11:44:38 by ejakob            #+#    #+#             */
+/*   Updated: 2026/02/09 11:48:05 by ejakob           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "cub3d.h"
 
 int	render_loop_hook(t_data *game)
@@ -34,7 +45,7 @@ int	key_press_hook(int key_code, t_data *game)
 	else if (key_code == XK_Left || key_code == XK_Right)
 		game->turn_action = key_code;
 	else if (key_code == XK_w || key_code == XK_a || key_code == XK_s
-			|| key_code == XK_d)
+		|| key_code == XK_d)
 		game->move_action = key_code;
 	return (0);
 }
@@ -44,7 +55,7 @@ int	key_release_hook(int key_code, t_data *game)
 	if (key_code == XK_Left || key_code == XK_Right)
 		game->turn_action = NONE;
 	else if (key_code == XK_w || key_code == XK_a || key_code == XK_s
-			|| key_code == XK_d)
+		|| key_code == XK_d)
 		game->move_action = NONE;
 	return (0);
 }
