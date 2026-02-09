@@ -6,7 +6,7 @@
 /*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:53:46 by ejakob            #+#    #+#             */
-/*   Updated: 2026/02/09 11:53:51 by ejakob           ###   ########.fr       */
+/*   Updated: 2026/02/09 13:04:15 by ejakob           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cub3d.h"
@@ -39,8 +39,7 @@ static bool	init_mlx(t_data *game)
 	if (!game->mlx)
 		return (print_error("mlx_init failed\n", game, 0), false);
 	if (!load_textures(game))
-		return (clean_up_mlx(game),
-			print_error("loading textures failed\n", game, 0), false);
+		return (clean_up_mlx(game), false);
 	game->mlx_win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!game->mlx_win)
 		return (clean_up_mlx(game),
@@ -63,6 +62,7 @@ bool	render(t_data *game)
 	game->map_height = game->map.y;
 	game->player_size = TILE_SIZE_2D - 1;
 	game->player_center = game->player_size / 2;
+	game->n_tiles = (MINIMAP_SIZE / TILE_SIZE_2D) / 2;
 	if (!init_mlx(game))
 		return (false);
 	mlx_hook(game->mlx_win, 17, 1L << 2, quit_game, game);

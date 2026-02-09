@@ -33,10 +33,10 @@ static void	draw_minimap_player(t_data *game)
 
 static void	init_minimap(t_data *game, t_minimap *map)
 {
-	map->start_col = (int)game->player->x - N_TILES;
-	map->start_row = (int)game->player->y - N_TILES;
-	map->end_col = (int)game->player->x + N_TILES + 1;
-	map->end_row = (int)game->player->y + N_TILES + 1;
+	map->start_col = (int)game->player->x - game->n_tiles;
+	map->start_row = (int)game->player->y - game->n_tiles;
+	map->end_col = (int)game->player->x + game->n_tiles + 1;
+	map->end_row = (int)game->player->y + game->n_tiles + 1;
 	map->x = map->start_col - 1;
 	map->y = map->start_row;
 	if (game->map_height < map->end_row)
