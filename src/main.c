@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 13:06:18 by netrunner         #+#    #+#             */
-/*   Updated: 2026/02/06 21:08:27 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 15:00:50 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **av)
 			printf("%s exit\n", ERROR_MSG);
 		cleanup_parser(&data, ERROR);
 	}
+
 	if (VERBOSE)
 		printf("%s exit\n", OK_MSG);
 	cleanup_parser(&data, SUCCESS);

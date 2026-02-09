@@ -6,7 +6,7 @@
 /*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/24 14:21:54 by ejakob            #+#    #+#             */
-/*   Updated: 2026/02/09 14:32:15 by ejakob           ###   ########.fr       */
+/*   Updated: 2026/02/09 15:23:16 by ejakob           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STRUCTS_H
@@ -81,7 +81,6 @@ typedef struct texture
 {
 	/* PATRICK */
 	char			*path;
-	bool			is_png;
 	/* ELIAS   */
 	t_img_data		image;
 	int				width;

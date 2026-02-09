@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:09:04 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 17:22:00 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:59:42 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**ft_realloc_map(char **map, size_t map_size)
 
 	tmp = ft_calloc(map_size + 1, sizeof(char *));
 	if (!tmp)
-		return (NULL);
+		return (free_split(map), NULL);
 	i = 0;
 	while (i < map_size - 1)
 	{
