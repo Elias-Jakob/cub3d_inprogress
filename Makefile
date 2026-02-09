@@ -3,7 +3,7 @@
 # =========================
 NAME            = cub3D
 CC              = cc
-CFLAGS          = -Wall -Werror -Wextra -MMD -MP
+CFLAGS          = -Wall -Werror -Wextra -MMD -MP -g
 DEBUG_FLAGS     = -g -DVERBOSE=1
 
 # =========================

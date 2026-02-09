@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 21:03:41 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 13:47:16 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	replace_whitespaces(t_data *data)
 	int i;
 	int	j;
 	int	len;
+	char *tmp;
 
 	i = 0;
 	while (data->map.arr[i])
@@ -42,9 +43,10 @@ static void	replace_whitespaces(t_data *data)
 		len = ft_strlen(data->map.arr[i]);
 		if (len < data->map.x)
 		{
-			data->map.arr[i] = ft_realloc_str(data, data->map.arr[i]);
-			if (!data->map.arr[i])
+			tmp = ft_realloc_str(data, data->map.arr[i]);
+			if (!tmp)
 				cleanup_parser(data, ERROR);
+			data->map.arr[i] = tmp;
 		}
 		j = 0;
 		while (j < data->map.x)

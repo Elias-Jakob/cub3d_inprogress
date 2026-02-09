@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ejakob <ejakob@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 11:53:46 by ejakob            #+#    #+#             */
-/*   Updated: 2026/02/09 11:53:51 by ejakob           ###   ########.fr       */
+/*   Updated: 2026/02/09 14:47:58 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "cub3d.h"
+
 
 static bool	load_textures(t_data *game)
 {
@@ -21,8 +23,10 @@ static bool	load_textures(t_data *game)
 	{
 		texture = &game->text[i_tex++];
 		if (!texture->is_png)
-			texture->image.img = mlx_xpm_file_to_image(game->mlx, texture->path,
-					&texture->width, &texture->height);
+		{
+			texture->image.img = mlx_xpm_file_to_image(game->mlx, texture->path, \
+				&texture->width, &texture->height);
+		}
 		if (!texture->image.img)
 			return (print_error("failed to load texture: ", game, 0),
 				printf("%s\n", texture->path), false);

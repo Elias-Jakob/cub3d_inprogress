@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:54:53 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/06 17:12:24 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 14:53:06 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	extract_files(t_data *data, int fd)
 	line = get_next_line(fd);
 	if (!line)
 		return (printf("%s\nMap empty\n", ERROR_MSG), ERROR);
-	while (line)
+	while (line && !data->flag.error)
 	{
 		if(extract_line_content(data, line))
 		{
