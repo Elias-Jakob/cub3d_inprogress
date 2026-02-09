@@ -26,7 +26,7 @@ static bool	init_mlx(t_data *game)
 	if (!game->mlx)
 		return (print_error("mlx_init failed\n", game, 0), false);
 	if (!load_textures(game))
-		return (clean_up_mlx(t_data *game), \
+		return (clean_up_mlx(game), \
 			print_error("loading textures failed\n", game, 0), false);
 	game->mlx_win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
 	if (!game->mlx_win)

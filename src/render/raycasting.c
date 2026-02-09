@@ -53,9 +53,9 @@ void	raycasting(t_data *game, t_ray *ray, int x)
 			ray->side = NORTH;
 		}
 	}
-	if (ray->side == WEST && ray->step_x == 1)
+	if (ray->side == WEST && ray->step_x == -1)
 		ray->side = EAST;
-	if (ray->side == NORTH && ray->step_y == 1)
+	if (ray->side == NORTH && ray->step_y == -1)
 		ray->side = SOUTH;
 	ray->wall_dist = ray->wall_dist_y - ray->delta_dist_y;
 	if (ray->side == WEST || ray->side == EAST)

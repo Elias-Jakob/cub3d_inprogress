@@ -8,7 +8,7 @@ static double	get_wall_x(t_data *game, t_ray	*ray)
 	if (ray->side == WEST || ray->side == EAST)
 		wall_x = game->player->y + ray->wall_dist * ray->dir_y;
 	wall_x -= (int)wall_x;
-	if (ray->side == WEST || ray->side == SOUTH)
+	if (ray->side == EAST || ray->side == NORTH)
 		wall_x = fabs(wall_x - 1);
 	return (wall_x);
 }

@@ -53,7 +53,7 @@ static void	draw_minimap_tile(t_data *game, t_minimap *map)
 void	draw_minimap(t_data *game)
 {
 	t_minimap	map;
-	
+
 	init_minimap(game, &map);
 	while (map.y < map.end_row)
 	{
@@ -86,7 +86,7 @@ void	draw_minimap_ray(t_data *game, t_ray *ray, int x1, int y1)
 	y1 += y0;
 	ray->wall_dist_x = ray->delta_dist_x;
 	ray->wall_dist_y = ray->delta_dist_y;
-	while (x0 != x1 && y0 != y1 && x0 < MINIMAP_SIZE && y0 < MINIMAP_SIZE)
+	while (x0 != x1 && y0 != y1 && x0 <= MINIMAP_SIZE && y0 <= MINIMAP_SIZE)
 	{
 		ft_put_pixel(game->image, x0, y0, MINIMAP_RAY_COLOR);
 		if (ray->wall_dist_x < ray->wall_dist_y)
