@@ -18,7 +18,7 @@ bool	ft_init(int fd, int *j, char **line)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (false);
 	*line = ft_calloc(10000, 1);
-	if (!line)
+	if (!(*line))
 		return (false);
 	return (true);
 }
