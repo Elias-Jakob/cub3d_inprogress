@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 09:38:00 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 21:51:09 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:12:29 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static int	valid_file(char *str)
 	if (!str)
 		return (ERROR);
 	len = ft_strlen(str);
-	if (len <= 4)
-		return (ERROR);
+	if (len < 4)
+		return (printf("%s\nMap name too short\n", ERROR_MSG), ERROR);
 	if (str[0] == '.' || check_hidden_filetyp(str, len))
 	{
 		printf("%s\nHidden files forbidden\n", ERROR_MSG);
