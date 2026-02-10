@@ -14,17 +14,11 @@
 # define CUB3D_H
 
 # include <stdio.h>
-# include <limits.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include <sys/wait.h>
 # include <stdlib.h>
-# include <stdint.h>
 # include <fcntl.h>
 # include <errno.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
 # include <sys/time.h>
 # include <math.h>
 # include <mlx.h>

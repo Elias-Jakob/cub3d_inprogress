@@ -19,6 +19,7 @@
 # define COMMA ','
 # define SPACE ' '
 # define TAB '\t'
+# define NEWLINE '\n'
 
 # include "cub3d.h"
 
