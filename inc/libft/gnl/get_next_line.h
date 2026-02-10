@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 18:41:04 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 17:24:21 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:06:55 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include "../libft.h"
 

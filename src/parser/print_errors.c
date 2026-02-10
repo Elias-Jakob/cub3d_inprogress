@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:43:11 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 19:54:05 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:22:11 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	print_rgb_error(t_data *data)
 	t_flag	flag;
 
 	flag = data->flag;
-	printf("\033[31mRGB erxtraction incomplete\033[0m\n");
+	printf("%s\n\033[31mRGB erxtraction incomplete\033[0m\n", ERROR_MSG);
 	if (!flag.ceiling)
 		printf("Ceiling RGB missing\n");
 	if (!flag.floor)
@@ -60,7 +60,7 @@ void	print_text_rgb_error(t_data *data)
 	t_flag	flag;
 
 	flag = data->flag;
-	printf("\033[31mTexture extraction incomplete\033[0m\n");
+	printf("%s\n\033[31mTexture extraction incomplete\033[0m\n", ERROR_MSG);
 	if (!flag.north)
 		printf("North texture missing\n");
 	if (!flag.south)

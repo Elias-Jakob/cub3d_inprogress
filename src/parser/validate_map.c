@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/10 12:50:05 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:29:19 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*ft_realloc_str(t_data *data, char *str)
 
 	tmp = ft_calloc(data->map.x + 1, sizeof(char));
 	if (!tmp)
-		return (print_error("ft_calloc fail in validate map", data, 0), NULL);
+		return (print_error("ft_calloc fail in validate map\n", data, 0), NULL);
 	i = 0;
 	while (str[i])
 	{
@@ -30,7 +30,7 @@ static void	*ft_realloc_str(t_data *data, char *str)
 	return (tmp);
 }
 
-static bool	replace_whitespaces(t_data *data)
+static void	replace_whitespaces(t_data *data)
 {
 	int		i;
 	int		j;
@@ -45,7 +45,7 @@ static bool	replace_whitespaces(t_data *data)
 		{
 			tmp = ft_realloc_str(data, data->map.arr[i]);
 			if (!tmp)
-				return (false);
+				return ;
 			data->map.arr[i] = tmp;
 		}
 		j = 0;
@@ -57,7 +57,6 @@ static bool	replace_whitespaces(t_data *data)
 		}
 		i++;
 	}
-	return (true);
 }
 
 static int	trim_line(char *str, int *len)
@@ -97,7 +96,8 @@ int	validate_map(t_data *data)
 		return (ERROR);
 	if (VERBOSE)
 		print_map_coords(data);
-	if (!replace_whitespaces(data))
+	replace_whitespaces(data);
+	if (data->flag.error)
 		return (ERROR);
 	if (VERBOSE)
 		print_normalized_map(data);
