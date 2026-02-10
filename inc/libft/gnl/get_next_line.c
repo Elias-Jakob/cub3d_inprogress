@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:13:32 by netrunner         #+#    #+#             */
-/*   Updated: 2026/02/09 18:30:28 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:55:07 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char	*get_next_line(int fd)
 				return (free(line), NULL);
 		}
 		line[j++] = buf[i++];
+		if (j >= 9999)
+			return (free(line), NULL);
 		if (line[j - 1] == '\n')
 			break ;
 	}

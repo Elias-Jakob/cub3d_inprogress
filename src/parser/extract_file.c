@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:54:53 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 20:32:09 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/10 13:54:41 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	extract_files(t_data *data, int fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		return (printf("%s\nMap empty\n", ERROR_MSG), ERROR);
+		return (printf("%s\nConfig file not valid\n", ERROR_MSG), ERROR);
 	while (line && !data->flag.error)
 	{
 		if (extract_line_content(data, line))
