@@ -1,10 +1,9 @@
-SO         ./src/textures/Wall7.xpm   
-WE ./src/textures/Wall4.xpm
-NO ./src/textures/Wall2.xpm
-EA ./src/textures/Wall8.xpm
-
-C                                   0,0,0          
-F 220,1 00,0        
+WE ./textures/wolfenstein/west.xpm
+		EA 			./textures/wolfenstein/east.xpm
+SO ./textures/wolfenstein/south.xpm
+NO ./textures/wolfenstein/north.xpm
+C                                   0,0,0
+F 220,1 00,100
 
 1111
 1001

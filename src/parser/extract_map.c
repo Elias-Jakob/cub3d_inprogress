@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 19:09:04 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 17:07:22 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 21:20:30 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_map_chars(t_data *data, char *str, size_t map_y)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != SPACE && str[i] != TAB && str[i] != NEWLINE
+		if (str[i] != SPACE && str[i] != NEWLINE
 			&& str[i] != '1' && str[i] != '0' && str[i] != 'N'
 			&& str[i] != 'S' && str[i] != 'W' && str[i] != 'E')
 		{

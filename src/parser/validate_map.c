@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 04:19:52 by pjelinek          #+#    #+#             */
-/*   Updated: 2026/02/09 17:11:42 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/09 20:59:35 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ static void	replace_whitespaces(t_data *data)
 
 static int	trim_line(char *str, int *len)
 {
-	while (*len - 1 > 0 && (str[*len - 1] == SPACE || str[*len - 1] == TAB))
+	while (*len - 1 > 0 && (str[*len - 1] == SPACE))
 		(*len)--;
 	return (1);
 }
 
-void	set_x_coord(t_data *data)
+bool	set_x_coord(t_data *data)
 {
 	int		i;
 	int		len_x;
@@ -83,6 +83,7 @@ void	set_x_coord(t_data *data)
 		}
 		i++;
 	}
+	return (true);
 }
 
 int	validate_map(t_data *data)
@@ -91,7 +92,8 @@ int	validate_map(t_data *data)
 		return (print_error("No Map in file\n", data, 0), ERROR);
 	if (VERBOSE)
 		print_map(data);
-	set_x_coord(data);
+	if (!set_x_coord(data))
+		return (ERROR);
 	if (VERBOSE)
 		print_map_coords(data);
 	replace_whitespaces(data);
