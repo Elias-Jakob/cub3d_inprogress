@@ -6,7 +6,7 @@
 /*   By: pjelinek <pjelinek@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:13:32 by netrunner         #+#    #+#             */
-/*   Updated: 2026/02/10 13:55:07 by pjelinek         ###   ########.fr       */
+/*   Updated: 2026/02/11 19:38:37 by pjelinek         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ char	*get_next_line(int fd)
 		{
 			i = 0;
 			bytes = read(fd, buf, BUFFER_SIZE);
-			if (bytes <= 0)
+			if (bytes < 0)
 				return (free(line), NULL);
+			if (bytes == 0)
+				break ;
+
 		}
 		line[j++] = buf[i++];
 		if (j >= 9999)
